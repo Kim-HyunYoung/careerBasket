@@ -5,5 +5,6 @@ public class Test {
 		System.out.println("commit test");
 		System.out.println("규리가 수정");
 		System.out.println("예지가 수정");
+		System.out.println("4시! 다시 수정!");
 	}
 }
