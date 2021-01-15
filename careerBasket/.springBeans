@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/config/context.xml</config>
+		<config>src/config/viewResolver.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

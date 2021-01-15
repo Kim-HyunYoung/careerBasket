@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<!-- 변수명 언더바를 카멜 표현으로 자동변환하는 설정  -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<typeAliases>
+		<!-- cb.signUp.User를 user로 설정 -->
+		<typeAlias type="cb.signUp.User" alias="user"/>
+	</typeAliases>
+
+</configuration>
