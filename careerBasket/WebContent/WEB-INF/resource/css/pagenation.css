@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.p,.goFirstPage,.goBackPage,.goNextPage,.goLastPage,.disabled
+	{
+		float: left;
+		margin-left: 30px;
+		position: relative;
+	    display: inline-block;
+	}
+.pg{
+	position: absolute;
+	text-align: center;
+	margin:0 auto;
+	}
+.info{float: right;}
