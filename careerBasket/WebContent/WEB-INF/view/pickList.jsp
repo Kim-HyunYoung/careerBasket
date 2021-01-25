@@ -42,8 +42,8 @@ $(function(){
 		
 		td.innerHTML = "${ca[0].careerPeriod}";
 		td.innerHTML = "${ca[0].company}";
-		td.innerHTML = "${ca[0].position}";
-		td.innerHTML = "${ca[0].salary}";
+		td.innerHTML = "${ca[0].careerPosition}";
+		td.innerHTML = "${ca[0].careerSalary}";
 		
 		tr2.appendChild(td);
 		tbody.appendChild(tr2);
@@ -135,13 +135,13 @@ $(function(){
   <table border="1">
     <tbody>
       <tr>
-        <td>{do.type}</td>
+        <td>${doList.type}</td>
       </tr>
       <tr>
-        <td>{do.type}</td>
+        <td>${doList.type}</td>
       </tr>
       <tr>
-        <td>{do.type}</td>
+        <td>${doList.type}</td>
       </tr>
     </tbody>
   </table>

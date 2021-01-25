@@ -76,8 +76,8 @@ public class ResumeService {
 				career.setResumeId(mapper.selectId(iu.getUserId()));
 				career.setCompany(iu.getCompany()[i]);
 				career.setCareerPeriod(iu.getCareerPeriod()[i]);
-				career.setPosition(iu.getPosition()[i]);
-				career.setSalary(iu.getSalary()[i]);
+				career.setCareerPosition(iu.getCareerPosition()[i]);
+				career.setCareerSalary(iu.getCareerSalary()[i]);
 				career.setDescription(iu.getDescription()[i]);
 				mapper.insertCareer(career);
 				
@@ -118,8 +118,8 @@ public class ResumeService {
 				career.setResumeId(iu.getResumeId());
 				career.setCompany(iu.getCompany()[i]);
 				career.setCareerPeriod(iu.getCareerPeriod()[i]);
-				career.setPosition(iu.getPosition()[i]);
-				career.setSalary(iu.getSalary()[i]);
+				career.setCareerPosition(iu.getCareerPosition()[i]);
+				career.setCareerSalary(iu.getCareerSalary()[i]);
 				career.setDescription(iu.getDescription()[i]);
 				//아이디값으로 카운트 해보고 값이 있으면 업데이트 없으면 인서트
 				if(mapper.countCareer(iu.getCareerId()[i])>0) {

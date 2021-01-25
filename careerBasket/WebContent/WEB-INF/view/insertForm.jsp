@@ -74,7 +74,7 @@
  	  
  	  var input3 = document.createElement("input");
 	  input3.setAttribute("type", "text");
-	  input3.setAttribute("name", "position");
+	  input3.setAttribute("name", "careerPosition");
 	  sec3.append(input3);
 	  
 	  var sec4 = document.createElement("section");
@@ -84,7 +84,7 @@
  	  
  	  var input4 = document.createElement("input");
 	  input4.setAttribute("type", "number");
-	  input4.setAttribute("name", "salary");
+	  input4.setAttribute("name", "careerSalary");
 	  sec4.append(input4);
 	  
 	  var sec5 = document.createElement("section");

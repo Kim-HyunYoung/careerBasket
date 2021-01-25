@@ -22,7 +22,7 @@ public class ResumeController {
 	@Autowired
 	ResumeService service;
 	
-	//마이페이지에서 미리보여주는 간단리스트
+	//마이페이지에서 미리보여주는 간단리스트, 이력서 카운트
 	@GetMapping("/list")
 	public String showViewPreview(Model m, String userId) {
 //		//실행확인

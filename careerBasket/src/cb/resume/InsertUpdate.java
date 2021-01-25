@@ -25,14 +25,14 @@ public class InsertUpdate {
 	private int[] careerId;
 	private String[] company;
 	private String[] careerPeriod;
-	private String[] position;
-	private long[] salary;
+	private String[] careerPosition;
+	private long[] careerSalary;
 	private String[] description;
 	public InsertUpdate() {}
 	public InsertUpdate(int resumeId, String userId, int documentId, String title, String finalEducation,
 			String educationName, String period, String[] state, String major, String score, String basicScore,
 			String career, String resumePath, String myinfo, SignUp info, int[] careerId, String[] company,
-			String[] careerPeriod, String[] position, long[] salary, String[] description) {
+			String[] careerPeriod, String[] careerPosition, long[] careerSalary, String[] description) {
 		super();
 		this.resumeId = resumeId;
 		this.userId = userId;
@@ -52,8 +52,8 @@ public class InsertUpdate {
 		this.careerId = careerId;
 		this.company = company;
 		this.careerPeriod = careerPeriod;
-		this.position = position;
-		this.salary = salary;
+		this.careerPosition = careerPosition;
+		this.careerSalary = careerSalary;
 		this.description = description;
 	}
 	public int getResumeId() {
@@ -164,17 +164,17 @@ public class InsertUpdate {
 	public void setCareerPeriod(String[] careerPeriod) {
 		this.careerPeriod = careerPeriod;
 	}
-	public String[] getPosition() {
-		return position;
+	public String[] getCareerPosition() {
+		return careerPosition;
 	}
-	public void setPosition(String[] position) {
-		this.position = position;
+	public void setCareerPosition(String[] careerPosition) {
+		this.careerPosition = careerPosition;
 	}
-	public long[] getSalary() {
-		return salary;
+	public long[] getCareerSalary() {
+		return careerSalary;
 	}
-	public void setSalary(long[] salary) {
-		this.salary = salary;
+	public void setCareerSalary(long[] careerSalary) {
+		this.careerSalary = careerSalary;
 	}
 	public String[] getDescription() {
 		return description;
@@ -189,8 +189,8 @@ public class InsertUpdate {
 				+ period + ", state=" + Arrays.toString(state) + ", major=" + major + ", score=" + score
 				+ ", basicScore=" + basicScore + ", career=" + career + ", resumePath=" + resumePath + ", myinfo="
 				+ myinfo + ", info=" + info + ", careerId=" + Arrays.toString(careerId) + ", company="
-				+ Arrays.toString(company) + ", careerPeriod=" + Arrays.toString(careerPeriod) + ", position="
-				+ Arrays.toString(position) + ", salary=" + Arrays.toString(salary) + ", description="
+				+ Arrays.toString(company) + ", careerPeriod=" + Arrays.toString(careerPeriod) + ", careerPosition="
+				+ Arrays.toString(careerPosition) + ", careerSalary=" + Arrays.toString(careerSalary) + ", description="
 				+ Arrays.toString(description) + "]";
 	}
 	

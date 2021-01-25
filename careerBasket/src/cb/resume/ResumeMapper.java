@@ -37,8 +37,8 @@ public interface ResumeMapper {
 			+ "#{state}, #{major}, #{score}, #{basicScore}, #{career}, #{resumePath}, #{myinfo})")
 	public int insert(Resume resume);
 	
-	@Insert("insert into career(resume_id, company, career_period, position, salary, description) "
-			+ "values(#{resumeId}, #{company}, #{careerPeriod}, #{position}, #{salary}, #{description})")
+	@Insert("insert into career(resume_id, company, career_period, career_position, career_salary, description) "
+			+ "values(#{resumeId}, #{company}, #{careerPeriod}, #{careerPosition}, #{careerSalary}, #{description})")
 	public int insertCareer(Career career);
 	
 	@Update("update resume set title=#{title}, final_education=#{finalEducation}, "
@@ -49,7 +49,7 @@ public interface ResumeMapper {
 	public int update(Resume resume);
 	
 	@Update("update career set company=#{company}, career_period=#{careerPeriod}, "
-			+ "position=#{position}, salary=#{salary}, description=#{description} "
+			+ "career_position=#{careerPosition}, career_salary=#{careerSalary}, description=#{description} "
 			+ "where resume_id=#{resumeId}")
 	public void updateCareer(Career career);
 	

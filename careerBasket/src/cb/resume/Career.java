@@ -6,19 +6,19 @@ public class Career {
 	private int resumeId;
 	private String company;
 	private String careerPeriod;
-	private String position;
-	private long salary;
+	private String careerPosition;
+	private long careerSalary;
 	private String description;
 	public Career() {}
-	public Career(int careerId, int resumeId, String company, String careerPeriod, String position, long salary,
+	public Career(int careerId, int resumeId, String company, String careerPeriod, String careerPosition, long careerSalary,
 			String description) {
 		super();
 		this.careerId = careerId;
 		this.resumeId = resumeId;
 		this.company = company;
 		this.careerPeriod = careerPeriod;
-		this.position = position;
-		this.salary = salary;
+		this.careerPosition = careerPosition;
+		this.careerSalary = careerSalary;
 		this.description = description;
 	}
 	public int getCareerId() {
@@ -45,17 +45,17 @@ public class Career {
 	public void setCareerPeriod(String careerPeriod) {
 		this.careerPeriod = careerPeriod;
 	}
-	public String getPosition() {
-		return position;
+	public String getCareerPosition() {
+		return careerPosition;
 	}
-	public void setPosition(String position) {
-		this.position = position;
+	public void setCareerPosition(String careerPosition) {
+		this.careerPosition = careerPosition;
 	}
-	public long getSalary() {
-		return salary;
+	public long getCareerSalary() {
+		return careerSalary;
 	}
-	public void setSalary(long salary) {
-		this.salary = salary;
+	public void setCareerSalary(long careerSalary) {
+		this.careerSalary = careerSalary;
 	}
 	public String getDescription() {
 		return description;
@@ -66,7 +66,7 @@ public class Career {
 	@Override
 	public String toString() {
 		return "Career [careerId=" + careerId + ", resumeId=" + resumeId + ", company=" + company + ", careerPeriod="
-				+ careerPeriod + ", position=" + position + ", salary=" + salary + ", description=" + description + "]";
+				+ careerPeriod + ", careerPosition=" + careerPosition + ", careerSalary=" + careerSalary + ", description=" + description + "]";
 	}
 	
 	
