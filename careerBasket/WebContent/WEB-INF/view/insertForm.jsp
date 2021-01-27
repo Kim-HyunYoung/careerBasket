@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
  function check(){
 	if($("input[type=checkbox]").is(":checked") == true){
@@ -113,9 +114,8 @@
  }
  function del(){
 	 var com = document.getElementById("com");
-	 while ( com.hasChildNodes() ){
 		 com.removeChild( com.firstChild ); 
-		 }
+		 com.removeChild( com.firstChild ); 
  }
 </script>
 <title>insertForm.jsp</title>

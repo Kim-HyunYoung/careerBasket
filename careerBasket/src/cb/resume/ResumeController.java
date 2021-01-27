@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,14 @@ public class ResumeController {
 //		//실행확인
 //		System.out.println("실행!");
 		userId="durumi";
+		SignUp myInfo = service.selectOneUserId(userId);
+		m.addAttribute("info", myInfo);
 		int resumeCount = service.resumeCount(userId);
 		m.addAttribute("count", resumeCount);
 		List<Resume> reList = service.showPreview();
 		m.addAttribute("list", reList);
 		List<Document> doList = service.selectDoPreView(userId);
-		System.out.println(doList);
+//		System.out.println(doList);
 		m.addAttribute("doList", doList);
 		return "list";
 	}
@@ -66,6 +69,8 @@ public class ResumeController {
 		//경력 정보 조회
 		List<Career> ca = service.selectCareer(Integer.parseInt(id));
 		m.addAttribute("ca", ca);
+		List<Document> doList = service.selectDoAllView(userId);
+		m.addAttribute("doList", doList);
 		return "pickList";
 	}
 	
@@ -155,11 +160,12 @@ public class ResumeController {
 	
 	//기타문서 폼
 	@GetMapping("/documentList")
-	public String fileUploadForm(Model m, String userId) {
+	public String documentUploadForm(Model m, String userId) {
 		List<Document> doList = service.selectDoAllView(userId);
 		m.addAttribute("doList", doList);
 		return "allDoInsertList";
 	}
+	
 	
 	//파일 받아와서 저장
 	@PostMapping(value="/documentList", produces = "plain/text; charset=utf-8")
@@ -169,7 +175,13 @@ public class ResumeController {
 		System.out.println(type);
 		String result = service.uploadFiles(files, type, userId);
 		m.addAttribute("result", result);
-		return fileUploadForm(m, userId);
+		return documentUploadForm(m, userId);
+	}
+	
+	@GetMapping("/deleteDocument")
+	public String deleteDo(String documentId, String userId, Model m) {
+		service.deleteDo(Integer.parseInt(documentId));
+		return documentUploadForm(m, userId);
 	}
 	
 }
