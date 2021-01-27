@@ -8,21 +8,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	if("${ca}"!=null){
+	if("${ca}"!="[]"){
 		console.log("휴..");
 		var com = document.getElementById("com");
 		
 		com.innerHTML="<h1>경력</h1>";
 		
+		<c:forEach var="c" items="${ca}">
 		var t = document.createElement("table");
-		var thead = documnet.createElement("thead");
-		var tr = documnet.createElement("tr");
-		var th1 = documnet.createElement("th");
-		var th2 = documnet.createElement("th");
-		var th3 = documnet.createElement("th");
-		var th4 = documnet.createElement("th");
-		
-		t.style.border = "1";
+		t.setAttribute("border", "1");
+		var thead = document.createElement("thead");
+		var tr = document.createElement("tr");
+		var th1 = document.createElement("th");
+		var th2 = document.createElement("th");
+		var th3 = document.createElement("th");
+		var th4 = document.createElement("th");
 		
 		th1.innerHTML = "근무기간";
 		th2.innerHTML = "회사명";
@@ -36,29 +36,86 @@ $(function(){
 		thead.appendChild(tr);
 		t.appendChild(thead);
 		
-		var tbody = documnet.createElement("tbody");
-		var tr2 = documnet.createElement("tr");
-		var td = documnet.createElement("td");
+		var tbody = document.createElement("tbody");
+		var tr2 = document.createElement("tr");
+		var td1 = document.createElement("td");
+		var td2 = document.createElement("td");
+		var td3 = document.createElement("td");
+		var td4 = document.createElement("td");
 		
-		td.innerHTML = "${ca[0].careerPeriod}";
-		td.innerHTML = "${ca[0].company}";
-		td.innerHTML = "${ca[0].careerPosition}";
-		td.innerHTML = "${ca[0].careerSalary}";
+		td1.innerHTML = "${c.careerPeriod}";
+		td2.innerHTML = "${c.company}";
+		td3.innerHTML = "${c.careerPosition}";
+		td4.innerHTML = "${c.careerSalary}";
 		
-		tr2.appendChild(td);
+		tr2.appendChild(td1);
+		tr2.appendChild(td2);
+		tr2.appendChild(td3);
+		tr2.appendChild(td4);
 		tbody.appendChild(tr2);
+		
+		var tr3 = document.createElement("tr");
+		var th5 = document.createElement("th");
+		th5.setAttribute("colspan", "4");
+		
+		th5.innerHTML = "경력기술서";
+		
+		tr3.appendChild(th5);
+		tbody.appendChild(tr3);
+		
+		var tr4 = document.createElement("tr");
+		var td5 = document.createElement("td");
+		td5.setAttribute("colspan", "4");
+		
+		td5.innerHTML = "${c.description}";
+		
+		tr4.appendChild(td5);
+		tbody.appendChild(tr4);
+		
 		t.appendChild(tbody);
+		com.append(t);
+		
+		</c:forEach>
 	}else{
 		console.log("경력없음");
 	}
 	
 })
+function print(){
+	const _tempHTML = document.getElementsByTagName("body")[0].innerHTML;
+	  const innerHTMLs = "<div class='printWrap' style='width:21cm; height: 29.7cm;'>" + _tempHTML + "</div>"; 
+	  const popupWindow = window.open("", "_blank", "width=700,height=800");
+	  popupWindow.document.write("<!DOCTYPE html>"+
+				      "<html>"+
+				        "<head>"+
+				        	"<style type='text/css'>"+
+				        		".endline{page-break-before:always}"+
+				        	"</style>"+
+				        	"<style type='text/css' media='print'>"+
+					    		"@page {"+
+					    		    "size: auto;  /* auto is the initial value */"+
+					    		    "margin: 0px 100px 0px 100px;  /* this affects the margin in the printer settings */"+
+					    		"}"+
+					    	"</style>"+
+				        "</head>"+
+				        "<body>"+innerHTMLs+"</body>"+
+				      "</html>");
+	  popupWindow.document.close();
+		popupWindow.focus();
+	  //1초후 새 창 프린트
+	  window.setTimeout(function () {
+		 	popupWindow.print();
+		 	popupWindow.close();
+		}, 1000);
+}
 </script>
 <title>pickList.jsp</title>
 </head>
 <body>
+<button onclick="print()">이력서 인쇄/PDF저장</button>
   <h1>${re.title }</h1>
   <hr>
+  <img alt="사진을 등록하세요" src="">
   <table>
   	<thead>
   		<tr>
@@ -80,6 +137,7 @@ $(function(){
   <table border="1">
   	<thead>
       <tr>
+      	<th>최종학력</th>
         <th>재학기간</th>
         <th>구분</th>
         <th>학교명</th>
@@ -89,6 +147,7 @@ $(function(){
     </thead>
     <tbody>
       <tr>
+      	<td>${re.finalEducation }</td>
         <td>${re.period }</td>
         <td>${re.state }</td>
         <td>${re.educationName }</td>
@@ -97,32 +156,7 @@ $(function(){
       </tr>
     </tbody>
   </table>
-  <section id="com"></section>
-  <%-- <h1>경력</h1>
-  <table border="1">
-  	<thead>
-      <tr>
-        <th>근무기간</th>
-        <th>회사명</th>
-        <th>직책/직급</th>
-        <th>연봉</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>${ca.careerPeriod }</td>
-        <td>${ca.company }</td>
-        <td>${ca.position }</td>
-        <td>${ca.salary }</td>
-      </tr>
-      <tr>
-        <th colspan="4">경력기술서</th>
-      </tr>
-      <tr>
-        <td colspan="4">${ca.description }</td>
-      </tr>
-    </tbody>
-  </table> --%>
+  <div id="com"></div>
   <h1>자기소개서</h1>
   <table border="1">
     <tbody>
@@ -132,17 +166,15 @@ $(function(){
     </tbody>
   </table>
   <h1>첨부문서</h1>
-  <table border="1">
+  <table >
     <tbody>
+    <c:forEach var="doc" items="${doList}">
       <tr>
-        <td>${doList.type}</td>
+        <td>${doc.type}</td>
+        <td>${doc.fileTitle}</td>
+        <td>${doc.fileSize}</td>
       </tr>
-      <tr>
-        <td>${doList.type}</td>
-      </tr>
-      <tr>
-        <td>${doList.type}</td>
-      </tr>
+	</c:forEach>
     </tbody>
   </table>
   </body>

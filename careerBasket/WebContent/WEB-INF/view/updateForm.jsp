@@ -8,13 +8,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	if("${re.finalEducation}"!=null){
+	if("${re.finalEducation}"!=""){
 		$("input[value='${re.finalEducation}']").prop("checked", true);
 	}
-	if("${re.career}"!=null){
+	if("${re.career}"!=""){
 		$("input[value=${re.career}]").prop("checked", true);
 	}
-	if("${re.state}"!=null){
+	if("${re.state}"!=""){
 		if("${re.state}"==$("input[name=state]").val()){
 			$("input[name=state]").prop("checked", true);
 			$("input[name=educationName]").prop("disabled", true);
@@ -33,7 +33,7 @@ $(function(){
 	 	 //타이틀 삽입
 	 	  var h = document.createElement("h2");
 	 	  h.innerHTML="경력";
-	 	 com.append(h);
+	 	  com.append(h);
 	 	  
 	 	  //fieldset 삽입
 	 	  var f = document.createElement("fieldset");
@@ -51,7 +51,7 @@ $(function(){
 	 	  var input = document.createElement("input");
 	 	  input.setAttribute("type", "text");
 	 	  input.setAttribute("name", "company");
-	 	 input.setAttribute("value", "${c.company}");
+	 	  input.setAttribute("value", "${c.company}");
 	 	  sec.append(input);
 	 	  
 	 	 var sec2 = document.createElement("section");
@@ -151,7 +151,7 @@ function check(){
  	 //타이틀 삽입
  	  var h = document.createElement("h2");
  	  h.innerHTML="경력";
- 	 com.append(h);
+ 	  com.append(h);
  	  
  	  //fieldset 삽입
  	  var f = document.createElement("fieldset");
@@ -234,9 +234,8 @@ function check(){
  }
  function del(){
 	 var com = document.getElementById("com");
-	 while ( com.hasChildNodes() ){
-		 com.removeChild( com.firstChild ); 
-		 }
+	 com.removeChild( com.firstChild ); 
+	 com.removeChild( com.firstChild );
  }
 </script>
 <title>updateForm.jsp</title>

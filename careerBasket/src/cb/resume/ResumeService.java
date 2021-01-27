@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -151,7 +152,7 @@ public class ResumeService {
 	public String uploadFiles(MultipartFile[] files, String type, String userId) {
 		String result = null;
 		
-		String uploadFolder = "/Users/jeong-yeji/git/careerBasket/careerBasket/WebContent/WEB-INF/resource/document ";
+		String uploadFolder = "/Users/jeong-yeji/git/careerBasket/careerBasket/WebContent/WEB-INF/resource/document/";
 		
 		
 		File file = new File(uploadFolder);
@@ -171,7 +172,7 @@ public class ResumeService {
 					String fileSize = files[0].getSize()/1024+"KB";
 					document.setFileSize(fileSize);
 				}else if((files[0].getSize()/1024)/1024<50) {
-					String fileSize = files[0].getSize()/1024+"MB";
+					String fileSize = (files[0].getSize()/1024)/1024+"MB";
 					document.setFileSize(fileSize);
 				}else {
 					result = "문서저장 실패! 다시 시도해주세요!";
@@ -181,7 +182,7 @@ public class ResumeService {
 				String newName = nums.toString()+files[i].getOriginalFilename();
 				file = new File(file, newName);
 				files[i].transferTo(file);
-				document.setFilePath(uploadFolder+nums.toString()+files[i].getOriginalFilename());
+				document.setFilePath(newName);
 				
 				mapper.insertDo(document);
 			}
@@ -198,5 +199,17 @@ public class ResumeService {
 
 	public int resumeCount(String userId) {
 		return mapper.resumeCount(userId);
+	}
+	
+	public int deleteDo(int documentId) {
+		return mapper.deleteDocument(documentId);
+	}
+
+	public Document selectDoOne(int documentId) {
+		return mapper.selectDoOne(documentId);
+	}
+
+	public SignUp selectOneUserId(String userId) {
+		return mapper.selectMyInfo(userId);
 	}
 }

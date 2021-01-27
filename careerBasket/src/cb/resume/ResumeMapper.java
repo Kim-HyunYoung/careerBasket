@@ -67,6 +67,9 @@ public interface ResumeMapper {
 	
 	@Select("select * from document where user_id='durumi'")
 	public List<Document> selectAllDo(String userId);
+	
+	@Select("select * from document where document_id=#{documentId}")
+	public Document selectDoOne(int documentId);
 
 	@Insert("insert into document(user_id, type, file_title, file_path, file_size) "
 			+ "values(#{userId}, #{type}, #{fileTitle}, #{filePath}, #{fileSize})")
@@ -75,4 +78,6 @@ public interface ResumeMapper {
 	@Select("select count(*) from resume where user_id=#{userId}")
 	public int resumeCount(String userId);
 	
+	@Delete("delete from document where document_id=#{documentId}")
+	public int deleteDocument(int documentId);
 }
