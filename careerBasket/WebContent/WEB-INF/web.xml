@@ -18,7 +18,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		
-	<!-- 파일업로드를 위한 설정 -->
+	<!-- 파일업로드를 위한 설정 .-->
 	    <multipart-config>
 	       <!-- 파일당 사이즈 -->
 	       <max-file-size>20971520</max-file-size>
