@@ -19,7 +19,7 @@ public class HireInfo {
 	private String detailImg;
 	private String logoImg; //얘 나중에 추가함
 	
-	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private LocalDateTime startDate;
 	
