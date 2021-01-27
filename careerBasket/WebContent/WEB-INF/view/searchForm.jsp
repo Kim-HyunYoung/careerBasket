@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>searchForm.jsp</title>
 <link rel="stylesheet" type="text/css" href="/css/pagenation.css">
-<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
+<link rel="stylesheet" type="text/css" href="/css/detail.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 //ajax 비동기 방식으로 검색 버튼 누르면 리스트 보여주기!
@@ -35,7 +35,7 @@
 						//가져온 데이터가 없으면 목록이 없다는 문구를 삽입.
 						$("#rs").children().remove();
 						$("#rs").append("<h1>죄송합니다.<br>해당하는 채용 공고가 없습니다.</h1>");
-						$(".pg").children().remove();
+						$(".pagination").children().remove();
 						
 					}else{
 						//가져온 데이터가 있으면 목록을 each로 반복해서출력!
@@ -81,7 +81,7 @@
 						var newSection = $("<section>");
 							
 						//append때문에 쌓이지 않도록 remove(초기화)시켜줌
-							$(".pg").children().remove();
+							$(".pagination").children().remove();
 							
 						//--------------첫번째 페이지로 가는 버튼----------------------------
 						if(pageTotalCnt == 1 || pageTotalCnt == 2){ //페이지가 1 또는 2면
@@ -89,7 +89,7 @@
 							$(".goFirstPage").children().remove();
 						}else{  //페이지가 1또는 2가 아니면 
 							// <<버튼 활성화
-							newSection.append("<div class='goFirstPage' value='"+1+"'><<</div>");
+							newSection.append("<li class='goFirstPage' value='"+1+"'><a><<</a></li>");
 						}
 						
 						//------------------뒤로가기 버튼---------------------------------
@@ -100,10 +100,10 @@
 							//전체 페이지가 2,3,4,,,,이면
 							if(currentPage == 1){ //현재 페이지가 1일 경우 
 								// <버튼 비활성화							
-								newSection.append("<div class='disabled' value='"+currentPage+"'><</div>");
+								newSection.append("<li class='disabled' value='"+currentPage+"'><a><</a></li>");
 							}else {
 								console.log("pageNumData-1="+(currentPage-1));
-								newSection.append("<div class='goBackPage' value='"+(currentPage-1)+"'><</div>");
+								newSection.append("<li class='goBackPage' value='"+(currentPage-1)+"'><a><<a></li>");
 								
 							}
 						}
@@ -111,9 +111,9 @@
 						//-----------------페이지 숫자 출력(3개씩)---------------------------
 						for(var i =blockBegin; i<blockEnd+1; i++){
 								console.log("페이지네이션"+i);
-							newSection.append("<div class='p' value='"+i+"'>"+i+"</div>");
+							newSection.append("<li class='p' value='"+i+"'><a>"+i+"</a></li>");
 							
-							$(".pg").append(newSection);
+							$(".pagination").append(newSection);
 						}
 						
 						//---------------------다음 버튼----------------------------------
@@ -123,9 +123,9 @@
 						}else {
 							if(currentPage == pageTotalCnt){ //현재 페이지가 1일 경우 
 								// >다음버튼 비활성화							
-								newSection.append("<div class='disabled' value='"+currentPage+"'>></div>");
+								newSection.append("<li class='disabled' value='"+currentPage+"'><a>></a></li>");
 							}else {
-								newSection.append("<div class='goNextPage' value='"+(currentPage+1)+"'>></div>");
+								newSection.append("<li class='goNextPage' value='"+(currentPage+1)+"'><a>></a></li>");
 							}
 						}
 							
@@ -135,7 +135,7 @@
 							$(".goLastPage").children().remove();
 						
 						}else {
-							newSection.append("<div class='goLastPage' value='"+pageTotalCnt+"'>>></div>");	
+							newSection.append("<li class='goLastPage' value='"+pageTotalCnt+"'><a>>></a></li>");	
 						}
 						
 						/*
@@ -187,13 +187,8 @@
 	 
 	 //검색버튼 눌렀을 때 실행될 이벤트
 	$("#f").on("submit",function(){
-		
-		//검색 조건3가지 중 하나라도 입력하지 않으면
-		//(null,지역을 선택하세요,null)
-		//안내문구 띄우기
-		
-		//검색버튼 눌렀을 땐 -> 1페이지 보여줘야함
-		var pageNumData = 1;
+	
+		var pageNumData = 1; //검색버튼 눌렀을 땐 -> 1페이지 보여줘야함
 			console.log("pageNumData :" +pageNumData);
 		//radio 체크된 값 가져오기
 		var careerData = $('form [name="hireCareer"]:checked').val();
@@ -206,6 +201,9 @@
 		var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
 		
 		
+		//검색 조건3가지 중 하나라도 입력하지 않으면
+		//(null,지역을 선택하세요,null)
+		//안내문구 띄우기
 		if(typeof careerData == "undefined" || workPlaceData == "선택" || typeof positionData == "undefined"){
 			//document.write("<h1>검색할 조건을 선택해주세요</h1>")
 			//loadAjax("/hire/check","post",allData);
@@ -216,7 +214,7 @@
 				success:function(){
 					$("#rs").children().remove();
 					$("#rs").append("<h1>검색 조건을 모두 선택해 주세요</h1>");
-					$(".pg").children().remove();
+					$(".pagination").children().remove();
 				},
 				error:function(e){
 					console.log(e);
@@ -352,7 +350,7 @@
 		
 	//마지막 페이지로 가기 버튼 이벤트
 	$(document).on("click",".goLastPage",function(){
-		alert("goLastPage!");	
+		//alert("goLastPage!");	
 		var pageNumData = $(this).attr("value");
 		console.log("pageNumData :" +pageNumData);
 		
@@ -420,7 +418,7 @@
 		
 	<!-- 페이지 네이션 -->
 		<!--<section> 옆으로 플로팅 시키기  -->
-		<div class="pg"></div>
+		<ul class="pagination"></ul>
 
 </body>
 </html>

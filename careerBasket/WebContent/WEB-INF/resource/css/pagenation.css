@@ -1,4 +1,6 @@
 @charset "UTF-8";
+@import "reset.css";
+
 .p,.goFirstPage,.goBackPage,.goNextPage,.goLastPage,.disabled
 	{
 		float: left;
@@ -6,9 +8,10 @@
 		position: relative;
 	    display: inline-block;
 	}
-.pg{
+.pagination{
 	position: absolute;
 	text-align: center;
 	margin:0 auto;
 	}
 .info{float: right;}
+
