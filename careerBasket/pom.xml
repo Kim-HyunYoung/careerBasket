@@ -115,6 +115,25 @@
 	    <artifactId>jackson-datatype-jsr310</artifactId>
 	    <version>2.12.0</version>
 	</dependency>
-	  </dependencies>
+	
+	
+	<!-- 메일 전송 라이브러리 -->
+	<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>mail</artifactId>
+	    <version>1.4.7</version>
+	</dependency>
+	
+	<!-- JavaMailSender 인터페이스 사용하기 위해 -->
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context-support</artifactId>
+	    <version>5.2.12.RELEASE</version>
+	</dependency>
+
+
+	</dependencies>
   
 </project>
