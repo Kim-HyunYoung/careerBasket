@@ -42,4 +42,49 @@
 	<mvc:annotation-driven/>
 	
 	<mvc:default-servlet-handler/>
+	
+	<!-- gmail설정 -->
+	<bean id="mailSender2" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+	     <property name="host" value="smtp.gmail.com" />
+	     <property name="port" value="587" />
+	 <property name="username" value="gusdud0725@gmail.com"/> <!-- 자신의 이메일 아이디 -->
+	 <property name="password" value="gusdud2499!!"/> <!-- 자신의 비밀번호 -->
+	 <!-- 보안연결 TLS과 관련된 설정 -->
+	     <property name="javaMailProperties">
+	    <props>
+	       <prop key="mail.smtp.auth">true</prop>
+	       <prop key="mail.smtp.starttls.enable">true</prop>
+	    </props>
+	     </property>
+	</bean>
+	
+	<!-- navermail설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+	 <property name="host" value="smtp.naver.com"/> <!-- 메이서버 호스트 -->
+	 <property name="port" value="465"/> <!-- 메이서버 포트번호 -->
+	 <property name="username" value="ekek0725"/> <!-- 자신의 이메일 아이디 -->
+	 <property name="password" value="gusdud0725!!"/> <!-- 자신의 비밀번호 -->
+	   <!-- 보안연결 SSL과 관련된 설정 -->
+	 <property name="javaMailProperties">
+	  <props>
+	  <prop key="mail.smtp.auth">true</prop>
+	  <prop key="mail.smtp.starttls.enable">true</prop>
+	  <prop key="mail.smtps.checkserveridentity">true</prop>
+	  <prop key="mail.smtps.ssl.trust">*</prop>
+	  <prop key="mail.debug">true</prop>
+	  <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+	  </props>
+	 </property>
+	</bean>
+	
+	   <!-- 리소스 맵칭을 위한 설정 -->
+   <!-- location=실제주소, mapping=가상주소 -->
+   <!-- 
+   <mvc:resources location="file:///C:/Users/rbfl6/Desktop/careerBascket/" mapping="/img/**"/>
+   <mvc:resources location="file:///C:/Users/rbfl6/Desktop/careerBascket/" mapping="/logo/**"/>
+    -->
+   <mvc:resources location="/WEB-INF/resource/img/" mapping="/img/**"/>
+   <mvc:resources location="/WEB-INF/resource/css/" mapping="/css/**"/>
+   <mvc:resources location="/WEB-INF/resource/document/" mapping="/document/**"/>
+   
 </beans>

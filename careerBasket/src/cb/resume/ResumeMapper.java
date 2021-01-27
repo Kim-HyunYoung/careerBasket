@@ -8,16 +8,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import cb.signup.SignUp;
+import cb.signUp.User;
 
 @Mapper
 public interface ResumeMapper {
 	
-	@Select("select * from resume where user_id='durumi' order by resume_id desc limit 3")
-	public List<Resume> selecLimit();
+	@Select("select * from resume where user_id=#{userId} order by resume_id desc limit 3")
+	public List<Resume> selecLimit(String userId);
 
-	@Select("select * from resume where user_id='durumi' order by resume_id desc")
-	public List<Resume> selectAll();
+	@Select("select * from resume where user_id=#{userId} order by resume_id desc")
+	public List<Resume> selectAll(String userId);
 	
 	@Select("select * from resume where resume_id=#{resumeId}")
 	public Resume selectOne(int resumeId);
@@ -25,8 +25,8 @@ public interface ResumeMapper {
 	@Select("select resume_id from resume where user_id=#{userId} order by resume_id desc limit 1")
 	public int selectId(String userId);
 	
-	@Select("select * from signup where user_id=#{userId}")
-	public SignUp selectMyInfo(String userId);
+	@Select("select * from sign_up where user_id=#{userId}")
+	public User selectMyInfo(String userId);
 	
 	@Select("select * from career where resume_id=#{resumeId}")
 	public List<Career> selectCareer(int resumeId);
@@ -62,10 +62,10 @@ public interface ResumeMapper {
 	
 	//document query
 	
-	@Select("select * from document where user_id='durumi' order by resume_id desc limit 3")
+	@Select("select * from document where user_id=#{userId} order by resume_id desc limit 3")
 	public List<Document> selectDo(String userId);
 	
-	@Select("select * from document where user_id='durumi'")
+	@Select("select * from document where user_id=#{userId}")
 	public List<Document> selectAllDo(String userId);
 	
 	@Select("select * from document where document_id=#{documentId}")

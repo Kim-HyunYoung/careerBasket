@@ -2,7 +2,7 @@ package cb.resume;
 
 import java.time.LocalDate;
 
-import cb.signup.SignUp;
+import cb.signUp.User;
 
 public class Resume {
 
@@ -21,7 +21,7 @@ public class Resume {
 	private String resumePath;
 	private String myinfo;
 	private LocalDate wDate;
-	private SignUp info;
+	private User info;
 	public Resume() {}
 	public Resume(int resumeId, String userId, int documentId, String title, String finalEducation,
 			String educationName, String period, String state, String major, String score, String basicScore,
@@ -45,7 +45,7 @@ public class Resume {
 	}
 	public Resume(int resumeId, String userId, int documentId, String title, String finalEducation,
 			String educationName, String period, String state, String major, String score, String basicScore,
-			String career, String resumePath, String myinfo, LocalDate wDate, SignUp info) {
+			String career, String resumePath, String myinfo, LocalDate wDate, User info) {
 		super();
 		this.resumeId = resumeId;
 		this.userId = userId;
@@ -154,10 +154,10 @@ public class Resume {
 	public void setwDate(LocalDate wDate) {
 		this.wDate = wDate;
 	}
-	public SignUp getInfo() {
+	public User getInfo() {
 		return info;
 	}
-	public void setInfo(SignUp info) {
+	public void setInfo(User info) {
 		this.info = info;
 	}
 	@Override

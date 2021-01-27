@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import cb.signup.SignUp;
+import cb.signUp.User;
+
+
 
 @Service
 public class ResumeService {
@@ -22,13 +24,13 @@ public class ResumeService {
 	ResumeMapper mapper;
 	
 	//이력서 최신등록 3개만 가져오는 메서드
-	public List<Resume> showPreview(){
-		return mapper.selecLimit();
+	public List<Resume> showPreview(String userId){
+		return mapper.selecLimit(userId);
 	}
 	
 	//이력서 전체를 가져오는 메서드
-	public List<Resume> showList(){
-		return mapper.selectAll();
+	public List<Resume> showList(String userId){
+		return mapper.selectAll(userId);
 	}
 	
 	//이력서 1개만 가져오는 메서드
@@ -37,7 +39,7 @@ public class ResumeService {
 	}
 	
 	//회원 기본정보 불러오는 메서드
-	public SignUp selectMyInfo(String userId) {
+	public User selectMyInfo(String userId) {
 		return mapper.selectMyInfo(userId);
 	}
 	
@@ -209,7 +211,7 @@ public class ResumeService {
 		return mapper.selectDoOne(documentId);
 	}
 
-	public SignUp selectOneUserId(String userId) {
+	public User selectOneUserId(String userId) {
 		return mapper.selectMyInfo(userId);
 	}
 }

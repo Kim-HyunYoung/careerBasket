@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cb.resume.Document;
 import cb.resume.Resume;
 import cb.resume.ResumeService;
+import cb.signUp.UserService;
 
 @Controller
 //@RequestMapping(value = "/hire", produces = "text/html; charset=UTF-8")
@@ -28,19 +29,24 @@ public class HireInfoController {
 	HireInfoService service;
 	
 	@Autowired
-	//@Qualifier("resume")
 	ResumeService resumService;
 	
+	@Autowired
+	UserService userService;
+	
 	@GetMapping("/list")
-	public String getHireList(){
+	public String getHireList(String userId,Model m){
+		m.addAttribute("userId", userId);
 		return "searchForm";
 	}
 	
 	@PostMapping("/search")
-	public @ResponseBody HireListView getHireList(int hireCareer,String workPlace,String position,int page,Model m){
+	public @ResponseBody HireListView getHireList(int hireCareer,String workPlace,String position,int page,String userId,Model m){
 		System.out.println("post컨트롤러에서 hireCareer:"+hireCareer);
 		System.out.println("post컨트롤러에서 workPlace:"+workPlace);
 		System.out.println("post컨트롤러에서 position:"+position);
+		
+		m.addAttribute("userId", userId);
 		
 		HireListView viewData = service.getHireListView(hireCareer, workPlace, position, page);
 		
@@ -82,18 +88,20 @@ public class HireInfoController {
 	//상세페이지로 이동
 	@GetMapping("/detail")
 	public String getDetail(int id,Model m,String userId) {
+		System.out.println(userId);
+		
 		//해당 id의 상세페이지 뿌려주는 메서드(service에 만들기)
 		HireInfo hireInfo = service.getHireDetail(id);
 		Company company = service.getCompany(hireInfo.getCompanyName());
 		m.addAttribute("detail", hireInfo);
 		m.addAttribute("company", company);
 		
-		userId="durumi"; //임의로 지정해둠
+		//userId="durumi"; //임의로 지정해둠
 		
 		m.addAttribute("userId", userId);
 		int resumeCount = resumService.resumeCount(userId);
 		m.addAttribute("count", resumeCount);
-		List<Resume> reList = resumService.showList();
+		List<Resume> reList = resumService.showList(userId);
 		m.addAttribute("list", reList);
 		List<Document> doList = resumService.selectDoPreView(userId);
 		System.out.println(doList);
@@ -117,7 +125,7 @@ public class HireInfoController {
 		
 		String result ="";
 		//임의로 회원 정해둠
-		userId = "durumi";
+		//userId = "durumi";
 		
 		List<Integer> applyIdList = service.getApplyId(userId);
 		System.out.println(applyIdList);
@@ -158,7 +166,7 @@ public class HireInfoController {
 	public String getApplyList(Model m,String userId) { //String userId 추가해야함(회원가입 완료되면)
 		
 		//임의로 회원 정해둠
-		userId = "durumi";
+		//userId = "durumi";
 		
 		//지원한 개수
 		int applyCnt = service.getApplyCnt(userId);
@@ -175,6 +183,7 @@ public class HireInfoController {
 	public String getMyPage() {
 		return "myPage";
 	}
+	
 	
 	
 }

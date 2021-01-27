@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import cb.signup.SignUp;
+import cb.signUp.User;
+
+
 
 @Controller
 @RequestMapping("/resume")
@@ -24,31 +26,31 @@ public class ResumeController {
 	ResumeService service;
 	
 	//마이페이지에서 미리보여주는 간단리스트, 이력서 카운트
-	@GetMapping("/list")
-	public String showViewPreview(Model m, String userId) {
-//		//실행확인
-//		System.out.println("실행!");
-		userId="durumi";
-		SignUp myInfo = service.selectOneUserId(userId);
-		m.addAttribute("info", myInfo);
-		int resumeCount = service.resumeCount(userId);
-		m.addAttribute("count", resumeCount);
-		List<Resume> reList = service.showPreview();
-		m.addAttribute("list", reList);
-		List<Document> doList = service.selectDoPreView(userId);
-//		System.out.println(doList);
-		m.addAttribute("doList", doList);
-		return "list";
-	}
+//	@GetMapping("/list")
+//	public String showViewPreview(Model m, String userId) {
+////		//실행확인
+////		System.out.println("실행!");
+////		userId="durumi";
+//		User myInfo = service.selectOneUserId(userId);
+//		m.addAttribute("info", myInfo);
+//		int resumeCount = service.resumeCount(userId);
+//		m.addAttribute("count", resumeCount);
+//		List<Resume> reList = service.showPreview(userId);
+//		m.addAttribute("list", reList);
+//		List<Document> doList = service.selectDoPreView(userId);
+////		System.out.println(doList);
+//		m.addAttribute("doList", doList);
+//		return "list";
+//	}
 	
 	//전체보기 클릭시 이력서 전체 목록 보여주기
 	@GetMapping("/listAll")
-	public String showViewList(Model m){
+	public String showViewList(Model m, String userId){
 //		//실행확인
 //		System.out.println("실행");
-		List<Resume> reList = service.showList();
+		List<Resume> reList = service.showList(userId);
 		m.addAttribute("list", reList);
-		m.addAttribute("userId", reList.get(0).getUserId());
+		m.addAttribute("userId", userId);
 		return "allList";
 	}
 	
@@ -61,7 +63,7 @@ public class ResumeController {
 		Resume re = service.selectOne(Integer.parseInt(id));
 		m.addAttribute("re", re);
 		//회원 정보 조회
-		SignUp si = service.selectMyInfo(userId);
+		User si = service.selectMyInfo(userId);
 		m.addAttribute("si", si);
 		//회원 나이 계산
 		int age = (LocalDate.now().getYear()-si.getBirthDate().getYear()+1);
@@ -81,7 +83,7 @@ public class ResumeController {
 //		System.out.println("실행");
 //		System.out.println(userId);
 		//회원 정보 조회
-		SignUp si = service.selectMyInfo(userId);
+		User si = service.selectMyInfo(userId);
 		m.addAttribute("si", si);
 		return "insertForm";
 	}
@@ -97,7 +99,7 @@ public class ResumeController {
 		Resume re = service.selectOne(iu.getResumeId());
 		m.addAttribute("re", re);
 		//회원 정보 조회
-		SignUp si = service.selectMyInfo(iu.getUserId());
+		User si = service.selectMyInfo(iu.getUserId());
 		m.addAttribute("si", si);
 		//회원 나이 계산
 		int age = (LocalDate.now().getYear()-si.getBirthDate().getYear()+1);
@@ -117,7 +119,7 @@ public class ResumeController {
 		Resume re = service.selectOne(Integer.parseInt(id));
 		m.addAttribute("re", re);
 		//회원 정보 조회
-		SignUp si = service.selectMyInfo(userId);
+		User si = service.selectMyInfo(userId);
 		m.addAttribute("si", si);
 		//경력 정보 조회
 		List<Career> ca = service.selectCareer(Integer.parseInt(id));
@@ -135,7 +137,7 @@ public class ResumeController {
 		Resume re = service.selectOne(iu.getResumeId());
 		m.addAttribute("re", re);
 		//회원 정보 조회
-		SignUp si = service.selectMyInfo(iu.getUserId());
+		User si = service.selectMyInfo(iu.getUserId());
 		m.addAttribute("si", si);
 		//회원 나이 계산
 		int age = (LocalDate.now().getYear()-si.getBirthDate().getYear()+1);
@@ -148,14 +150,14 @@ public class ResumeController {
 	
 	//이력서 리스트에서 삭제버튼 클릭시 해당 이력서 디비에서 삭제
 	@GetMapping("/delete")
-	public String delete(String id, Model m) {
+	public String delete(String resumeId, Model m, String userId) {
 //		//아이디값 넘어오는지 확인
 //		System.out.println(id);
 //		//실행확인
 //		System.out.println("삭제실행");
 //		//아이디값이 string으로 넘어오기때문에 int로 형변환
-		service.delete(Integer.parseInt(id));
-		return showViewList(m);
+		service.delete(Integer.parseInt(resumeId));
+		return showViewList(m, userId);
 	}
 	
 	//기타문서 폼

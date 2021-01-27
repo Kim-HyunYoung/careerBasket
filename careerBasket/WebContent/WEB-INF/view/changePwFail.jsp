@@ -4,13 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>myPage.jsp</title>
+<title>changePwFail.jsp</title>
 </head>
 <body>
-
-<div>
-	<a href="http://localhost:8080/hire/applyInfo?userId=durumi">지원 현황</a>
-</div>
-
+<h1>비밀번호 변경 실패하셨습니다.</h1> <br>
+<button><a href="/user/findPwForm">다시 비밀번호 찾기</a></button>
 </body>
 </html>

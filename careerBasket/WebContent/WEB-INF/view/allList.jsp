@@ -51,8 +51,8 @@ function picklist(id, userId){
 	  document.querySelector("body").appendChild(form);
 	  form.submit();
 }
-function mydelete(id){
-	  console.log(id);
+function mydelete(resumeId, userId){
+	  //console.log(id);
 	  //삭제전에 확인창 띄우기
 	 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
 		  var form = document.createElement("form");
@@ -62,8 +62,15 @@ function mydelete(id){
 		//파라미터 넘겨주기 위해 히든타입으로 input id값 입력
 		  var hiddenField=document.createElement("input");
 		  hiddenField.setAttribute("type", "hidden");
-		  hiddenField.setAttribute("name", "id");
-		  hiddenField.setAttribute("value", id);
+		  hiddenField.setAttribute("name", "userId");
+		  hiddenField.setAttribute("value", userId);
+		  form.appendChild(hiddenField);
+		  
+		//파라미터 넘겨주기 위해 히든타입으로 input id값 입력
+		  var hiddenField=document.createElement("input");
+		  hiddenField.setAttribute("type", "hidden");
+		  hiddenField.setAttribute("name", "resumeId");
+		  hiddenField.setAttribute("value", resumeId);
 		  form.appendChild(hiddenField);
 		  
 		  //동적 form은 꼭 append해줘야 submit가능
@@ -73,8 +80,8 @@ function mydelete(id){
 		    return;
 		} 			
 }
-function myupdate(id, userId){
-	  console.log(id);
+function myupdate(resumeId, userId){
+	  console.log(resumeId);
 	  var form = document.createElement("form");
 	  form.setAttribute("method", "get");
 	  form.setAttribute("action", "${pageContext.request.contextPath}/resume/update");
@@ -82,8 +89,8 @@ function myupdate(id, userId){
 	  //파라미터 넘겨주기 위해 히든타입으로 input하고 submit함
 	  var hiddenField=document.createElement("input");
 	  hiddenField.setAttribute("type", "hidden");
-	  hiddenField.setAttribute("name", "id");
-	  hiddenField.setAttribute("value", id);
+	  hiddenField.setAttribute("name", "resumeId");
+	  hiddenField.setAttribute("value", resumeId);
 	  form.appendChild(hiddenField);
 	  
 		//파라미터 넘겨주기 위해 히든타입으로 input id값 입력
@@ -112,7 +119,7 @@ ${re.wDate}
 </section>
 <section>
 <button onclick="myupdate('${re.resumeId}', '${re.userId}')">수정</button>
-<button onclick="mydelete(${re.resumeId})">삭제</button>
+<button onclick="mydelete('${re.resumeId}', '${re.userId}')">삭제</button>
 </section>
 </c:forEach>
 </fieldset>

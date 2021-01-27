@@ -3,7 +3,7 @@ package cb.resume;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import cb.signup.SignUp;
+import cb.signUp.User;
 
 public class InsertUpdate {
 
@@ -21,7 +21,7 @@ public class InsertUpdate {
 	private String career;
 	private String resumePath;
 	private String myinfo;
-	private SignUp info;
+	private User info;
 	private int[] careerId;
 	private String[] company;
 	private String[] careerPeriod;
@@ -31,7 +31,7 @@ public class InsertUpdate {
 	public InsertUpdate() {}
 	public InsertUpdate(int resumeId, String userId, int documentId, String title, String finalEducation,
 			String educationName, String period, String[] state, String major, String score, String basicScore,
-			String career, String resumePath, String myinfo, SignUp info, int[] careerId, String[] company,
+			String career, String resumePath, String myinfo, User info, int[] careerId, String[] company,
 			String[] careerPeriod, String[] careerPosition, long[] careerSalary, String[] description) {
 		super();
 		this.resumeId = resumeId;
@@ -140,10 +140,10 @@ public class InsertUpdate {
 	public void setMyinfo(String myinfo) {
 		this.myinfo = myinfo;
 	}
-	public SignUp getInfo() {
+	public User getInfo() {
 		return info;
 	}
-	public void setInfo(SignUp info) {
+	public void setInfo(User info) {
 		this.info = info;
 	}
 	public int[] getCareerId() {

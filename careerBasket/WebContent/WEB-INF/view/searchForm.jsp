@@ -49,7 +49,7 @@
 						var newSection = $("<section>");
 						newSection.append("<img class='logo' src='http:/img/logo/"+hire.logoImg+"'>")
 						//id 링크 -> hash
-						newSection.append("<a value='"+currentPage+"' class='info' href='http://localhost:8080/hire/detail?id="+hire.id+"'>상세보기</a><br>")
+						newSection.append("<a value='"+currentPage+"' class='info' href='http://localhost:8080/hire/detail?id="+hire.id+"&userId=${userId}'>상세보기</a><br>")
 							//쿼리스트링으로 해당 페이지로 연결 url~~~?변수1=값1&변수2=값2
 							//http://localhost:8080/hire/detail
 						newSection.append(hire.hireTitle+"<br>")
