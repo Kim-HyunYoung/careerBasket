@@ -78,7 +78,7 @@
 	</bean>
 	
 	   <!-- 리소스 맵칭을 위한 설정 -->
-   <!-- location=실제주소, mapping=가상주소 -->
+   <!-- location=실제주소, mapping=가상주소. -->
    <!-- 
    <mvc:resources location="file:///C:/Users/rbfl6/Desktop/careerBascket/" mapping="/img/**"/>
    <mvc:resources location="file:///C:/Users/rbfl6/Desktop/careerBascket/" mapping="/logo/**"/>
