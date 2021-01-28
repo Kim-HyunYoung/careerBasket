@@ -23,7 +23,9 @@ $(function(){
 })
 function infoUpdate(){
 	var form = document.creatElement("form");
-	form.setAttribute("action", "${pageContext.request.contextPath}/resume/infoUpdate")
+	form.setAttribute("action", "${pageContext.request.contextPath}/resume/infoUpdateForm");
+	form.setAttribute("method", "get");
+	form.submit();
 }
 
 function changeValue(obj){

@@ -127,6 +127,7 @@ public class ResumeController {
 		return "updateForm";
 	}
 	
+	//이력서 상세페이지, 인쇄가능 페이지
 	@PostMapping("/update")
 	@ResponseBody
 	public String update(InsertUpdate iu, Model m) {
@@ -160,7 +161,7 @@ public class ResumeController {
 		return showViewList(m, userId);
 	}
 	
-	//기타문서 폼
+	//기타문서 폼 및 등록한 문서 리스트
 	@GetMapping("/documentList")
 	public String documentUploadForm(Model m, String userId) {
 		List<Document> doList = service.selectDoAllView(userId);
@@ -180,10 +181,23 @@ public class ResumeController {
 		return documentUploadForm(m, userId);
 	}
 	
+	//기타문서 삭제
 	@GetMapping("/deleteDocument")
 	public String deleteDo(String documentId, String userId, Model m) {
 		service.deleteDo(Integer.parseInt(documentId));
 		return documentUploadForm(m, userId);
+	}
+	
+	@GetMapping("/infoUpdateForm")
+	public String myinfoUpdateForm(Model m, String userId) {
+		User userInfo = service.selectMyInfo(userId);
+		m.addAttribute("info", userInfo);
+		return "userInfoUpdateForm";
+	}
+	
+	@PostMapping("/infoUpdate")
+	public String userInfoUpdate(Model m, User user) {
+		return "userInfoUpdateResult";
 	}
 	
 }

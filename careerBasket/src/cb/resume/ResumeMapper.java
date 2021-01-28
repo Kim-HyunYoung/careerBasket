@@ -13,6 +13,8 @@ import cb.signUp.User;
 @Mapper
 public interface ResumeMapper {
 	
+	//resume query
+	
 	@Select("select * from resume where user_id=#{userId} order by resume_id desc limit 3")
 	public List<Resume> selecLimit(String userId);
 
@@ -24,9 +26,6 @@ public interface ResumeMapper {
 	
 	@Select("select resume_id from resume where user_id=#{userId} order by resume_id desc limit 1")
 	public int selectId(String userId);
-	
-	@Select("select * from sign_up where user_id=#{userId}")
-	public User selectMyInfo(String userId);
 	
 	@Select("select * from career where resume_id=#{resumeId}")
 	public List<Career> selectCareer(int resumeId);
@@ -80,4 +79,15 @@ public interface ResumeMapper {
 	
 	@Delete("delete from document where document_id=#{documentId}")
 	public int deleteDocument(int documentId);
+	
+	
+	//signUp query
+	
+	@Update("update sign_up set password=#{password}, name=#{name}, birth_date=#{birthDate}, "
+			+ "sex=#{sex}, email=#{email}, tel=#{tel}, address=#{address}"
+			+ "where user_id=#{userId}")
+	public int signUpUpdate(String userId);
+	
+	@Select("select * from sign_up where user_id=#{userId}")
+	public User selectMyInfo(String userId);
 }

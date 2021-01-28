@@ -199,18 +199,22 @@ public class ResumeService {
 		return	type+result;
 	}
 
+	//등록된 이력서 카운트
 	public int resumeCount(String userId) {
 		return mapper.resumeCount(userId);
 	}
 	
+	//기타문서 삭제 서비스
 	public int deleteDo(int documentId) {
 		return mapper.deleteDocument(documentId);
 	}
 
+	//기타문서 하나만 선택하는 서비스
 	public Document selectDoOne(int documentId) {
 		return mapper.selectDoOne(documentId);
 	}
 
+	//사용자의 정보 가져오는 메서드
 	public User selectOneUserId(String userId) {
 		return mapper.selectMyInfo(userId);
 	}
