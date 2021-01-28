@@ -118,8 +118,7 @@
 				 	</select>
 				 	<button type="button" id="emailCheck">중복확인</button>
 		<span id="dupEmailCheck"></span> <br>
-		전화번호* <input type="text" name="tel" placeholder="예: 010-####-####">
-			     <button type="button">인증번호 받기</button> <br>
+		전화번호* <input type="text" name="tel" placeholder="예: 010-####-####"> <br>
 		주소* 	<input type="text" name="post" id="postCode" placeholder="우편번호">
 				<button id="searchAddr" type="button" onclick="searchAddress()">우편번호 찾기</button> <br>		<!-- type="button"을 안해주면 무조건 그냥 submit 해버리기 때문에 추가함. -->
 				<input type="text" name="addr" id="address" placeholder="주소"><br>
