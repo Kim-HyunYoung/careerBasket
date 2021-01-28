@@ -56,11 +56,11 @@ public class ResumeController {
 	
 	//확인하려는 이력서 클릭하면 보이는 이력서 상세페이지
 	@GetMapping("/details")
-	public String showPickView(Model m, String id, String userId) {
+	public String showPickView(Model m, String resumeId, String userId) {
 //		System.out.println("실행");
-		System.out.println(id+userId);
+		System.out.println(resumeId+userId);
 		//이력서 정보 조회
-		Resume re = service.selectOne(Integer.parseInt(id));
+		Resume re = service.selectOne(Integer.parseInt(resumeId));
 		m.addAttribute("re", re);
 		//회원 정보 조회
 		User si = service.selectMyInfo(userId);
@@ -69,7 +69,7 @@ public class ResumeController {
 		int age = (LocalDate.now().getYear()-si.getBirthDate().getYear()+1);
 		m.addAttribute("age", age);
 		//경력 정보 조회
-		List<Career> ca = service.selectCareer(Integer.parseInt(id));
+		List<Career> ca = service.selectCareer(Integer.parseInt(resumeId));
 		m.addAttribute("ca", ca);
 		List<Document> doList = service.selectDoAllView(userId);
 		m.addAttribute("doList", doList);
