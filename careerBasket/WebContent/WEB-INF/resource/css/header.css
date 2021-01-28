@@ -8,7 +8,11 @@ body{margin: 0px;}
 .top_middle{width:500px; position:absolute; left: 30%; top:20%}
 .top_middle>a{margin-left: 150px}
 .top_right{float:right; margin-right: 10px; margin-top: 4px;}
-.ms{float:right;}
+.ms{
+    float: left;
+    position: relative;
+    }
+.logOut{float:left;}
 button{background-color: #82B6ED; border: none; color: white; margin-right: 3px;}
 	
 a:link {color: black; text-decoration: none;}

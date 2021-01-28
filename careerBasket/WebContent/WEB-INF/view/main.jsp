@@ -31,17 +31,19 @@ function changeValue(obj){
 <link rel="stylesheet" type="text/css" href="/css/header.css">
 </head>
 <body>
+<!-- 상단바 -->
 <div class="top">
-	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${userId}">careerBasket</a></div>
+	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${userId}">careerBasket</a></div>	<!-- 로고 -->
 	<div class="top_middle">
 		<a href="/hire/list?userId=${userId}">탐색</a>
-		<a>이력서</a>
+		<a href="/resume/addresume?userId=${userId}">이력서</a>
 	</div>
 	<div class="top_right">
-		<div calss="ms">${userId}님의 취업을 응원합니다!</div>
-		<button><a href="/user/logout">로그아웃</a></button>
+		<div class="ms">${userId}님의 취업을 응원합니다!</div>
+		<button class="logOut"><a href="/user/logout">로그아웃</a></button>
 	</div>
 </div>
+
 로그인했을 때 메인화면 <br>
 <%
 	String userId = (String)session.getAttribute("userId");
