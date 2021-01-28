@@ -111,18 +111,18 @@ public class ResumeController {
 	
 	//이력서 리스트에서 수정버튼 클릭시 해당 이력서 수정할수 있는 폼
 	@GetMapping("/update")
-	public String update(Model m, String id, String userId) {
+	public String update(Model m, String resumeId, String userId) {
 //		//실행확인
 //		System.out.println("실행");
 //		//아이디값 넘어오는지 확인
-		System.out.println(id);
-		Resume re = service.selectOne(Integer.parseInt(id));
+		System.out.println(resumeId);
+		Resume re = service.selectOne(Integer.parseInt(resumeId));
 		m.addAttribute("re", re);
 		//회원 정보 조회
 		User si = service.selectMyInfo(userId);
 		m.addAttribute("si", si);
 		//경력 정보 조회
-		List<Career> ca = service.selectCareer(Integer.parseInt(id));
+		List<Career> ca = service.selectCareer(Integer.parseInt(resumeId));
 		m.addAttribute("ca", ca);
 		return "updateForm";
 	}
