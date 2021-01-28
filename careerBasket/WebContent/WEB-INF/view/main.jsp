@@ -8,8 +8,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	if("${doList}"==null){
+	if("${doList}"=="[]"){
 		$("#document").html("<section>등록된 문서가 없습니다</section>");
+	}
+	if("${list}"=="[]"){
+		$("#resume").html("<section>등록된 이력서가 없습니다</section>")
 	}
 	
 	$('#target_img').click(function (e) {
@@ -65,7 +68,7 @@ ${info.tel }<br>
 </div>
 <div><a href="http://localhost:8080/hire/applyInfo?userId=${userId}">지원현황: ${applyCnt}</a></div>
 <div>등록된 이력서: ${count}</div>
-<div>
+<div id="resume">
 <c:forEach var="re" items="${list}">
 <section>
 ${re.title}
@@ -78,9 +81,9 @@ ${re.wDate}
 <button>전체보기</button>
 </form>
 
-<div>
+<div id="document">
 <c:forEach var="doc" items="${doList}">
-<section id="document">
+<section>
 ${doc.type}
 ${doc.fileTitle}
 </section>

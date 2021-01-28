@@ -26,7 +26,7 @@ function myinsert(userId){
 	  document.querySelector("body").appendChild(form);
 	  form.submit();
 }
-function picklist(id, userId){
+function picklist(resumeId, userId){
 	console.log("실행")
 	//form생성후에 동적으로 보내주기
 	var form = document.createElement("form");
@@ -36,8 +36,8 @@ function picklist(id, userId){
 	//파라미터 넘겨주기 위해 히든타입으로 input id값 입력
 	  var hiddenField=document.createElement("input");
 	  hiddenField.setAttribute("type", "hidden");
-	  hiddenField.setAttribute("name", "id");
-	  hiddenField.setAttribute("value", id);
+	  hiddenField.setAttribute("name", "resumeId");
+	  hiddenField.setAttribute("value", resumeId);
 	  form.appendChild(hiddenField);
 	  
 	//파라미터 넘겨주기 위해 히든타입으로 input id값 입력

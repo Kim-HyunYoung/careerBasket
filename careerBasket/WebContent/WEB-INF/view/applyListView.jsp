@@ -7,6 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>applyListView.jsp</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	if("${applyList}"=="[]"){
+		$("body").html("<section>등록된 문서가 없습니다</section>");
+	}
+})
+</script>
 </head>
 <body>
 	<!-- 지원 현황 테이블 -->
