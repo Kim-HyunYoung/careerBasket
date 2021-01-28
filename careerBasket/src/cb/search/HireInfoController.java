@@ -124,8 +124,6 @@ public class HireInfoController {
 		System.out.println(companyName);
 		
 		String result ="";
-		//임의로 회원 정해둠
-		//userId = "durumi";
 		
 		List<Integer> applyIdList = service.getApplyId(userId);
 		System.out.println(applyIdList);

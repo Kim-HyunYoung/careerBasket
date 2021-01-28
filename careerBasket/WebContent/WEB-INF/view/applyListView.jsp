@@ -11,7 +11,7 @@
 <script type="text/javascript">
 $(function(){
 	if("${applyList}"=="[]"){
-		$("body").html("<section>등록된 문서가 없습니다</section>");
+		$("body").html("<div>아직 지원한 회사가 없습니다.</div>");
 	}
 })
 </script>

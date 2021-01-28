@@ -25,13 +25,16 @@
 	<script>
 	
 	function open_modal(){
-		//alert("지원하기 버튼 누름!");
 		$('#myModal').show(); 
+		if("${userId}" == ""){
+			$('.modal-content').children().remove();
+			$('.modal-content').append("<div>로그인을 해주세요</div>");
+			$('.modal-content').append("<button><a href='/user/loginForm'>로그인</a></button>");
+		}
 		
 	};
 	
 	function close_modal(){
-		//alert("X 버튼 누름!");
 		$('#myModal').hide(); //팝업 close기능
 	};
 	
@@ -84,9 +87,8 @@ $(function(){
 
 	}, 1000);
 	
-	//지원하기 버튼 눌렀을 때 실행될 것
+	//모달창 안에 지원하기 버튼 눌렀을 때 실행될 것
 	$("form").on("submit",function(){ 
-		alert("지원하기버튼 누름!");
 		var titleData = $('form [name="title"]').val();
 		console.log(titleData);
 		
