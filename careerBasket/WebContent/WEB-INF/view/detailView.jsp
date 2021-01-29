@@ -7,11 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>detailView.jsp</title>
-<link rel="stylesheet" type="text/css" href="/css/detail.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/header.css?a">
+<link rel="stylesheet" type="text/css" href="/css/detail.css?a">
+<link rel="stylesheet" type="text/css" href="/css/imgstyle.css?a">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- services 라이브러리 불러오기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f92552f56d0252119d785ec6db2f5b73&libraries=services"></script>
-							
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f92552f56d0252119d785ec6db2f5b73&libraries=services"></script>
+
 </head>
 <body>
 
@@ -155,8 +160,24 @@ $(function(){
 </script>
 
 	<div class="frame">
-		<div class="header"></div>
-		<!-- //header -->
+		<!-- 상단바 -->
+		<div class="top">
+			<div class="top_left">
+				<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
+			</div>
+			<!-- 로고 -->
+			<div class="top_middle">
+				<a href="/hire/list?userId=${userId}">탐색</a> <a
+					href="/resume/addresume?userId=${userId}">이력서</a>
+			</div>
+			<div class="top_right">
+				<div class="ms">${userId}님의취업을응원합니다!</div>
+				<button class="logOut">
+					<a href="/user/logout">로그아웃</a>
+				</button>
+			</div>
+		</div>
+		<!-- //상단바 -->
 
 		<div class="container">
 			<div class="content">
@@ -231,12 +252,15 @@ $(function(){
 							</div>
 						</div>
 					</div>
-					<!--------------------- 지도 ------------------------------------------------------------>
-						<div class="boldT">기업 위치</div>
-						<div class="location">
-						<div id="map" style="width:100%;height:350px;"></div>
+				</div>
+				<!-- //comInfo -->
+				<!--------------------- 지도 ------------------------------------------------------------>
+				<div class="mapInfo">
+				<div class="boldT">기업 위치</div>
+					<div class="location">
+						<div id="map" style="width: 100%; height: 350px;"></div>
 
-						
+
 						<script>
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 						    mapOption = {
@@ -275,10 +299,9 @@ $(function(){
 						    } 
 						});    
 						</script>
-						
-						</div>
-				</div> <!-- //comInfo -->
 
+					</div>
+				</div>
 			</div>
 			<!-- ---------------------------------nav---------------------------------------------- -->
 
@@ -326,8 +349,8 @@ $(function(){
 					이력서 개수 :${count}<br>
 					<c:choose>
 						<c:when test="${count>0}">
-						<form>
-						<!-- 
+							<form>
+								<!-- 
 							<form action="/hire/apply" method="post">
 						 -->
 								<!-- action,method 없애도 됨 ajax로 보낼꺼니까 -->
@@ -336,13 +359,14 @@ $(function(){
 									<c:forEach var="resume" items="${list}">
 										<option>${resume.title}</option>
 									</c:forEach>
-								</select> 
-								<div id="parents"><div id="children"></div></div>
-								<input type="hidden" name="id" value="${detail.id}"> 
-								<input type="hidden" name="companyName" value="${detail.companyName}">
-								<input type="hidden" name="userId" value="${userId}"> 
-								
-								<input id="apply" class="blue_btn" type="submit" value="지원하기">
+								</select>
+								<div id="parents">
+									<div id="children"></div>
+								</div>
+								<input type="hidden" name="id" value="${detail.id}"> <input
+									type="hidden" name="companyName" value="${detail.companyName}">
+								<input type="hidden" name="userId" value="${userId}"> <input
+									id="apply" class="blue_btn" type="submit" value="지원하기">
 							</form>
 							<!-- 지원하기 버튼(submit) 누르면 선택한 데이터와 필요한 값들 컨트롤러로 넘겨서 DB에 저장하고 해당 이력서 사진을 폴더에 저장 -->
 						</c:when>

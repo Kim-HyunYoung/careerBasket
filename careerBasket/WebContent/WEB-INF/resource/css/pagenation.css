@@ -8,10 +8,21 @@
 		position: relative;
 	    display: inline-block;
 	}
+	
 .pagination{
-	position: absolute;
+	position: relative;
 	text-align: center;
 	margin:0 auto;
+	width: fit-content;
 	}
-.info{float: right;}
+	
+.info{
+	float: right;
+    position: relative;
+    top: 50%;
+    left: -17px;
+    margin-top: -11px;
+    font-size: large;
+    border-radius: 15px;
+}
 

@@ -1,0 +1,198 @@
+@charset "UTF-8";
+@import "reset.css";
+
+body{
+	background-color: lightgray;
+}
+
+.frame{
+	width: 100%;
+	height: 100%;
+	position: relative;
+
+}
+.frame::after{content: ""; display: block; clear: both;}
+
+.header{
+	width: 100%;
+	height: 70px;
+	float: left;
+	border-bottom: 1px solid gray;
+	position: relative;
+}
+
+.container{
+	background-color: lightgray;
+    width: 100%;
+    height: 247px;
+    float: left;
+    position: relative;
+    margin-top: 35px;
+}
+
+.container::after{content: ""; display: block; clear: both;}
+
+.searchBar{
+	background-color: white;
+	width: 100%;
+	height: 100%;
+	float:left;
+}
+
+.rs_list{
+	position: relative;
+	background-color: lightgray;
+	padding: 3%;
+}
+
+#rs{
+	position: relative;
+}
+
+.career{
+	margin-left: 12%;
+    margin-right: 28%;
+    float: left;
+}
+
+.place{
+	margin-left: 40px;
+}
+
+.search1{
+	width: 100%;
+	margin: 1%;
+}
+
+.position{
+	margin-left: 40px;
+}
+
+.position::after{content: ""; display: block; clear: both;}
+
+.po_content1,.po_content2{
+	color: gray;
+	float: left;
+	position: relative;
+	margin-left:10%;
+	margin-right: 8%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.po_content3{
+	color: gray;
+	float: left;
+	position: relative;
+	margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left:5%;
+}
+
+.search_btn{
+	font-size: larger;
+    border-radius: 15px;
+    left: 50%;
+    position: relative;
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-left: -35px;
+    margin-bottom: 1%;
+}
+
+.list_content{
+	background-color: white;
+    width: 70%;
+    height: 100px;
+    border-radius: 15px;
+    margin: auto;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+}
+
+.list_top{
+	position: absolute;
+    left: 103px;
+    width: 700px;
+}
+
+.hire_title{
+	font-size: x-large;
+    font-weight: bold;
+    float: left;
+    position: relative;
+    left: 37px;
+    top: 13px;
+}
+
+.end_box{
+	border: 1px solid red;
+	border-radius: 2px;
+    font-size: x-small;
+    margin-right: 6px;
+    margin-left: 28px;
+}
+
+.end_date{
+	color: red;
+    float: left;
+    position: relative;
+    top: 21px;
+    left: 148px;
+    font-size: smaller;
+}
+
+.com_name_box{
+	position: absolute;
+	left: 363px;
+    top: 3px;
+}
+
+.company_name{
+	font-size: small;
+    position: relative;
+    top: 39px;
+    left: -223px;
+    float: left;
+}
+
+.h_info{
+	float: left;
+    color: gray;
+    position: absolute;
+    top: 65px;
+    left: -60px;
+    font-size: small;
+
+}
+
+.list_box{
+	top: -12%;
+    left: 24%;
+    position: relative;
+}
+
+.notice{
+	background-color: white;
+    width: 500px;
+    height: 100px;
+    left: 50%;
+    margin-left: -250px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.sorry{
+	text-align: center;
+	top: 45px;
+	position: relative;
+}
+
+.check{
+	text-align: center;
+	top: 55px;
+	position: relative;
+}

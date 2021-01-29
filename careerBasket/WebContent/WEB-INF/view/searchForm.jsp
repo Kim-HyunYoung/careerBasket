@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -7,9 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>searchForm.jsp</title>
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
+<link rel="stylesheet" type="text/css" href="/css/search.css?ver3">
 <link rel="stylesheet" type="text/css" href="/css/pagenation.css">
-<link rel="stylesheet" type="text/css" href="/css/detail.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 //ajax 비동기 방식으로 검색 버튼 누르면 리스트 보여주기!
 
@@ -34,7 +37,7 @@
 					if(hireTotalCnt == 0){
 						//가져온 데이터가 없으면 목록이 없다는 문구를 삽입.
 						$("#rs").children().remove();
-						$("#rs").append("<h1>죄송합니다.<br>해당하는 채용 공고가 없습니다.</h1>");
+						$("#rs").append("<div class='notice'><h1 class='sorry'>죄송합니다.<br>해당하는 채용 공고가 없습니다.</h1></div>");
 						$(".pagination").children().remove();
 						
 					}else{
@@ -46,18 +49,19 @@
 						for(var hire of hireList){
 							console.log(hire);
 							console.log("logoImg :"+hire.logoImg);
-						var newSection = $("<section>");
+						var newSection = $("<div class='list_content'>");
 						newSection.append("<img class='logo' src='http:/img/logo/"+hire.logoImg+"'>")
 						//id 링크 -> hash
-						newSection.append("<a value='"+currentPage+"' class='info' href='http://localhost:8080/hire/detail?id="+hire.id+"&userId=${userId}'>상세보기</a><br>")
+						newSection.append("<button class='info'><a value='"+currentPage+"' href='http://localhost:8080/hire/detail?id="+hire.id+"&userId=${userId}'>상세보기</a></button>")
 							//쿼리스트링으로 해당 페이지로 연결 url~~~?변수1=값1&변수2=값2
 							//http://localhost:8080/hire/detail
-						newSection.append(hire.hireTitle+"<br>")
-						newSection.append(hire.endDate+"<br>")
-						newSection.append(hire.companyName+"<br>")
-						newSection.append(hire.workPlace+"<br>")
-						newSection.append(hire.workType+"<br>")
-						newSection.append(hire.education+"<hr>")
+						newSection.append("<div class='list_top'><div class='hire_title'>"+hire.hireTitle+"</div><div class='end_date'><span class='end_box'>마감일</span>"+hire.endDate.substring(0,10)+"</div>")
+						//newSection.append("<div class='end_date'><span class='end_box'>마감일</span>"+hire.endDate.substring(0,10))
+						newSection.append("<div class='com_name_box'><div class='company_name'>"+hire.companyName+"</div>")
+						newSection.append("<br><div class='list_box'><div class='h_info'><span>"+hire.workPlace+" | </span><span>"+hire.workType+" | </span><span>"+hire.education+"</span></div>")
+						//newSection.append("<div class='h_info'><span>"+hire.workPlace+" | </span><span>"+hire.workType+" | </span><span>"+hire.education+"</span>")
+						//newSection.append("<div>"+hire.workType+"</div>")
+						//newSection.append("<div>"+hire.education+"</div></div>")
 							
 						$("#rs").append(newSection);
 					
@@ -213,7 +217,7 @@
 				type:"post",
 				success:function(){
 					$("#rs").children().remove();
-					$("#rs").append("<h1>검색 조건을 모두 선택해 주세요</h1>");
+					$("#rs").append("<div class='notice'><h1 class='check'>검색 조건을 모두 선택해 주세요</h1></div>");
 					$(".pagination").children().remove();
 				},
 				error:function(e){
@@ -376,49 +380,99 @@
 	
  }); //여기가 ready 끝
  
- 
 </script>
+
+
 </head>
 <body>
 
-<form id="f" action="/hire/search" method="post">
-	<!-- 
-	<input type="hidden" name="page" value="1" >
-	 -->
-	<input type="radio" name="hireCareer" value= 1> 경력
-	<input type="radio" name="hireCareer" value= 2> 신입
-	<hr>
-	
-	<label>지역</label>
-	<select name="workPlace">
-		<option value="선택"> 지역을 선택해주세요</option>
-		<option value="서울">서울</option>
-		<option value="대구">대구</option>
-		<option value="부산">부산</option>
-	</select>
-	<hr>
-	<!-- 특정 태그로 감싸서 onclick 이벤트(값 저장되도록) 걸어주기 -->
-	<!-- 
-	<a href="">자바 개발자 </a>  
-	<a href='http://localhost:8080/hire/search?position='>자바 개발자</a><br>
-	<br>
-	<a href="">안드로이드 개발자</a>
-	 
-	 -->
-	 <input type="radio" name="position" value="자바 개발자">자바 개발자
-	 <input type="radio" name="position" value="안드로이드 개발자">안드로이드 개발자
-	 <input type="radio" name="position" value="데이터 사이언티스트">데이터 사이언티스트
-	<hr>
-	<input type="submit" value="검색">
-	
-</form>
-<hr>
-	<!-- 결과 보여주는 부분 -->
-		<div id="rs"></div>
-		
-	<!-- 페이지 네이션 -->
-		<!--<section> 옆으로 플로팅 시키기  -->
-		<ul class="pagination"></ul>
+	<div class="frame">
+		<!-- 상단바 -->
+		<div class="top">
+			<div class="top_left">
+				<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
+			</div>
+			<!-- 로고 -->
+			<div class="top_middle">
+				<a href="/hire/list?userId=${userId}">탐색</a> <a
+					href="/resume/addresume?userId=${userId}">이력서</a>
+			</div>
+			<div class="top_right">
+				<div class="ms">${userId}님의취업을응원합니다!</div>
+				<button class="logOut">
+					<a href="/user/logout">로그아웃</a>
+				</button>
+			</div>
+		</div>
+		<!-- //상단바 -->
 
+		<div class="container">
+			<!-- 검색바 -->
+			<div class="searchBar">
+				<form id="f" action="/hire/search" method="post">
+					<div class="search1">
+						<div class="career">
+							<input type="radio" name="hireCareer" value=1> 경력 <input
+								type="radio" name="hireCareer" value=2> 신입
+						</div>
+						<div class="place">
+							<label>지역</label> <select name="workPlace">
+								<option value="선택">지역을 선택해주세요</option>
+								<option value="서울">서울</option>
+								<option value="대구">대구</option>
+								<option value="부산">부산</option>
+							</select>
+						</div>
+					</div>
+					<hr>
+					<div class="position">
+					<div class="po_content1">
+					<input type="radio" name="position" value="자바 개발자">자바 개발자 <br>
+					<input type="radio" name="position" value="안드로이드 개발자">안드로이드 개발자 <br>
+					<input type="radio" name="position" value="데이터 사이언티스트">데이터 사이언티스트<br>
+					<input type="radio" name="position" value="프론트엔드 개발자">프론트엔드 개발자 <br>
+					<input type="radio" name="position" value="소프트웨어 엔지니어 ">소프트웨어 엔지니어 <br>
+					</div>
+					<div class="po_content2">
+					<input type="radio" name="position" value="빅데이터 엔지니어">빅데이터 엔지니어<br>
+					<input type="radio" name="position" value="보안 엔지니어 ">보안 엔지니어 <br>
+					<input type="radio" name="position" value="PHP 개발자">PHP 개발자<br>
+					<input type="radio" name="position" value="임베디드 개발자">임베디드 개발자<br>
+					<input type="radio" name="position" value="하드웨어 엔지니어">하드웨어 엔지니어<br>
+					</div>
+					<div class="po_content3">
+					<input type="radio" name="position" value="BI 엔지니어">BI 엔지니어<br>
+					<input type="radio" name="position" value="기술지원">기술지원<br>
+					<input type="radio" name="position" value="QA,체스트 엔지니어">QA,체스트 엔지니어<br>
+					<input type="radio" name="position" value="그래픽스 엔지니어">그래픽스 엔지니어<br>
+					<input type="radio" name="position" value="Node.js 개발자">Node.js 개발자<br>
+					</div>
+					</div>
+					<!-- <input type="submit" value="검색"> -->
+					<hr>
+					<button class="search_btn">검색</button>
+				</form>
+			</div>
+			<!-- //검색바 -->
+
+			<!-- 리스트 -->
+			<hr>
+			<!-- 결과 보여주는 부분 -->
+			<div class="rs_list">
+				<div id="rs">
+				</div>
+			</div>
+			<!-- //리스트 -->
+			<!-- 페이지 네이션 -->
+			<!-- 가운데 정렬 시키기 -->
+			<div class="p_bottom">
+				<ul class="pagination"></ul>
+			</div>
+			<!-- //페이지 네이션 -->
+		</div>
+		<!-- //container -->
+
+
+	</div>
 </body>
 </html>

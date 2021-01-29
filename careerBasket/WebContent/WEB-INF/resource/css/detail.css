@@ -1,6 +1,10 @@
 @charset "UTF-8";
 @import "reset.css";
 
+div{
+	border-radius: 10px;
+}
+
 .frame{
 width: 100%;
 height: 100%;
@@ -22,6 +26,7 @@ position: relative;
 	height: 70%;
 	float: left;
 	position: relative;
+	margin-top: 35px;
 }
 
 .container::after{content: ""; display: block; clear: both;}
@@ -32,6 +37,8 @@ position: relative;
 	float: left;
 	position: relative;
 }
+
+.content::after{content: ""; display: block; clear: both;}
 
 .title{
 	background-color: pink;
@@ -93,16 +100,14 @@ position: relative;
 
 .detailImg{
 	background-color: orange;
-	float: left;
 	margin-left: 40px;
 	margin-top: 40px;
+	margin-right: 40px;
 	position: relative;
 }
 
 .comInfo{
 	background-color: white;
-	width: 85%;
-	float: left;
 	margin-left: 40px;
 	margin-top: 40px;
 	margin-bottom: 50px;
@@ -114,13 +119,22 @@ position: relative;
 
 .company{
 	background-color: brown;
-	height: 90px;
+	width: 100%;
+    height: 100px;
 }
 
 .com01,.com02{
 	float: left;
 }
 
+.mapInfo{
+	background-color: white;
+	margin-left: 40px;
+	margin-top: 40px;
+	margin-bottom: 50px;
+	margin-right: 40px;
+	position: relative;
+}
 
 .nav{
 	background-color: gray;
@@ -130,15 +144,6 @@ position: relative;
     right: 0;
     top: 31%;
     margin-right: 40px;
-}
-
-
-#info{width:500px; height:1000px;}
-
-.logo{width:auto; height:auto;
-		max-width: 100px;
-		max-height: 100px;
-		float: left;
 }
 
 .modal{
@@ -210,3 +215,5 @@ a{
 .gray_btn>a { 
 	color:white;
 	}
+	
+	
