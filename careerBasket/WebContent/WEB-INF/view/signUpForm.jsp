@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>signUpForm.jsp</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/signUp.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){ 	//로드가 끝났다면
@@ -98,35 +102,97 @@
 </script>
 </head>     
 <body>
+	<!-- 상단바 -->
+	<div class="top">
+		<div class="top_left"><a href="/user/logout" style="color:#82B6ED">careerBasket</a></div>	<!-- 로그아웃 했을 때 첫 화면으로 가기 -->
+		<div class="top_middle">
+			<a href="/hire/list">탐색</a>
+			<a href="/user/loginForm">이력서</a>
+		</div>
+		<div class="top_right">
+			<button class="btn btn-color"><a href="/user/signup">회원가입</a></button>
+			<button class="btn btn-color"><a href="/user/loginForm">로그인</a></button>
+		</div>
+	</div>
+	
+	<div class="all">
 	<h1>회원가입</h1>
-	<h5>*필수입력사항</h5> <hr>
+	<h5><span id="star">*</span>필수입력사항</h5> <hr class="line">
+	<div class="form">
 	<form action="/user/signup" method="post">
-		아이디*  <input type="text" name="userId" placeholder="아이디를 입력해주세요"> 
-			   <button type="button" id="idCheck">중복확인</button>
-		<span id="dupIdCheck"></span> <br>
-		비밀번호* <input type="password" name="password" placeholder="비밀번호를 입력해주세요"> <br>
-		비밀번호 확인* <input type="password" name="rePassword" placeholder="비밀번호를 한번 더 입력해주세요"> 
-		<span id="pwCheck"></span><br>
-		이름* <input type="text" name="name" placeholder="이름을 입력해주세요"> <br>
-		생일* <input type="date" name="birthDate"> <br>
-		성별* <input type="radio" name="sex" value="남자">남자
+		<div style="margin-top: 30px; margin-bottom: 10px;">
+		<span class="option">아이디<span id="star">*</span></span>
+			   <span id="box1">
+			   <input type="text" name="userId" placeholder="아이디를 입력해주세요."> 
+			   <button type="button" id="idCheck" class="btn btn-outline-primary">중복확인</button> <br>
+			    <span id="dupIdCheck" class="message"></span> <br>
+			   </span>
+		</div>
+		<div id="section">
+		<span class="option">비밀번호<span id="star">*</span></span>
+		 <span id="box2">
+		 <input type="password" name="password" placeholder="비밀번호를 입력해주세요." style="margin-left: 33px; width: 200px;"> <br>
+		 </span>
+		</div>
+		<div id="section">
+		<span class="option">비밀번호 확인<span id="star">*</span></span>
+			<span id="box3">
+		 	<input type="password" name="rePassword" placeholder="비밀번호를 한번 더 입력해주세요." style="width:260px"> <br>
+			<span id="pwCheck" class="message"></span><br>
+		</span>
+		</div>
+		<div id="section">
+		<span class="option">이름<span id="star">*</span></span>
+		 	<span id="box4">
+			 <input type="text" name="name" placeholder="이름을 입력해주세요."> <br>
+			 </span>
+		</div>
+		<div id="section">
+		<span class="option">생일<span id="star">*</span></span>
+		 	<span id="box5">
+			 <input type="date" name="birthDate"> <br>
+			 </span>
+		</div>
+		<div id="section">
+		<span class="option">성별<span id="star">*</span></span>
+			<span id="box6">
+			<input type="radio" name="sex" value="남자">남자
 			 <input type="radio" name="sex" value="여자">여자 <br>
-		이메일주소* <input type="text" name="emailStart">@
+			 </span>
+		</div>
+		<div id="section">
+		<span class="option">이메일주소<span id="star">*</span></span>
+			<span id="box7">
+			<input type="text" name="emailStart">@
 				 	<select name="emailEnd">
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option> 	
 				 	</select>
-				 	<button type="button" id="emailCheck">중복확인</button>
-		<span id="dupEmailCheck"></span> <br>
-		전화번호* <input type="text" name="tel" placeholder="예: 010-####-####"> <br>
-		주소* 	<input type="text" name="post" id="postCode" placeholder="우편번호">
-				<button id="searchAddr" type="button" onclick="searchAddress()">우편번호 찾기</button> <br>		<!-- type="button"을 안해주면 무조건 그냥 submit 해버리기 때문에 추가함. -->
+				 	<button type="button" id="emailCheck" class="btn btn-outline-primary" class="message">중복확인</button> <br>
+			</span>
+		<span id="dupEmailCheck" class="message"></span> <br>
+		</div>
+		<div id="section">
+		<span class="option">전화번호<span id="star">*</span></span>
+			<span id="box8">
+			<input type="text" name="tel" placeholder="예: 010-####-####"> <br>
+			</span>
+		</div>
+		<div id="section">
+		<span class="option">주소<span id="star">*</span></span>
+			<span id="box9">
+			 	<input type="text" name="post" id="postCode" placeholder="우편번호">
+				<button id="searchAddr" type="button" class="btn btn-outline-primary" onclick="searchAddress()">우편번호 찾기</button> <br>		<!-- type="button"을 안해주면 무조건 그냥 submit 해버리기 때문에 추가함. -->
+			</span>
+			<div id="box10">
 				<input type="text" name="addr" id="address" placeholder="주소"><br>
+			</div> 
+			<div id="box11">
 				<input type="text" name="detailAddr" id="detailAddress" placeholder="상세주소">
 				<input type="text" name="extraAddr" id="extraAddress" placeholder="참고항목"> 	<!-- 도로명 주소일 때 : OO동을 써줌 -->
-				
+			</div>
 				<!-- 주소검색 div를 주소 폼 밑에 띄어줌. -->
-				<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">	
+				<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative; margin-left: 382px">	
 				<!-- 닫기 버튼 -->
 				<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="닫기 버튼">
 				</div>
@@ -137,6 +203,7 @@
 				    // 우편번호 찾기 화면을 넣을 element
 				    var element_wrap = document.getElementById('wrap');
 				
+				    
 				    function foldDaumPostcode() {	//닫기버튼 눌렀을 때
 				        // iframe을 넣은 element를 안보이게 한다.
 				        element_wrap.style.display = 'none';
@@ -210,7 +277,10 @@
 				    }
 				</script>
 		<hr>
-		<input id="signUp" type="submit" value="가입하기">
+		</div>
+		<input class="btn" id="signUp" type="submit" value="가입하기">
 	</form>
+	</div>
+	</div>
 </body>
 </html>

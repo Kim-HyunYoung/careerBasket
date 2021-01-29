@@ -1,0 +1,89 @@
+@charset "UTF-8";
+@import "reset.css";
+
+.line{
+	width: 780px;
+    margin-left: 100px;
+}
+.all{
+	position: absolute;
+	left: 15%;
+	top: 20%;
+}
+h1{
+	font-size: 40px;
+	font-weight: bold;
+	text-align: center;
+}
+h5{
+	font-size: 1px;
+	color: gray;
+	text-align: right;
+}
+#star{
+	color:red;
+}
+.btn-color{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    size: 100px;
+    /* btn btn-color btn-sm */
+}
+.message{
+	margin-left: 380px;
+	color: red;
+    font-size: 12px;
+    
+}
+#section{
+	margin-bottom: 30px;
+}
+.option{padding-left: 170px;}
+#box1{margin-left: 153px;}
+#box2{margin-left: 103px;}
+#box3{margin-left: 100px;}
+#box4{margin-left: 169px;}
+#box5{margin-left: 169px;}
+#box6{margin-left: 169px;}
+#box7{margin-left: 120px;}
+#box8{margin-left: 136px;}
+#box9{margin-left: 168px;}
+.searchAddr{
+	width: 80px;
+}
+#box10{
+	margin-left: 382px;
+	margin-top: 8px;
+}
+#box11{
+	margin-left: 382px;
+    margin-top: 8px;
+}
+
+#searchAddr{
+	    width: 105px;
+}
+
+#signUp{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    width: 156px;
+    height: 44px;
+    font-size: 15px;
+    margin-left: 347px;
+    margin-bottom: 100px;
+}
+
+.btn-outline-primary{
+	color: #82B6ED;
+    border-color: #82B6ED;
+    font-size: 12px;
+}
+
+
+
+
