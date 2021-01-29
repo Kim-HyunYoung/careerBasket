@@ -1,0 +1,85 @@
+@charset "utf-8";
+@import url("reset.css");
+
+div#resume_form_wrapper{
+	width:80%;
+	margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+}
+
+.ms{
+	margin-bottom: 3%;
+    font-size: 13px;
+    color: #cecece;
+}
+
+.info_wrapper{
+	border: 1px solid #cecece;
+    padding: 3%
+}
+
+.colFormLabel{
+	width:350px;
+}
+
+.colFormLabel2{
+	width:500px;
+}
+
+.btn-color {
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    float:right;
+}
+
+.btn-outline-primary{
+	color: #82B6ED;
+    border-color: #82B6ED;
+}
+
+.title{
+	font-size: 2em;
+	margin-bottom: 2%;
+	margin-top: 5%;
+	font-family: 
+}
+
+.ed_title{
+	font-weight: bold;
+	margin: 3%;
+}
+
+.ed_ch{
+	margin-bottom: 2%;
+    margin-left: 3%;
+}
+
+.form-check-label{
+	padding-top: 1%;
+	width: 90%;
+}
+
+.doc_date{
+	font-size: 0.9em;
+    margin-right: 3%;
+    margin-left: 1%;
+}
+
+.doc_type{
+	font-weight: bold;
+    margin-right: 3%;
+    font-size: 0.9em;
+}
+
+.doc_fileTitle{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.doc_fileSize{
+	float: right;
+}

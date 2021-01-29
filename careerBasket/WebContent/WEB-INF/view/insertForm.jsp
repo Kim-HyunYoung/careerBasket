@@ -33,8 +33,26 @@
 	 /* //실행되면 확인
 	 console.log("휴.."); */
  	 var com = document.getElementById("com");
+	 
+	 $("#com").append("<h1 class='title'>경력</h1>");
+	 $("#com").append("<div class='info_wrapper' style='padding-bottom: 6%;'>"
+			 +"<p class='ed_title'>회사 정보 입력</p>"
+			 +"<div class='row'><label for='colFormLabel' class='col-sm-2 col-form-label'>회사명</label>"
+			 +"<div class='col-sm-10'><input type='text' name='company' class='colFormLabel2' id='colFormLabel'></div></div>"
+			 +"<div class='row'><label for='colFormLabel' class='col-sm-2 col-form-label'>재직기간</label>"
+			 +"<div class='col-sm-10'><input type='text' name='careerPeriod' placeholder=' 예시)2016-03-02~2020-02-09' class='colFormLabel2' id='colFormLabel'></div></div>"
+			 +"<div class='row'><label for='colFormLabel' class='col-sm-2 col-form-label'>직책</label>"
+			 +"<div class='col-sm-10'><input type='text' name='careerPosition' class='colFormLabel2' id='colFormLabel'></div></div>"
+			 +"<div class='row'><label for='colFormLabel' class='col-sm-2 col-form-label'>연봉</label>"
+			 +"<div class='col-sm-10'><input type='text' name='careerSalary' class='colFormLabel2' id='colFormLabel'></div></div>"
+			 +"<div class='form-floating'>"
+			 +"<textarea name='description' class='form-control' id='floatingTextarea2' style='height: 100px;margin: 1%;'></textarea>"
+			 +"<label for='floatingTextarea2' style='margin: 1%;'>직무기술서</label></div>"
+			 +"<button type='button' onclick='addCareer()' class='btn btn-color btn-sm'>+경력추가</button>"
+			 +"<button type='button' onclick='del()' class='btn btn-color btn-sm' style='margin-right: 2%;'>-삭제</button>"
+			 +"</div>");
  	 
- 	 //타이틀 삽입
+ 	 /* //타이틀 삽입
  	  var h = document.createElement("h2");
  	  h.innerHTML="경력";
  	 com.append(h);
@@ -110,7 +128,7 @@
 	  button2.setAttribute("type", "button");
 	  button2.setAttribute("value", "-삭제");
 	  button2.setAttribute("onclick", "del()");
-	  f.append(button2);
+	  f.append(button2); */
  }
  function del(){
 	 var com = document.getElementById("com");
@@ -119,63 +137,137 @@
  }
 </script>
 <title>insertForm.jsp</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/resumeInsertForm.css">
 </head>
 <body>
+<div id="resume_form_wrapper">
 <form action="/resume/addresume" method="post">
-<input type="submit" value="이력서 저장">
-<input type="text" name="title" placeholder="이력서의 제목을 적어주세요">
-<h2>기본정보</h2>
-<fieldset>
-<h5>기본정보 수정은 마이페이지 기본정보 수정페이지에서 가능합니다</h5>
-<button type="button" >기본정보 수정하기</button><br>
+    <input type="text" name="title" placeholder="이력서의 제목을 적어주세요" style="width:600px;margin-top: 0.3%">
+    <input type="submit" class="btn btn-color btn-sm"  value="이력서 저장">
+<h1 class="title">기본정보</h1>
+<div class="info_wrapper">
+<img alt="사진을 등록하세요" src=""  style="width:100px;height:140px;float:right;margin-bottom: 5%;" class="img-thumbnail">
+<p class="ms">기본정보 수정은 마이페이지 기본정보 수정페이지에서 가능합니다</p>
 <input type="hidden" name="userId" value="${si.userId }">
-이름: <input type="text" name="name" readonly="readonly" value="${si.name }"><br>
-생년월일: <input type="date" name="birth_date" readonly="readonly" value="${si.birthDate }"><br>
-이메일: <input type="email" name="email" readonly="readonly" value="${si.email }"><br>
-전화번호: <input type="tel" name="tel" readonly="readonly" value="${si.tel }"><br>
-주소: <input type="text" name="address" readonly="readonly" value="${si.address }"><br>
+<div class="row">
+  <label for="colFormLabel" class="col-sm-2 col-form-label">이름</label>
+  <div class="col-sm-10">
+    <input type="text" name="name" class="colFormLabel" id="colFormLabel" readonly="readonly" value="${si.name }">
+  </div>
+</div>
+<div class="row">
+  <label for="colFormLabel" class="col-sm-2 col-form-label">생년월일</label>
+  <div class="col-sm-10">
+    <input type="date" name="birth_date" class="colFormLabel" id="colFormLabel" readonly="readonly" value="${si.birthDate }">
+  </div>
+</div>
+<div class="row">
+  <label for="colFormLabel" class="col-sm-2 col-form-label">이메일</label>
+  <div class="col-sm-10">
+    <input type="text" name="email" class="colFormLabel" id="colFormLabel" readonly="readonly" value="${si.email }">
+  </div>
+</div>
+<div class="row">
+  <label for="colFormLabel" class="col-sm-2 col-form-label">주소</label>
+  <div class="col-sm-10">
+    <input type="text" name="address" class="colFormLabel" style="width: 500px;" id="colFormLabel" readonly="readonly" value="${si.address }">
+  </div>
+</div>
 <hr>
-</fieldset>
-<h2>학력정보</h2>
-<fieldset>
-<label><input type="radio" name="finalEducation" value="초등학교">초등학교</label>
-<label><input type="radio" name="finalEducation" value="중학교">중학교</label>
-<label><input type="radio" name="finalEducation" value="고등학교">고등학교</label>
-<label><input type="radio" name="finalEducation" value="대학교/대학원">대학교/대학원</label>
+<button type="button" class="btn btn-color btn-sm" >기본정보 수정하기</button><br>
+</div>
+<h1 class="title">학력정보</h1>
+<div class="info_wrapper">
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%">
+  <input type="radio" class="btn-check" name="finalEducation" id="btnradio1" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio1">초등학교</label>
+
+  <input type="radio" class="btn-check" name="finalEducation" id="btnradio2" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio2">중학교</label>
+
+  <input type="radio" class="btn-check" name="finalEducation" id="btnradio3" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio3">고등학교</label>
+  
+  <input type="radio" class="btn-check" name="finalEducation" id="btnradio4" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio4">대학교/대학원</label>
+</div>
 <hr>
-<h5>학교정보입력</h5>
-<label><input type="checkbox" name="state" onclick="check()" value="검정고시">검정고시</label><br>
-학교명: <input type="text" name="educationName"><br>
-재학기간: <input type="text" name="period" placeholder="예시)2016-03-02~2020-02-09">
-<select name="state">
+<p class="ed_title">학교정보입력</p>
+<label class="ed_ch"><input type="checkbox" name="state" onclick="check()" value="검정고시">검정고시</label><br>
+<div class="row">
+  <label for="colFormLabel" class="col-sm-2 col-form-label">학교명</label>
+  <div class="col-sm-10">
+    <input type="text" name="educationName" class="colFormLabel" id="colFormLabel">
+  </div>
+</div>
+<div class="row">
+  <label for="colFormLabel" class="col-sm-2 col-form-label">재학기간</label>
+  <div class="col-sm-10">
+    <input type="text" name="period" class="colFormLabel" id="colFormLabel" placeholder="예시)2016-03-02~2020-02-09">
+    <select name="state">
     <option value="">상태</option>
     <option value="재학">재학</option>
     <option value="졸업">졸업</option>
     <option value="휴학">휴학</option>
     <option value="중퇴">중퇴</option>
-</select><br>
-전공: <input type="text" name="major"><br>
-학점: <input type="text" name="score" placeholder="평균학점 예시)3.9">
-<input type="text" name="basicScore" placeholder="기준학점 예시)4.5">
-</fieldset>
-<h2>경력선택</h2>
-<fieldset>
-<label><input type="radio" name="career" value="신입">신입</label>
-<label><input type="radio" name="career" value="경력">경력</label>
+</select>
+  </div>
+</div>
+<div class="row">
+  <label for="colFormLabel" class="col-sm-2 col-form-label">전공</label>
+  <div class="col-sm-10">
+    <input type="text" name="major" class="colFormLabel" id="colFormLabel">
+  </div>
+</div>
+<div class="row">
+	<label for="colFormLabel" class="col-sm-2 col-form-label">학점</label>
+  <div class="col-sm-3">
+    <input type="text" class="form-control" name="score" placeholder="평균학점 예시)3.9" aria-label="First name">
+  </div>
+  <div class="col-sm-3">
+    <input type="text" class="form-control" name="basicScore" placeholder="기준학점 예시)4.5" aria-label="Last name">
+  </div>
+</div>
+</div>
+<h1 class="title">경력정보</h1>
+<div class="info_wrapper" style="padding-bottom: 6%;">
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%">
+  <input type="radio" class="btn-check" name="career" id="btnradio5" autocomplete="off" value="신입">
+  <label class="btn btn-outline-primary" for="btnradio5">신입</label>
+  
+  <input type="radio" class="btn-check" name="career" id="btnradio6" autocomplete="off" value="경력">
+  <label class="btn btn-outline-primary" for="btnradio6">경력</label>
+</div>
 <hr>
-<button type="button" onclick="addCareer()">+경력추가</button>
-</fieldset>
-<section id="com"></section>
-<h2>자기소개서</h2>
-<fieldset>
-<input type="text" name="myinfo" placeholder="자유양식">
-</fieldset>
-<h2>기타서류</h2>
-<fieldset>
-<h5>첨부파일선택</h5>
-
-</fieldset>
-<input type="submit" value="이력서 저장">
+<button type="button" onclick="addCareer()" class="btn btn-color btn-sm">+경력추가</button>
+</div>
+<div id="com"></div>
+<h1 class="title">자기소개서</h1>
+<div class="info_wrapper">
+<div class="form-floating">
+  <textarea name="myinfo" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">자기소개서</label>
+</div>
+</div>
+<h1 class="title">기타서류</h1>
+<div class="info_wrapper">
+<p class="ed_title">첨부파일 선택</p>
+<c:forEach var="doc" items="${doList}">
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="${doc.documentId}" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+	<span class="doc_date">${doc.wDate}</span>
+	<span class="doc_type">${doc.type}</span> 
+	<span class="doc_fileTitle">${doc.fileTitle}</span> 
+	<span class="doc_fileSize">${doc.fileSize}</span>
+  </label>
+</div>
+</c:forEach>
+</div>
+<input type="submit" class="btn btn-color btn-sm" style="margin-top:2%;" value="이력서 저장">
 </form>
+</div>
 </body>
 </html>
