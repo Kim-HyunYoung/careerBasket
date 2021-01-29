@@ -9,8 +9,8 @@
 <title>searchForm.jsp</title>
 <link rel="stylesheet" type="text/css" href="/css/header.css">
 <link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
-<link rel="stylesheet" type="text/css" href="/css/search.css?ver3">
-<link rel="stylesheet" type="text/css" href="/css/pagenation.css">
+<link rel="stylesheet" type="text/css" href="/css/search.css?a">
+<link rel="stylesheet" type="text/css" href="/css/pagenation.css?a">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -56,12 +56,9 @@
 							//쿼리스트링으로 해당 페이지로 연결 url~~~?변수1=값1&변수2=값2
 							//http://localhost:8080/hire/detail
 						newSection.append("<div class='list_top'><div class='hire_title'>"+hire.hireTitle+"</div><div class='end_date'><span class='end_box'>마감일</span>"+hire.endDate.substring(0,10)+"</div>")
-						//newSection.append("<div class='end_date'><span class='end_box'>마감일</span>"+hire.endDate.substring(0,10))
 						newSection.append("<div class='com_name_box'><div class='company_name'>"+hire.companyName+"</div>")
 						newSection.append("<br><div class='list_box'><div class='h_info'><span>"+hire.workPlace+" | </span><span>"+hire.workType+" | </span><span>"+hire.education+"</span></div>")
-						//newSection.append("<div class='h_info'><span>"+hire.workPlace+" | </span><span>"+hire.workType+" | </span><span>"+hire.education+"</span>")
-						//newSection.append("<div>"+hire.workType+"</div>")
-						//newSection.append("<div>"+hire.education+"</div></div>")
+						
 							
 						$("#rs").append(newSection);
 					

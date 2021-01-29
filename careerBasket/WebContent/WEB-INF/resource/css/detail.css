@@ -1,8 +1,8 @@
 @charset "UTF-8";
 @import "reset.css";
 
-div{
-	border-radius: 10px;
+body{
+	min-width: 1000px;
 }
 
 .frame{
@@ -26,7 +26,7 @@ position: relative;
 	height: 70%;
 	float: left;
 	position: relative;
-	margin-top: 35px;
+    margin-top: 73px;
 }
 
 .container::after{content: ""; display: block; clear: both;}
@@ -137,13 +137,61 @@ position: relative;
 }
 
 .nav{
-	background-color: gray;
+	background-color: white;
+	border: 1px solid lightgray;
     width: 25%;
     float: left;
     position: fixed;
     right: 0;
     top: 31%;
     margin-right: 40px;
+}
+
+.nav_content{
+	text-align: center;
+	padding: 10%;
+	position: relative;
+}
+
+.last_t{
+	
+}
+
+.last_t{
+	color: #82B6ED;
+}
+
+.clock{
+	color: #82B6ED;
+	font-weight: bold;
+	font-size: large;
+}
+
+.date{
+	position: relative;
+}
+
+.date::after{content: ""; display: block; clear: both;}
+
+
+.startDate{
+	font-size: small;
+}
+
+.endDate{
+	font-size: small;
+}
+
+.s_date{
+	float: left;
+	border: 1px solid lightgray;
+	border-radius: 8px;
+}
+
+.e_date{
+	float: left;
+	border: 1px solid red;
+    border-radius: 8px;
 }
 
 .modal{
@@ -159,61 +207,132 @@ position: relative;
 	background-color: rgba(0,0,0,0.4); /*마지막 투명도:40%*/
 }
 
+.mModal_box{
+	width: 500px;
+    height: 350px;
+    float: left;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -250px;
+}
+
+
 .modal-content{
 	background-color: #fefefe;
-	width: 400px;
-	height: 300px;
+	width: 500px;
+    height: 400px;
 	float: left;
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin: -150px 0 0 -200px;
+	margin: -150px 0 0 -250px;
 }
 
 .m-content{
 	margin: 20px;
+	margin-top: 40px;
+}
+
+.name{
+	font-size: x-large;
+	font-weight: bold;
+	margin-left: 10%;
+}
+
+.doc{
+	margin-left: 10%;
+	margin-top: 6%;
 }
 
 .close_bt{
-	color:white;
-	float: right;
-    top: 142px;
-    left: 690px;
-    position: absolute;
+	color: white;
+    float: right;
+    top: -4px;
+    left: 0px;
+    position: relative;
     font-size: xx-large;
 }
 
 .resumeBtn{
-	color: white;
-	background-color: blue;
-	width: 80px;
-	height: 50px;
+    color: white;
+    background-color: blue;
+    width: 150px;
+    height: 35px;
+    left: 50%;
+    margin-left: -75px;
+    margin-bottom: 8%;
+    position: relative;
 }
 
 .blue_btn{
 	color: white;
-	background-color: blue;
-	width: 80px;
-	height: 50px;
+    background-color: #82B6ED;
+    width: 100px;
+    height: 45px;
+    left: 50%;
+    margin-left: -50px;
+    position: relative;
+    margin-top: 5%;
 }
 
 .gray_btn{
 	color: white;
-	background-color: gray;
-	width: 80px;
-	height: 50px;
+    background-color: gray;
+    width: 100px;
+    height: 45px;
+    left: 50%;
+    margin-left: -50px;
+    position: relative;
+    margin-top: 5%;
 }
 
 a{
 	text-decoration: none;
 }
-
-.blue_btn>a { 
-	color:white;
-	 }
-
-.gray_btn>a { 
-	color:white;
-	}
 	
-	
+.notice_noResume{
+	border: 1px solid lightgray;
+    width: 70%;
+    position: relative;
+    left: 50%;
+    margin-left: -40%;
+    padding: 5%;
+}
+
+.resume_check{
+	width: 70%;
+    left: 50%;
+    margin-left: -35%;
+    position: relative;
+}
+
+.notice_re{
+	color: red;
+    font-size: small;
+    left: 16%;
+    position: relative;
+    margin-top: 5%;
+}
+
+.notice_already{
+    width: 60%;
+    height: 40%;
+    position: relative;
+    left: 50%;
+    margin-left: -30%;
+    background-color: lightgrey;
+    top: 28%;
+}
+
+.noti{
+    text-align: center;
+    position: relative;
+    top: 59%;
+}
+
+.n_content{
+	padding: 8%;
+    font-size: small;
+    text-align: center;
+}

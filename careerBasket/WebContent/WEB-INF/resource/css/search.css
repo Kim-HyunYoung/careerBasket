@@ -3,6 +3,7 @@
 
 body{
 	background-color: lightgray;
+	min-width: 1000px;
 }
 
 .frame{
@@ -27,7 +28,7 @@ body{
     height: 247px;
     float: left;
     position: relative;
-    margin-top: 35px;
+    margin-top: 73px;
 }
 
 .container::after{content: ""; display: block; clear: both;}

@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>detailView.jsp</title>
-<link rel="stylesheet" type="text/css" href="/css/header.css?a">
-<link rel="stylesheet" type="text/css" href="/css/detail.css?a">
-<link rel="stylesheet" type="text/css" href="/css/imgstyle.css?a">
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/detail.css">
+<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -104,7 +104,7 @@ $(function(){
 				type:"post",
 				success:function(){
 					$("#parents").children().remove();
-					$("#parents").append("<h1>이력서를 선택해주세요</h1>");
+					$("#parents").append("<h1 class='notice_re'>이력서를 선택해주세요</h1>");
 				},
 				error:function(e){
 					console.log(e);
@@ -129,7 +129,7 @@ $(function(){
 						console.log(resp);
 						
 						$('.modal-content').children().remove();
-						$('.modal-content').append(resp);
+						$('.modal-content').append("<div class='notice_already'><div class='noti'>"+resp+"</div></div>");
 						
 					},
 					error:function(e){
@@ -256,7 +256,7 @@ $(function(){
 				<!-- //comInfo -->
 				<!--------------------- 지도 ------------------------------------------------------------>
 				<div class="mapInfo">
-				<div class="boldT">기업 위치</div>
+					<div class="boldT">기업 위치</div>
 					<div class="location">
 						<div id="map" style="width: 100%; height: 350px;"></div>
 
@@ -306,85 +306,92 @@ $(function(){
 			<!-- ---------------------------------nav---------------------------------------------- -->
 
 			<div class="nav">
-				<div>남은 기간</div>
-				<div class="time">
-					<div class="clock"></div>
-				</div>
-				<div class="date">
-					<div class="startDate">
-						<div class="start">시작일</div>
-						<!--받은 값의 패턴을 담은 변수의 포맷 변경-->
-						<div>
-							<fmt:formatDate value="${startDate}"
-								pattern="yyyy-MM-dd hh:mm:ss" />
+				<div class="nav_content">
+					<div class="last_t">남은 기간</div>
+					<div class="time">
+						<div class="clock"></div>
+					</div>
+					<div class="date">
+						<div class="startDate">
+							<div class="s_date">시작일</div>
+							<!--받은 값의 패턴을 담은 변수의 포맷 변경-->
+							<div>
+								<fmt:formatDate value="${startDate}"
+									pattern="yyyy-MM-dd hh:mm:ss" />
+							</div>
+						</div>
+						<div class="endDate">
+							<div class="e_date">마감일</div>
+							<!--받은 값의 패턴을 담은 변수의 포맷 변경-->
+							<div>
+								<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd hh:mm:ss" />
+							</div>
 						</div>
 					</div>
-					<div class="endDate">
-						<div class="end">마감일</div>
-						<!--받은 값의 패턴을 담은 변수의 포맷 변경-->
-						<div>
-							<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd hh:mm:ss" />
-						</div>
-					</div>
-				</div>
-				<div onclick="open_modal();">
-					<b>지원하기</b>
-				</div>
+					<div onclick="open_modal();">지원하기</div>
 
+				</div>
 			</div>
-
 
 			<!-- //nav -->
 		</div>
-		<!-- container -->
+		<!-- //container -->
+
 		<div id="myModal" class="modal">
-			<div class="close_bt" onclick="close_modal();">X</div>
-			<div class="modal-content">
-				<div class="m-content">
-					<span class="name">${company.companyName}</span> <span>입사지원</span>
-					<br>
-					<div>제출서류</div>
-					<br>
-					<!-- 지원서 개수 받아와서 비교후 생성 -->
-					이력서 개수 :${count}<br>
-					<c:choose>
-						<c:when test="${count>0}">
-							<form>
-								<!-- 
-							<form action="/hire/apply" method="post">
-						 -->
-								<!-- action,method 없애도 됨 ajax로 보낼꺼니까 -->
-								<select name="title">
-									<option>이력서를 선택하세요</option>
-									<c:forEach var="resume" items="${list}">
-										<option>${resume.title}</option>
-									</c:forEach>
-								</select>
-								<div id="parents">
-									<div id="children"></div>
-								</div>
-								<input type="hidden" name="id" value="${detail.id}"> <input
-									type="hidden" name="companyName" value="${detail.companyName}">
-								<input type="hidden" name="userId" value="${userId}"> <input
-									id="apply" class="blue_btn" type="submit" value="지원하기">
-							</form>
-							<!-- 지원하기 버튼(submit) 누르면 선택한 데이터와 필요한 값들 컨트롤러로 넘겨서 DB에 저장하고 해당 이력서 사진을 폴더에 저장 -->
-						</c:when>
+			<div class="mModal_box">
+				<div class="close_bt" onclick="close_modal();">X</div>
+				<div class="modal-content">
+					<div class="m-content">
+						<span class="name">${company.companyName}</span> <span>입사지원</span>
+						<br>
+						<div class="doc">제출서류</div>
+						<br>
+						<!-- 지원서 개수 받아와서 비교후 생성 -->
+						<c:choose>
+							<c:when test="${count>0}">
+									<form>
+										<!-- action,method 없애도 됨 ajax로 보낼꺼니까 -->
+									<div class="notice_noResume">
+										<select class="resume_check" name="title">
+											<option>이력서를 선택하세요</option>
+											<c:forEach var="resume" items="${list}">
+												<option>${resume.title}</option>
+											</c:forEach>
+										</select>
+										<div id="parents">
+											<div id="children"></div>
+										</div>
+										<input type="hidden" name="id" value="${detail.id}"> <input
+											type="hidden" name="companyName"
+											value="${detail.companyName}"> <input type="hidden"
+											name="userId" value="${userId}">
+									</div>
+									<input id="apply"
+											class="blue_btn" type="submit" value="지원하기">
+									</form>
+								<!-- 지원하기 버튼(submit) 누르면 선택한 데이터와 필요한 값들 컨트롤러로 넘겨서 DB에 저장하고 해당 이력서 사진을 폴더에 저장 -->
+							</c:when>
 
-						<c:when test="${count<=0}">
-							<div>
-								등록된 이력서가 없습니다.<br> 지원하시려면, 먼저 이력서를 등록해주세요.
-								<div class="resumeBtn">
-									<a href="/resume/addresume">이력서 등록하기</a>
+							<c:when test="${count<=0}">
+								<div class="notice_noResume">
+									<div class="n_content">
+										등록된 이력서가 없습니다.<br> <br>먼저 이력서를 등록해주세요.
+									</div>
+									<button class="resumeBtn">
+										<a href="/resume/addresume">이력서 등록하기</a>
+									</button>
 								</div>
-							</div>
-							<div class="gray_btn">지원하기</div>
-						</c:when>
-					</c:choose>
+								<button class="gray_btn">
+									<a>지원하기</a>
+								</button>
+							</c:when>
+						</c:choose>
 
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<!-- //frame -->
 </body>
