@@ -7,13 +7,34 @@
 <head>
 <meta charset="UTF-8">
 <title>detailView.jsp</title>
-<link rel="stylesheet" type="text/css" href="/css/header.css">
-<link rel="stylesheet" type="text/css" href="/css/detail.css">
-<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
+<!-- 부트스트랩 버전 3으로 해야 select 잘 적용됨 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+	crossorigin="anonymous">
+<!-- 부트스트랩 select css -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
+<!-- ajax CDN -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- services 라이브러리 불러오기 -->
+<!-- select보다 부트스트랩이 더 먼저와야함 -->
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+	integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+	crossorigin="anonymous"></script>
+<!-- 부트스트랩 select 스크립트 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<!-- 부트스트랩 아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+<link rel="stylesheet" type="text/css" href="/css/detail.css">
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
+
+<!-- 지도 services 라이브러리 불러오기 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f92552f56d0252119d785ec6db2f5b73&libraries=services"></script>
 
@@ -27,24 +48,11 @@
 	<fmt:parseDate var="startDate" pattern="yyyy-MM-dd'T'HH:mm"
 		value="${detail.startDate}" />
 
-	<script>
-	
-	function open_modal(){
-		$('#myModal').show(); 
-		if("${userId}" == ""){
-			$('.modal-content').children().remove();
-			$('.modal-content').append("<div>로그인을 해주세요</div>");
-			$('.modal-content').append("<button><a href='/user/loginForm'>로그인</a></button>");
-		}
-		
-	};
-	
-	function close_modal(){
-		$('#myModal').hide(); //팝업 close기능
-	};
+	<script>	
 	
 $(function(){
-	
+
+	//-------------------- 남은 시간 계산 --------------
 	const clock = document.querySelector(".clock");
 	
 	function getTime(){
@@ -93,7 +101,7 @@ $(function(){
 	}, 1000);
 	
 	//모달창 안에 지원하기 버튼 눌렀을 때 실행될 것
-	$("form").on("submit",function(){ 
+	$("#apply").on("click",function(){ 
 		var titleData = $('form [name="title"]').val();
 		console.log(titleData);
 		
@@ -128,9 +136,30 @@ $(function(){
 					success:function(resp){
 						console.log(resp);
 						
-						$('.modal-content').children().remove();
-						$('.modal-content').append("<div class='notice_already'><div class='noti'>"+resp+"</div></div>");
+						//0이면 이미 지원하신 채용공고입니다.
+						//1이면 지원이 완료되었습니다.
 						
+						//구분해서 각각 다른 아이콘 넣어주기
+						if(resp == "이미 지원하신 채용공고입니다."){
+							console.log("이미 지원하신 채용공고입니다.");
+							$('.modal-body').children().remove();
+							//$('.modal-body').append("<div class='noti'>"+resp+"</div></div>");
+							$('.modal-body').append('<div class="notice_already"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="darkgray" class="bi bi-exclamation-circle" viewBox="0 0 16 16">'
+							  +'<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'
+							  +'<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>'
+							  +'</svg><div class="noti">'+resp+'</div></div>');
+						
+						}else if(resp == "지원이 완료되었습니다."){
+							console.log("지원이 완료되었습니다.");
+							$('.modal-body').children().remove();
+							$('.modal-body').append('<div class="notice_already"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#82B6ED" class="bi bi-file-earmark-check" viewBox="0 0 16 16">'
+									  +'<path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>'
+									  +'<path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>'
+									  +'</svg><div class="noti">'+resp+'</div></div>');
+						
+						}
+						
+			
 					},
 					error:function(e){
 						console.log(e);
@@ -160,95 +189,131 @@ $(function(){
 </script>
 
 	<div class="frame">
-		<!-- 상단바 -->
+		<!-- 로그아웃일 때 상단바 -->
 		<div class="top">
-			<div class="top_left">
-				<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
-			</div>
-			<!-- 로고 -->
-			<div class="top_middle">
-				<a href="/hire/list?userId=${userId}">탐색</a> <a
-					href="/resume/addresume?userId=${userId}">이력서</a>
-			</div>
-			<div class="top_right">
-				<div class="ms">${userId}님의취업을응원합니다!</div>
-				<button class="logOut">
-					<a href="/user/logout">로그아웃</a>
-				</button>
-			</div>
+			<c:if test="${empty userId}">
+				<div class="top_left">
+					<a href="/user/logout" style="color: #82B6ED">careerBasket</a>
+				</div>
+				<div class="top_middle">
+					<a href="/hire/list">탐색</a> <a href="/user/loginForm">이력서</a>
+				</div>
+				<div class="top_right">
+					<button class="btn btn-color">
+						<a href="/user/signup">회원가입</a>
+					</button>
+					<button class="btn btn-color">
+						<a href="/user/loginForm">로그인</a>
+					</button>
+				</div>
+			</c:if>
+			<!-- 로그인일 때 상단바 -->
+			<c:if test="${not empty userId}">
+				<div class="top_left">
+					<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
+				</div>
+				<!-- 로고 -->
+				<div class="top_middle">
+					<a href="/hire/list?userId=${userId}">탐색</a> <a
+						href="/resume/addresume?userId=${userId}">이력서</a>
+				</div>
+				<div class="top_right">
+					<div class="ms">${userId}님의취업을응원합니다!</div>
+					<button class="logOut">
+						<a href="/user/logout">로그아웃</a>
+					</button>
+				</div>
+			</c:if>
 		</div>
 		<!-- //상단바 -->
 
-		<div class="container">
+		<div class="con">
 			<div class="content">
-				<div class="title">
-					<div class="position">${detail.hireTitle}</div>
-					<div class="comName">${detail.companyName}</div>
+				<div id="title">
+					<div class="line">
+						<span style="font-size: xx-large; font-weight: bold; top:-3px; position: relative;">|</span><span class="position">${detail.hireTitle}</span>
+					</div>
+						<div class="comName">${detail.companyName}</div>
 				</div>
 
 				<div class="hireInfo">
 					<div class="condition">
-						<div class="boldT">지원 자격</div>
+						<div  class="boldT">
+							<span style="font-size:large; font-weight: bold; top: -1px; position: relative;">|</span><span>지원 자격</span>
+						</div>
 						<div class="conContent">
 							<div class="grayF">
-								<div>경력</div>
-								<div>학력</div>
-								<div>근무 형태</div>
+								<div class="line">경력</div>
+								<div class="line">학력</div>
+								<div class="line">근무 형태</div>
 							</div>
 							<div class="blueF">
-								<div>${detail.hireCareer}</div>
-								<div>${detail.education}</div>
-								<div>${detail.workType}</div>
+								<!-- 1이면 경력 2면 신입으로 글자로 바꿔서 출력해주기 -->
+								<c:if test="${detail.hireCareer eq 1}">
+									<div class="line">경력</div>
+								</c:if>
+								<c:if test="${detail.hireCareer eq 2}">
+									<div class="line">신입</div>
+								</c:if>
+								<div class="line">${detail.education}</div>
+								<div class="line">${detail.workType}</div>
 							</div>
 						</div>
 					</div>
 					<div class="workType">
-						<div class="boldT">근무 조건</div>
+					<div  class="boldT">
+						<span style="font-size:large; font-weight: bold; top: -1px; position: relative;">|</span><span>근무 조건</span>
+					</div>
 						<div class="workContent">
 							<div class="grayF">
-								<div>급여</div>
-								<div>근무 지역</div>
+								<div class="line">급여</div>
+								<div class="line">근무 지역</div>
 							</div>
 							<div class="blueF">
-								<div>${detail.salary}</div>
-								<div>${detail.workPlace}</div>
+								<div class="line">${detail.salary}</div>
+								<div class="line">${detail.workPlace}</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="detailImg">
-					<div class="boldT">상세 정보</div>
+				<div  class="boldT">
+					<span style="font-size:large; font-weight: bold; top: -1px; position: relative;">|</span><span>상세 정보</span>
+				</div>
 					<img id="info" alt="상세이미지"
-						src="http://localhost:8080/img/detail/${detail.detailImg}">
-
+						src="http://localhost:8080/img/detail/${detail.detailImg}" style="border-radius:10px">
 				</div>
 
 				<div class="comInfo">
-					<div class="boldT">기업 정보</div>
+				<div  class="boldT">
+					<span style="font-size:large; font-weight: bold; top: -1px; position: relative;">|</span><span class="boldT">기업 정보</span>
+				</div>
 					<div class="company">
 						<img class="logo" alt="회사 로고"
 							src="http://localhost:8080/img/logo/${company.companyLogo}">
-						<div class="name">${company.companyName}</div>
-						<div class="com01">
-							<div class="grayF">
-								<div>기업 형태</div>
-								<div>설립일</div>
-
+						<div class="comInfoCon">
+							<div class="comInfoName">${company.companyName}</div>
+							<div class="com01">
+								<div class="grayF">
+									<div class="line">기업 형태</div>
+									<div class="line">설립일</div>
+	
+								</div>
+								<div class="blackF">
+									<div class="line">${company.companyType}</div>
+									<div class="line">${company.startDate}</div>
+								</div>
 							</div>
-							<div class="blackF">
-								<div>${company.companyType}</div>
-								<div>${company.startDate}</div>
-							</div>
-						</div>
-						<div class="com02">
-							<div class="grayF">
-								<div>기업주소</div>
-								<div>대표자명</div>
-							</div>
-							<div class="blackF">
-								<div>${company.companyAddress}</div>
-								<div>${company.bossName}</div>
+							<div class="com02">
+								<div class="grayF">
+									<div class="line">기업주소</div>
+									<div class="line">대표자명</div>
+								</div>
+								<div class="blackF">
+									<div class="line">${company.companyAddress}</div>
+									<div class="line">${company.bossName}</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -256,7 +321,9 @@ $(function(){
 				<!-- //comInfo -->
 				<!--------------------- 지도 ------------------------------------------------------------>
 				<div class="mapInfo">
-					<div class="boldT">기업 위치</div>
+				<div  class="boldT">
+					<span style="font-size:large; font-weight: bold; top: -1px; position: relative;">|</span><span class="boldT">기업 위치</span>
+				</div>
 					<div class="location">
 						<div id="map" style="width: 100%; height: 350px;"></div>
 
@@ -328,8 +395,9 @@ $(function(){
 							</div>
 						</div>
 					</div>
-					<div onclick="open_modal();">지원하기</div>
-
+					<!-- Button trigger modal -->
+					<button id="mo" type="button" class="btn btn-primary">
+						지원하기</button>
 				</div>
 			</div>
 
@@ -337,6 +405,95 @@ $(function(){
 		</div>
 		<!-- //container -->
 
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<c:if test="${empty userId}">
+							
+							
+							<h4 class="modal-title">회원이 아닙니다.</h4>
+						</c:if>
+						<c:if test="${not empty userId}">
+							<span class="modal-title" id="myModalLabel">${company.companyName}</span>
+							<span class="subN">입사지원</span>
+						</c:if>
+					</div>
+					<div class="modal-body">
+						<!-- 로그인 여부 판단하기 -->
+						<c:if test="${empty userId}">
+						<div class="notice_already">
+						<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#82B6ED" class="bi bi-person-plus" viewBox="0 0 16 16">
+						  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+						  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+						</svg>
+							<div class='loginStart'>careerBasket 시작하기!</div>
+							<button id="loginBtn" class="btn btn-primary btn-sm" type="button">
+								<a href='/user/loginForm'>로그인</a>
+							</button>
+							</div>
+						</c:if>
+						<c:if test="${not empty userId}">
+							<div class="doc">제출서류</div>
+							<c:choose>
+								<c:when test="${count>0}">
+									<form>
+										<div class="container n_content">
+											<select class="selectpicker" name="title">
+												<option>이력서를 선택하세요</option>
+												<c:forEach var="resume" items="${list}">
+													<option>${resume.title}</option>
+												</c:forEach>
+											</select>
+											<div id="parents">
+												<div id="children"></div>
+											</div>
+											<input type="hidden" name="id" value="${detail.id}">
+											<input type="hidden" name="companyName"
+												value="${detail.companyName}"> <input type="hidden"
+												name="userId" value="${userId}">
+										</div>
+										<button id="apply" type="button"
+											class="btn btn-primary btn-lg">지원하기</button>
+									</form>
+								</c:when>
+
+								<c:when test="${count<=0}">
+									<div class="notice_noResume">
+										<div class="n_content">
+											<div>등록된 이력서가 없습니다.<br> <br>먼저 이력서를 등록해주세요.</div>
+										<button id="resume_apply" class="btn btn-primary btn-sm">
+											<a href="/resume/addresume">이력서 등록하기</a>
+										</button>
+										</div>
+									</div>
+									<button id="apply" type="button"
+										class="btn btn-secondary btn-lg" disabled>지원하기</button>
+								</c:when>
+							</c:choose>
+						</c:if>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		$('#mo').on('click', function(){
+			$('#myModal').modal('show');
+			
+			});
+		
+		</script>
+
+		<!-- 
 		<div id="myModal" class="modal">
 			<div class="mModal_box">
 				<div class="close_bt" onclick="close_modal();">X</div>
@@ -346,13 +503,11 @@ $(function(){
 						<br>
 						<div class="doc">제출서류</div>
 						<br>
-						<!-- 지원서 개수 받아와서 비교후 생성 -->
 						<c:choose>
 							<c:when test="${count>0}">
 									<form>
-										<!-- action,method 없애도 됨 ajax로 보낼꺼니까 -->
-									<div class="notice_noResume">
-										<select class="resume_check" name="title">
+									<div class="container">
+										<select class="selectpicker" name="title">
 											<option>이력서를 선택하세요</option>
 											<c:forEach var="resume" items="${list}">
 												<option>${resume.title}</option>
@@ -369,7 +524,6 @@ $(function(){
 									<input id="apply"
 											class="blue_btn" type="submit" value="지원하기">
 									</form>
-								<!-- 지원하기 버튼(submit) 누르면 선택한 데이터와 필요한 값들 컨트롤러로 넘겨서 DB에 저장하고 해당 이력서 사진을 폴더에 저장 -->
 							</c:when>
 
 							<c:when test="${count<=0}">
@@ -391,7 +545,7 @@ $(function(){
 				</div>
 			</div>
 		</div>
-
+		 -->
 	</div>
 	<!-- //frame -->
 </body>

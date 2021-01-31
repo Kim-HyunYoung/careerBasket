@@ -1,8 +1,16 @@
 @charset "UTF-8";
 @import "reset.css";
 
+.content div{
+	border-radius: 10px;
+}	
+
 body{
 	min-width: 1000px;
+}
+
+.line{
+	margin-bottom: 5px;
 }
 
 .frame{
@@ -21,7 +29,7 @@ position: relative;
 	position: relative;
 }
 
-.container{
+.con{
 	width: 100%;
 	height: 70%;
 	float: left;
@@ -32,74 +40,101 @@ position: relative;
 .container::after{content: ""; display: block; clear: both;}
 
 .content{
-	width: 70%;
+	width: 66%;
 	height: 100%;
 	float: left;
 	position: relative;
+	padding-left: 40px;
+	border-right: 1px solid lightgray;
 }
 
 .content::after{content: ""; display: block; clear: both;}
 
-.title{
-	background-color: pink;
+#title{
 	height: 50px;
     margin-left: 40px;
     margin-top: 40px;
     margin-right: 40px;
     border-bottom: 1px solid gray;
    	position: relative;
+   	border-radius: 0px;
+    padding-bottom: 10%;
 }
 
 .position{
-	font-size: large;
-	font-weight: bold;
+	font-size: x-large;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
 .comName{
 	color: gray;
+    font-size: medium;
+    margin-left: 11px;
+    margin-top: 14px;
 }
 
 .hireInfo{
-	background-color: purple;
-	height: 100px;
+	background-color: #f2f3f5;
+    height: 125px;
 	margin-left: 40px;
     margin-top: 40px;
     margin-right: 40px;
     position: relative;
 }
 
+.conContent{
+	margin-top: 4%;
+}
+
 .condition{
-	background-color: lime;
+	background-color: #f2f3f5;
 	width: 50%;
-	height: 90px;
 	float: left;
 	position: relative;
+    padding-top: 3%;
+    padding-left: 6%;
+    padding-bottom: 3%;
 }
 
 .boldT{
-		font-weight: bold;
+	font-weight: bold;
+	margin-bottom: 14px;
 }
 
 .grayF{
 	color: gray;
-	float: left;
+    float: left;
+    font-size: small;
+    font-weight:bold;
+    margin-right: 10px;
 }
 
 .blackF{
-	color: blue;
+	color: balck;
 	float: left;
+	font-size: small;
+    margin-right: 20px;
+}
+
+.blueF{
+	font-size: small;
+	color: #82B6ED;
+}
+
+.workContent{
+	margin-top: 4%;	
 }
 
 .workType{
-	background-color: red;
+	background-color: #f2f3f5;
 	width: 50%;
-	height: 90px;
 	float: left;
 	position: relative;
+	padding: 3%;
 }
 
 .detailImg{
-	background-color: orange;
 	margin-left: 40px;
 	margin-top: 40px;
 	margin-right: 40px;
@@ -118,14 +153,33 @@ position: relative;
 .comInfo::after{content: ""; display: block; clear: both;}
 
 .company{
-	background-color: brown;
+	background-color: #f2f3f5;
 	width: 100%;
-    height: 100px;
+    height: 130px;
+    border-radius: 10px;
+}
+
+.comInfoName{
+	font-size: large;
+	font-weight: bold;
+	margin-bottom: 13px;
+}
+
+.comInfoCon{
+	position: relative;
+    left: 5%;
+    top:15%;
+    padding: 2%;
+    padding-right: 0px;
+    float: left;
+    width: 83%;
 }
 
 .com01,.com02{
-	float: left;
+	position: relative;
 }
+
+.com01,.com02::after{content: ""; display: block; clear: both;}
 
 .mapInfo{
 	background-color: white;
@@ -137,14 +191,16 @@ position: relative;
 }
 
 .nav{
-	background-color: white;
-	border: 1px solid lightgray;
-    width: 25%;
+    background-color: white;
+    border: 1px solid lightgray;
+    width: 22%;
     float: left;
     position: fixed;
     right: 0;
     top: 31%;
-    margin-right: 40px;
+    border-radius: 15px;
+    border-radius: 13px;
+    margin-right: 80px;
 }
 
 .nav_content{
@@ -154,7 +210,7 @@ position: relative;
 }
 
 .last_t{
-	
+	    margin: 4%;
 }
 
 .last_t{
@@ -163,12 +219,16 @@ position: relative;
 
 .clock{
 	color: #82B6ED;
-	font-weight: bold;
-	font-size: large;
+    font-weight: bold;
+    font-size: large;
+    margin: 4%;
 }
 
 .date{
 	position: relative;
+    margin-top: 8%;
+    margin-bottom: 8%;
+    left: 8px;
 }
 
 .date::after{content: ""; display: block; clear: both;}
@@ -176,26 +236,40 @@ position: relative;
 
 .startDate{
 	font-size: small;
+	margin: 3%;
+	color: lightgray;
 }
+
+.startDate::after{content: ""; display: block; clear: both;}
 
 .endDate{
 	font-size: small;
+	margin: 3%;
+	color: red;
 }
+
+.endDate::after{content: ""; display: block; clear: both;}
 
 .s_date{
 	float: left;
 	border: 1px solid lightgray;
 	border-radius: 8px;
+	margin-right: 4px;
+	font-size: smaller;
 }
 
 .e_date{
 	float: left;
 	border: 1px solid red;
     border-radius: 8px;
+    margin-right: 4px;
+    font-size: smaller;
 }
 
+/*
+
 .modal{
-	display: none; /* Hidden by default */
+	display: none; 
 	position: fixed; 
 	z-index: 1;
 	left: 0;
@@ -204,7 +278,7 @@ position: relative;
 	height: 100%;
 	overflow: auto;
 	background-color: rgb(0,0,0);
-	background-color: rgba(0,0,0,0.4); /*마지막 투명도:40%*/
+	background-color: rgba(0,0,0,0.4); 
 }
 
 .mModal_box{
@@ -233,7 +307,16 @@ position: relative;
 	margin: 20px;
 	margin-top: 40px;
 }
+*/
 
+.modal-title{
+	font-weight: bold;
+	font-size: larger;	
+}
+
+.subN{
+	font-size: medium;	
+}
 .name{
 	font-size: x-large;
 	font-weight: bold;
@@ -241,8 +324,9 @@ position: relative;
 }
 
 .doc{
-	margin-left: 10%;
-	margin-top: 6%;
+    margin-left: 44px;
+    margin-bottom: 12px;
+    font-size: smaller;
 }
 
 .close_bt{
@@ -290,49 +374,83 @@ position: relative;
 a{
 	text-decoration: none;
 }
-	
-.notice_noResume{
-	border: 1px solid lightgray;
-    width: 70%;
-    position: relative;
-    left: 50%;
-    margin-left: -40%;
-    padding: 5%;
-}
-
-.resume_check{
-	width: 70%;
-    left: 50%;
-    margin-left: -35%;
-    position: relative;
-}
 
 .notice_re{
 	color: red;
     font-size: small;
-    left: 16%;
     position: relative;
     margin-top: 5%;
+    margin-left: 12px;
 }
 
 .notice_already{
-    width: 60%;
-    height: 40%;
+        width: 70%;
+    height: 186px;
     position: relative;
     left: 50%;
-    margin-left: -30%;
-    background-color: lightgrey;
+    margin-left: -35%;
+    background-color: #f2f3f5;
     top: 28%;
+    border-radius: 7px;
+    text-align: center;
+    padding: 8%;
 }
 
+.notice_already::after{content: ""; display: block; clear: both;}
+
 .noti{
-    text-align: center;
     position: relative;
-    top: 59%;
+    margin-top: 18px;
+    font-size: smaller;
+}
+
+.loginStart{
+	position: relative;
+    margin-top: 10px;
+    font-size: smaller;
+    margin-bottom: 10px;
 }
 
 .n_content{
-	padding: 8%;
+	left: 50%;
+    padding: 5%;
     font-size: small;
-    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    width: 78%;
+}
+
+#loginBtn{
+	border-radius: 15px;
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 238px;
+}
+
+#mo{
+	border-radius: 25px;
+}
+
+#apply{
+	border-radius: 25px;
+    left: 50%;
+    position: relative;
+    margin-left: -51px;
+    margin-top: 28px;
+    margin-bottom: 15px;
+}
+
+#resume_apply{
+	border-radius: 25px;
+}
+
+.modal-body {
+    position: relative;
+    padding: 20px;
+}
+
+
+.modal.in .modal-dialog {
+	width: 400px
 }

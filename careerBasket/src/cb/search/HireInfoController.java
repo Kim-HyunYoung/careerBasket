@@ -123,6 +123,9 @@ public class HireInfoController {
 		System.out.println(id);
 		System.out.println(companyName);
 		
+		//0이면 이미 지원하신 채용공고입니다.
+		//1이면 지원이 완료되었습니다.
+		
 		String result ="";
 		
 		List<Integer> applyIdList = service.getApplyId(userId);
@@ -182,6 +185,10 @@ public class HireInfoController {
 		return "myPage";
 	}
 	
+	@GetMapping("/boot")
+	public String getBoot() {
+		return "bootstrapTest";
+	}
 	
 	
 }
