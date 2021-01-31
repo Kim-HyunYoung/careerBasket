@@ -85,6 +85,10 @@ public class ResumeController {
 		//회원 정보 조회
 		User si = service.selectMyInfo(userId);
 		m.addAttribute("si", si);
+		
+		List<Document> doList = service.selectDoAllView(userId);
+		m.addAttribute("doList", doList);
+		
 		return "insertForm";
 	}
 	
@@ -94,10 +98,11 @@ public class ResumeController {
 	public String addResume(InsertUpdate iu, Model m) {
 //		System.out.println("실행");
 		System.out.println(iu);
-		service.insert(iu);
 		//이력서 정보 조회
-		Resume re = service.selectOne(iu.getResumeId());
+		Resume re = service.selectOne(service.insert(iu));
 		m.addAttribute("re", re);
+		String resuemId = re.getResumeId()+"";
+		System.out.println(resuemId);
 		//회원 정보 조회
 		User si = service.selectMyInfo(iu.getUserId());
 		m.addAttribute("si", si);
@@ -106,7 +111,7 @@ public class ResumeController {
 		m.addAttribute("age", age);
 		//경력 정보 조회
 		List<Career> ca = service.selectCareer(iu.getResumeId());
-		return "pickList";
+		return showViewList(m, iu.getUserId());
 	}
 	
 	//이력서 리스트에서 수정버튼 클릭시 해당 이력서 수정할수 있는 폼
@@ -137,6 +142,8 @@ public class ResumeController {
 		//이력서 정보 조회
 		Resume re = service.selectOne(iu.getResumeId());
 		m.addAttribute("re", re);
+		String resumeId = re.getResumeId()+"";
+		System.out.println(resumeId);
 		//회원 정보 조회
 		User si = service.selectMyInfo(iu.getUserId());
 		m.addAttribute("si", si);
@@ -146,7 +153,7 @@ public class ResumeController {
 		//경력 정보 조회
 		List<Career> ca = service.selectCareer(iu.getResumeId());
 		m.addAttribute("ca", ca);
-		return "pickList";
+		return showPickView(m, resumeId, re.getUserId());
 	}
 	
 	//이력서 리스트에서 삭제버튼 클릭시 해당 이력서 디비에서 삭제

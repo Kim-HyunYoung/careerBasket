@@ -53,7 +53,6 @@ public class ResumeService {
 		Resume re = new Resume();
 		re.setResumeId(iu.getResumeId());
 		re.setUserId(iu.getUserId());
-		re.setDocumentId(iu.getDocumentId());
 		re.setTitle(iu.getTitle());
 		re.setFinalEducation(iu.getFinalEducation());
 		re.setEducationName(iu.getEducationName());
@@ -63,7 +62,11 @@ public class ResumeService {
 		re.setScore(iu.getScore());
 		re.setBasicScore(iu.getBasicScore());
 		re.setCareer(iu.getCareer());
-		re.setResumePath(iu.getResumePath());
+		String document="";
+		for(int i=0;i<iu.getDocument().length;i++) {
+			document += iu.getDocument()[i]+",";
+		}
+		re.setDocument(document);
 		re.setMyinfo(iu.getMyinfo());
 		
 		mapper.insert(re);
@@ -94,7 +97,6 @@ public class ResumeService {
 		Resume re = new Resume();
 		re.setResumeId(iu.getResumeId());
 		re.setUserId(iu.getUserId());
-		re.setDocumentId(iu.getDocumentId());
 		re.setTitle(iu.getTitle());
 		re.setFinalEducation(iu.getFinalEducation());
 		re.setEducationName(iu.getEducationName());
@@ -104,7 +106,11 @@ public class ResumeService {
 		re.setScore(iu.getScore());
 		re.setBasicScore(iu.getBasicScore());
 		re.setCareer(iu.getCareer());
-		re.setResumePath(iu.getResumePath());
+		String document="";
+		for(int i=0;i<iu.getDocument().length;i++) {
+			document += iu.getDocument()[i]+",";
+		}
+		re.setDocument(document);
 		re.setMyinfo(iu.getMyinfo());
 		
 		mapper.update(re);

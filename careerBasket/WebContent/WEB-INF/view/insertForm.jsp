@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+1<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -144,7 +144,7 @@
 <body>
 <div id="resume_form_wrapper">
 <form action="/resume/addresume" method="post">
-    <input type="text" name="title" placeholder="이력서의 제목을 적어주세요" style="width:600px;margin-top: 0.3%">
+    <input type="text" name="title" placeholder="이력서의 제목을 적어주세요(필수)" style="width:600px;margin-top: 0.3%" required="required">
     <input type="submit" class="btn btn-color btn-sm"  value="이력서 저장">
 <h1 class="title">기본정보</h1>
 <div class="info_wrapper">
@@ -181,21 +181,21 @@
 <h1 class="title">학력정보</h1>
 <div class="info_wrapper">
 <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%">
-  <input type="radio" class="btn-check" name="finalEducation" id="btnradio1" autocomplete="off">
+  <input type="radio" class="btn-check" name="finalEducation" id="btnradio1" autocomplete="off" value="초등학교" required="required">
   <label class="btn btn-outline-primary" for="btnradio1">초등학교</label>
 
-  <input type="radio" class="btn-check" name="finalEducation" id="btnradio2" autocomplete="off">
+  <input type="radio" class="btn-check" name="finalEducation" id="btnradio2" autocomplete="off" value="중학교" required="required">
   <label class="btn btn-outline-primary" for="btnradio2">중학교</label>
 
-  <input type="radio" class="btn-check" name="finalEducation" id="btnradio3" autocomplete="off">
+  <input type="radio" class="btn-check" name="finalEducation" id="btnradio3" autocomplete="off" value="고등학교" required="required">
   <label class="btn btn-outline-primary" for="btnradio3">고등학교</label>
   
-  <input type="radio" class="btn-check" name="finalEducation" id="btnradio4" autocomplete="off">
+  <input type="radio" class="btn-check" name="finalEducation" id="btnradio4" autocomplete="off" value="대학교/대학원" required="required">
   <label class="btn btn-outline-primary" for="btnradio4">대학교/대학원</label>
 </div>
 <hr>
-<p class="ed_title">학교정보입력</p>
-<label class="ed_ch"><input type="checkbox" name="state" onclick="check()" value="검정고시">검정고시</label><br>
+<p class="ed_title">학교정보입력<span style="font-size: 11px;color: red;margin-left: 1%;">필수</span></p>
+<label class="ed_ch"><input type="checkbox" name="state" onclick="check()" value="검정고시" required="required">검정고시</label><br>
 <div class="row">
   <label for="colFormLabel" class="col-sm-2 col-form-label">학교명</label>
   <div class="col-sm-10">
@@ -206,7 +206,7 @@
   <label for="colFormLabel" class="col-sm-2 col-form-label">재학기간</label>
   <div class="col-sm-10">
     <input type="text" name="period" class="colFormLabel" id="colFormLabel" placeholder="예시)2016-03-02~2020-02-09">
-    <select name="state">
+    <select name="state" required="required">
     <option value="">상태</option>
     <option value="재학">재학</option>
     <option value="졸업">졸업</option>
@@ -231,13 +231,13 @@
   </div>
 </div>
 </div>
-<h1 class="title">경력정보</h1>
+<h1 class="title">경력정보<span style="font-size: 11px;color: red;margin-left: 1%;">필수</span></h1>
 <div class="info_wrapper" style="padding-bottom: 6%;">
 <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%">
-  <input type="radio" class="btn-check" name="career" id="btnradio5" autocomplete="off" value="신입">
+  <input type="radio" class="btn-check" name="career" id="btnradio5" autocomplete="off" value="신입" required="required">
   <label class="btn btn-outline-primary" for="btnradio5">신입</label>
   
-  <input type="radio" class="btn-check" name="career" id="btnradio6" autocomplete="off" value="경력">
+  <input type="radio" class="btn-check" name="career" id="btnradio6" autocomplete="off" value="경력" required="required">
   <label class="btn btn-outline-primary" for="btnradio6">경력</label>
 </div>
 <hr>
@@ -256,7 +256,7 @@
 <p class="ed_title">첨부파일 선택</p>
 <c:forEach var="doc" items="${doList}">
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="${doc.documentId}" id="flexCheckDefault">
+  <input class="form-check-input" type="checkbox" value="${doc.documentId}" name ="document" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
 	<span class="doc_date">${doc.wDate}</span>
 	<span class="doc_type">${doc.type}</span> 

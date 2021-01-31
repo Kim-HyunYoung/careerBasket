@@ -31,9 +31,9 @@ public interface ResumeMapper {
 	public List<Career> selectCareer(int resumeId);
 	
 	@Insert("insert into resume(user_id, title, final_education, education_name, "
-			+ "period, state, major, score, basic_score, career, resume_path, myinfo) "
+			+ "period, state, major, score, basic_score, career, document, myinfo) "
 			+ "values(#{userId}, #{title}, #{finalEducation}, #{educationName}, #{period}, "
-			+ "#{state}, #{major}, #{score}, #{basicScore}, #{career}, #{resumePath}, #{myinfo})")
+			+ "#{state}, #{major}, #{score}, #{basicScore}, #{career}, #{document}, #{myinfo})")
 	public int insert(Resume resume);
 	
 	@Insert("insert into career(resume_id, company, career_period, career_position, career_salary, description) "
@@ -43,7 +43,7 @@ public interface ResumeMapper {
 	@Update("update resume set title=#{title}, final_education=#{finalEducation}, "
 			+ "education_name=#{educationName}, period=#{period}, state=#{state}, major=#{major}, "
 			+ "score=#{score}, basic_score=#{basicScore}, career=#{career}, "
-			+ "resume_path=#{resumePath}, myinfo=#{myinfo} "
+			+ "document=#{document}, myinfo=#{myinfo} "
 			+ "where resume_id=#{resumeId}")
 	public int update(Resume resume);
 	

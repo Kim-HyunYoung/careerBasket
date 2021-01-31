@@ -9,7 +9,6 @@ public class InsertUpdate {
 
 	private int resumeId;
 	private String userId;
-	private int documentId;
 	private String title;
 	private String finalEducation;
 	private String educationName;
@@ -19,7 +18,7 @@ public class InsertUpdate {
 	private String score;
 	private String basicScore;
 	private String career;
-	private String resumePath;
+	private String[] document;
 	private String myinfo;
 	private User info;
 	private int[] careerId;
@@ -29,14 +28,13 @@ public class InsertUpdate {
 	private long[] careerSalary;
 	private String[] description;
 	public InsertUpdate() {}
-	public InsertUpdate(int resumeId, String userId, int documentId, String title, String finalEducation,
-			String educationName, String period, String[] state, String major, String score, String basicScore,
-			String career, String resumePath, String myinfo, User info, int[] careerId, String[] company,
-			String[] careerPeriod, String[] careerPosition, long[] careerSalary, String[] description) {
+	public InsertUpdate(int resumeId, String userId, String title, String finalEducation, String educationName,
+			String period, String[] state, String major, String score, String basicScore, String career,
+			String[] document, String myinfo, User info, int[] careerId, String[] company, String[] careerPeriod,
+			String[] careerPosition, long[] careerSalary, String[] description) {
 		super();
 		this.resumeId = resumeId;
 		this.userId = userId;
-		this.documentId = documentId;
 		this.title = title;
 		this.finalEducation = finalEducation;
 		this.educationName = educationName;
@@ -46,7 +44,7 @@ public class InsertUpdate {
 		this.score = score;
 		this.basicScore = basicScore;
 		this.career = career;
-		this.resumePath = resumePath;
+		this.document = document;
 		this.myinfo = myinfo;
 		this.info = info;
 		this.careerId = careerId;
@@ -67,12 +65,6 @@ public class InsertUpdate {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-	public int getDocumentId() {
-		return documentId;
-	}
-	public void setDocumentId(int documentId) {
-		this.documentId = documentId;
 	}
 	public String getTitle() {
 		return title;
@@ -128,11 +120,11 @@ public class InsertUpdate {
 	public void setCareer(String career) {
 		this.career = career;
 	}
-	public String getResumePath() {
-		return resumePath;
+	public String[] getDocument() {
+		return document;
 	}
-	public void setResumePath(String resumePath) {
-		this.resumePath = resumePath;
+	public void setDocument(String[] document) {
+		this.document = document;
 	}
 	public String getMyinfo() {
 		return myinfo;
@@ -184,15 +176,16 @@ public class InsertUpdate {
 	}
 	@Override
 	public String toString() {
-		return "InsertUpdate [resumeId=" + resumeId + ", userId=" + userId + ", documentId=" + documentId + ", title="
-				+ title + ", finalEducation=" + finalEducation + ", educationName=" + educationName + ", period="
-				+ period + ", state=" + Arrays.toString(state) + ", major=" + major + ", score=" + score
-				+ ", basicScore=" + basicScore + ", career=" + career + ", resumePath=" + resumePath + ", myinfo="
-				+ myinfo + ", info=" + info + ", careerId=" + Arrays.toString(careerId) + ", company="
-				+ Arrays.toString(company) + ", careerPeriod=" + Arrays.toString(careerPeriod) + ", careerPosition="
+		return "InsertUpdate [resumeId=" + resumeId + ", userId=" + userId + ", title=" + title + ", finalEducation="
+				+ finalEducation + ", educationName=" + educationName + ", period=" + period + ", state="
+				+ Arrays.toString(state) + ", major=" + major + ", score=" + score + ", basicScore=" + basicScore
+				+ ", career=" + career + ", document=" + Arrays.toString(document) + ", myinfo=" + myinfo + ", info="
+				+ info + ", careerId=" + Arrays.toString(careerId) + ", company=" + Arrays.toString(company)
+				+ ", careerPeriod=" + Arrays.toString(careerPeriod) + ", careerPosition="
 				+ Arrays.toString(careerPosition) + ", careerSalary=" + Arrays.toString(careerSalary) + ", description="
 				+ Arrays.toString(description) + "]";
 	}
+	
 	
 	
 }
