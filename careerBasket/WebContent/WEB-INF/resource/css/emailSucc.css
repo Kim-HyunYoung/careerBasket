@@ -1,0 +1,67 @@
+@charset "UTF-8";
+@import "reset.css";
+
+.btn-color{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    /* btn btn-color btn-sm */
+}
+
+.all{
+	position: absolute;
+    top: 25%;
+    left: 35%;
+    text-align: center;	
+}
+
+h1{
+	font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 46px;
+}
+
+h2{
+	color: gray;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#icon{
+	font-size: 115px;
+    position: relative;
+    color: #82B6ED;
+    left: 17px;
+    top: -23px;
+}
+
+#bottom{
+	position: relative;
+    left: -3px;
+    margin-top: 16px;
+}
+
+.bt{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    width: 400px;
+    height: 56px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 36px;
+}
+
+.change{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    width: 400px;
+    height: 56px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 18px;
+}

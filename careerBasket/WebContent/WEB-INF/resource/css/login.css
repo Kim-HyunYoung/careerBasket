@@ -1,0 +1,56 @@
+@charset "UTF-8";
+@import "reset.css";
+
+.btn-color{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    /* btn btn-color btn-sm */
+}
+
+.all{
+	position: absolute;
+    top: 25%;
+    left: 35%;
+    text-align: center;
+}
+
+h1{
+	font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 46px;
+}
+
+input{
+	margin-bottom: 14px;
+    width: 400px;
+    height: 50px;
+}
+
+#login{
+	margin-top: 21px;
+    width: 400px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#message{
+	font-size: 14px;
+    color: red;
+}
+
+.findButton{
+	border: none;
+    background: white;
+}
+
+#find{
+	color: gray;
+    font-size: 13px;
+}
+
+.abcRioButton abcRioButtonBlue{
+	width: 277.44px;
+}

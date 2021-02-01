@@ -1,0 +1,49 @@
+@charset "UTF-8";
+@import "reset.css";
+
+.btn-color{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    /* btn btn-color btn-sm */
+}
+
+#login{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    width: 156px;
+    height: 44px;
+    font-size: 15px;
+    margin-left: 367px;
+    margin-bottom: 100px;
+}
+
+.signUpResult{
+	position: absolute;
+	top: 20%;
+    left: 17%;
+}
+
+#icon{
+	font-size: 150px;
+    position: absolute;
+    color: #82B6ED;
+    left: 385px;
+}
+
+#bottom{
+	position: absolute;
+    top: 180px;
+}
+
+h1{
+	position: relative;
+    left: 62%;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}

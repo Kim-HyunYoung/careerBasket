@@ -48,8 +48,20 @@ public interface UserMapper {
 	@Select("select email from sign_up where user_id=#{userId} and name=#{name}")
 	public String findEmail(@Param("userId")String userId, @Param("name")String name);
 	
+	//아이디랑 이름이랑 정보가 맞지 않을때
+	@Select("select count(*) from sign_up where user_id=#{userId} and name=#{name}")
+	public int SameIdName(@Param("userId")String userId, @Param("name")String name);
+	
+	//아이디랑 이메일이랑 정보가 맞지 않을 때
+	@Select("select count(*) from sign_up where user_id=#{userId} and email=#{email}")
+	public int SameIdEmail(@Param("userId")String userId, @Param("email")String email);
+	
+	//이름이랑 이메일이랑 정보가 맞지 않을 때
+	@Select("select count(*) from sign_up where name=#{name} and email=#{email}")
+	public int SameNameEmail(@Param("name")String name, @Param("email")String email);
+	
 	//비밀번호 변경
-	@Update("update sign_up set password=#{password} where email=#{email}")
-	public int changePw(@Param("password")String password, @Param("email")String email);
+	@Update("update sign_up set password=#{password} where email=#{email} and name=#{name} and user_id=#{userId}")
+	public int changePw(@Param("password")String password, @Param("email")String email, @Param("name")String name, @Param("userId")String userId);
 
 }

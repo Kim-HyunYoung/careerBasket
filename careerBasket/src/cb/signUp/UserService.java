@@ -2,6 +2,8 @@ package cb.signUp;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,9 +58,24 @@ public class UserService {
 		return userMapper.findEmail(userId, name);
 	}
 	
+	//아이디랑 이름이랑 정보가 맞지 않을때
+	public int CorrectIdName(String userId, String name) {
+		return userMapper.SameIdName(userId, name);
+	}
+		
+	//아이디랑 이메일이랑 정보가 맞지 않을 때
+	public int CorrectIdEmail(String userId, String email) {
+		return userMapper.SameIdEmail(userId, email);
+	}
+		
+	//이름이랑 이메일이랑 정보가 맞지 않을 때
+	public int CorrectNameEmail(String name, String email) {
+		return userMapper.SameNameEmail(name, email);
+	}
+	
 	//비밀번호 변경
-	public int pwChange(String password, String email) {
-		return userMapper.changePw(password, email);
+	public int pwChange(String password, String email, String name, String userId) {
+		return userMapper.changePw(password, email, name, userId);
 	}
 	
 

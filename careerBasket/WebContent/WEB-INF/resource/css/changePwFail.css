@@ -1,0 +1,40 @@
+@charset "UTF-8";
+@import "reset.css";
+
+.all{
+	position: absolute;
+    top: 25%;
+    left: 34%;
+    text-align: center;	
+}
+
+#icon{
+	font-size: 115px;
+    position: relative;
+    color: #82B6ED;
+    left: 17px;
+    top: -23px;
+}
+
+h1{
+	font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 46px;
+}
+
+h3{
+	color: red;
+	font-weight: bold;
+}
+
+.bt{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    width: 400px;
+    height: 56px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 19px;
+}

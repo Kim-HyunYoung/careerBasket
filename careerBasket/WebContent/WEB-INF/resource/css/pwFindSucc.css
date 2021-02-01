@@ -1,0 +1,64 @@
+@charset "UTF-8";
+@import "reset.css";
+
+.btn-color{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    /* btn btn-color btn-sm */
+}
+
+.all{
+	position: absolute;
+    top: 25%;
+    left: 34%;
+    text-align: center;	
+}
+
+h1{
+	font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 46px;
+}
+
+#icon{
+	font-size: 115px;
+    position: relative;
+    color: #82B6ED;
+    top: -23px;
+}
+
+#bottom{
+	position: relative;
+    left: -4px;
+    margin-top: 16px;
+}
+
+#confirmNum{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    width: 400px;
+    height: 56px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 19px;
+}
+
+h2{
+	color: #82B6ED;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+h5{
+	margin-top: 12px;
+    color: gray;
+    font-size: 14px;
+}
+
+#next{
+	margin-top: -5px;
+}

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+@import "reset.css";
+
+.btn-color{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    /* btn btn-color btn-sm */
+}
+
+#confirm{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    width: 400px;
+    height: 52px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 19px;
+    margin-bottom: 100px;
+}
+
+.all{
+	position: absolute;
+    top: 25%;
+    left: 34%;
+    text-align: center;	
+}
+
+h1{
+	font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 46px;
+}
+
+#id{
+	position: relative;
+    left: -176px;
+    margin-bottom: 19px;
+}
+
+#name{
+	position: relative;
+    left: -181px;
+    margin-bottom: 19px;
+}
+
+#email{
+	position: relative;
+    left: -176px;
+    margin-bottom: 19px;
+}
+
+#message{
+	font-size: 14px;
+    color: red;
+}
+
+input{
+	margin-top: 11px;
+	margin-bottom: 14px;
+    width: 400px;
+    height: 50px;
+}

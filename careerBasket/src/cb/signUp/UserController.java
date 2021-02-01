@@ -177,13 +177,26 @@ public class UserController {
 	
 	//비밀번호 찾기 이메일 인증
 	//조건(아이디, 이름)에 맞는 이메일 있는지 확인
+
 	@PostMapping("/findEmail")
 	public String findEmail(@RequestParam("userId")String userId, @RequestParam("name")String name, 
 			@RequestParam("email")String email, Model m) {
 		
+//		*비밀번호 찾기 실패 경우*
+//		1. 유저아이디, 이름에 맞는 이메일이 없을때
+//		2. 입력한 아이디가 테이블에 없을 때
+//		3. 입력한 이름이 테이블에 없을 때
+//		4. 입력한 이메일이랑 입력한 유저아이디, 이름으로 조회한 이메일이랑 다를때
+//
+//		5. 아이디랑 이름이랑 정보가 맞지 않을때
+//		6. 아이디랑 이메일이랑 정보가 맞지 않을때
+//		7. 이름이랑 이메일이랑 정보가 맞지 않을때
+//		8. 입력한 이메일이 테이블에 없을 때
+		
 		String findEmail = service.emailFind(userId, name);
-		if(findEmail == "" || service.idCheck(userId) == 0 || service.nameCheck(name) == 0 ||
-				!findEmail.equals(email)) {		//입력한 정보가 테이블에 없다면
+		if(findEmail == "" || service.emailCheck(email) == 0 || service.idCheck(userId) == 0 || service.nameCheck(name) == 0 ||
+				!findEmail.equals(email) || service.CorrectIdName(userId, name) == 0 || service.CorrectIdEmail(userId, email) == 0 ||
+				service.CorrectNameEmail(name, email) == 0) {		//입력한 정보가 테이블에 없다면
 			return "pwFindFail";
 		}else{ 
 			int idx = findEmail.indexOf("@");	//@ 인덱스 구하기
@@ -200,6 +213,10 @@ public class UserController {
 			subSubEmail += endEmail;	//@뒤 주소 붙혀주기
 			m.addAttribute("showEmail", subSubEmail);
 			m.addAttribute("email", email);
+			
+			//비밀번호 변경시 필요함.(이름, 아이디)
+			m.addAttribute("name", name);
+			m.addAttribute("userId", userId);
 			return "pwFindSucc";
 		}
 	}
@@ -208,7 +225,8 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	@RequestMapping(value = "/sendMail", method = RequestMethod.GET)
-	public String sendMail(@RequestParam("emailAddr")String email, Model m) throws Exception{
+	public String sendMail(@RequestParam("emailAddr")String email, Model m, @RequestParam("name")String name, 
+			@RequestParam("userId")String userId) throws Exception{
 		
 		 //인증 번호 생성기
         StringBuffer temp =new StringBuffer();
@@ -264,14 +282,21 @@ public class UserController {
         
         m.addAttribute("email", email);
         m.addAttribute("confirmNum", randNum);
+        //비밀번호 변경시 필요함.(이름, 아이디)
+		m.addAttribute("name", name);
+		m.addAttribute("userId", userId);
         return "emailConfirm";		//인증번호 입력하는 폼으로 이동.
 	}
 	
 	//이메일 인증 완료
 	@PostMapping("/emailSucc")
 	public String emailSucc(@RequestParam("confirmNum")String answer, @RequestParam("userConfirm")String input, 
-			@RequestParam("email")String email, Model m) {
+			@RequestParam("email")String email, @RequestParam("name")String name, 
+			@RequestParam("userId")String userId, Model m) {
 		m.addAttribute("email", email);
+		//비밀번호 변경시 필요함.(이름, 아이디)
+		m.addAttribute("name", name);
+		m.addAttribute("userId", userId);
 		
 		if(answer.equals(input)) {
 			return "emailSucc";
@@ -283,25 +308,29 @@ public class UserController {
 	
 	//비밀번호 변경 폼 화면
 	@GetMapping("/changePwForm")
-	public String changePwForm(@RequestParam("email")String email, Model m) {
+	public String changePwForm(@RequestParam("email")String email, @RequestParam("name")String name, 
+			@RequestParam("userId")String userId, Model m) {
 		m.addAttribute("email", email);
+		//비밀번호 변경시 필요함.(이름, 아이디)
+		m.addAttribute("name", name);
+		m.addAttribute("userId", userId);
 		return "changePwForm";
 	}
 	
 	//비밀번호 변경
 	@PostMapping("/changePw")
 	public String changePw(@RequestParam("pw")String pw, @RequestParam("rePw")String rePw, 
-			@RequestParam("email")String email) {
+			@RequestParam("email")String email, @RequestParam("name")String name, 
+			@RequestParam("userId")String userId) {
 		
 		//이메일 정보로 기존 password 변경(update) 해주기
-		int rs = service.pwChange(rePw, email);
-		if(rs == 1) {	//비밀번호 변경 쿼리문이 실행이 잘 됐다면
+		int rs = service.pwChange(rePw, email, name, userId);
+		if(rs >= 1) {	//비밀번호 변경 쿼리문이 실행이 잘 됐다면
 			return "login";
 		}else {
 			return "changePwFail";
 		}
 
 	}
-
 	
 }

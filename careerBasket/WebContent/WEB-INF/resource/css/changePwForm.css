@@ -1,0 +1,72 @@
+@charset "UTF-8";
+@import "reset.css";
+
+.all{
+	position: absolute;
+    top: 25%;
+    left: 32%;
+    text-align: center;	
+}
+
+.bottom{
+	position: relative;
+    text-align: center;
+    margin-top: 39px;
+    left: 33px;
+}
+
+hr{
+	width: 478px;
+}
+
+h1{
+	font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#message{
+	font-size: 14px;
+    color: red;
+}
+
+input{
+	margin-top: 11px;
+	margin-bottom: 14px;
+    width: 273px;
+    height: 50px;
+}
+
+#text1{
+	position: relative;
+    left: -65px;
+}
+
+#text2{
+    position: relative;
+    left: -44px;
+}
+
+#changePw{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    border-radius: 8px;
+    width: 400px;
+    height: 56px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-left: -50px;
+}
+}
+
+#pwForm{
+    position: relative;
+    left: 77px;
+}
+
+#repwForm{
+    position: relative;
+    left: -19px;
+}
