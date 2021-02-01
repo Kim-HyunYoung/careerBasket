@@ -4,7 +4,6 @@
 .p,.goFirstPage,.goBackPage,.goNextPage,.goLastPage,.disabled
 	{
 		float: left;
-		margin-left: 30px;
 		position: relative;
 	    display: inline-block;
 	}
@@ -14,15 +13,60 @@
 	text-align: center;
 	margin:0 auto;
 	width: fit-content;
+	padding: 3%;
+	padding-top: 0%;
 	}
 	
 .info{
 	float: right;
     position: relative;
-    top: 50%;
     left: -17px;
-    margin-top: -11px;
     font-size: large;
-    border-radius: 15px;
+    border-radius: 18px;
+    width: 80px;
+    height: 35px;
+    top: 50%;
+    margin-top: -17px;
 }
 
+.p_bottom{
+	text-align: center;
+}
+
+.pager {
+    padding-left: 0;
+    margin: 20px 0;
+    text-align: center;
+    list-style: none;
+    float: left;
+    position: relative;
+    top: -15px;
+
+}
+
+.previous>a{
+    float: left;
+    position: relative;
+    left: -250px;
+    color: #82B6ED;
+}
+
+.next>a{
+	float: left;
+    position: relative;
+    right: -250px;
+    color: #82B6ED;
+}
+
+.pagination>li>a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #82B6ED;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

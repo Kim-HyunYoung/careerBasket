@@ -88,7 +88,6 @@ position: relative;
 }
 
 .condition{
-	background-color: #f2f3f5;
 	width: 50%;
 	float: left;
 	position: relative;
@@ -127,7 +126,6 @@ position: relative;
 }
 
 .workType{
-	background-color: #f2f3f5;
 	width: 50%;
 	float: left;
 	position: relative;
@@ -425,7 +423,7 @@ a{
 }
 
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-    width: 238px;
+    width: 375px;
 }
 
 #mo{
@@ -452,5 +450,5 @@ a{
 
 
 .modal.in .modal-dialog {
-	width: 400px
+	width: 600px
 }

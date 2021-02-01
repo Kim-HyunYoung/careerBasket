@@ -447,7 +447,7 @@ $(function(){
 								<c:when test="${count>0}">
 									<form>
 										<div class="container n_content">
-											<select class="selectpicker" name="title">
+											<select name="title" class="selectpicker" data-live-search="true">
 												<option>이력서를 선택하세요</option>
 												<c:forEach var="resume" items="${list}">
 													<option>${resume.title}</option>

@@ -7,10 +7,35 @@
 <head>
 <meta charset="UTF-8">
 <title>searchForm.jsp</title>
+
+<!-- 부트스트랩 버전 3으로 해야 select 잘 적용됨 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+	crossorigin="anonymous">
+<!-- 부트스트랩 select css -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+<!-- ajax CDN -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- select보다 부트스트랩이 더 먼저와야함 -->
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+	integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+	crossorigin="anonymous"></script>
+<!-- 부트스트랩 select 스크립트 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<!-- 부트스트랩 아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
 <link rel="stylesheet" type="text/css" href="/css/header.css">
 <link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
-<link rel="stylesheet" type="text/css" href="/css/search.css?a">
-<link rel="stylesheet" type="text/css" href="/css/pagenation.css?a">
+<link rel="stylesheet" type="text/css" href="/css/search.css">
+<link rel="stylesheet" type="text/css" href="/css/pagenation.css?ver45">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -52,7 +77,7 @@
 						var newSection = $("<div class='list_content'>");
 						newSection.append("<img class='logo' src='http:/img/logo/"+hire.logoImg+"'>")
 						//id 링크 -> hash
-						newSection.append("<button class='info'><a value='"+currentPage+"' href='http://localhost:8080/hire/detail?id="+hire.id+"&userId=${userId}'>상세보기</a></button>")
+						newSection.append("<button class='btn btn-color btn-lg info'><a id='detail_btn' value='"+currentPage+"' href='http://localhost:8080/hire/detail?id="+hire.id+"&userId=${userId}'>상세보기</a></button>")
 							//쿼리스트링으로 해당 페이지로 연결 url~~~?변수1=값1&변수2=값2
 							//http://localhost:8080/hire/detail
 						newSection.append("<div class='list_top'><div class='hire_title'>"+hire.hireTitle+"</div><div class='end_date'><span class='end_box'>마감일</span>"+hire.endDate.substring(0,10)+"</div>")
@@ -79,7 +104,8 @@
 						var pageTotalCnt = resp.pageTotalCnt;
 							console.log("pageTotalCnt :"+pageTotalCnt);
 						
-						var newSection = $("<section>");
+						//var newSection = $("<div>");
+						var newSection = $(".pagination");
 							
 						//append때문에 쌓이지 않도록 remove(초기화)시켜줌
 							$(".pagination").children().remove();
@@ -90,7 +116,7 @@
 							$(".goFirstPage").children().remove();
 						}else{  //페이지가 1또는 2가 아니면 
 							// <<버튼 활성화
-							newSection.append("<li class='goFirstPage' value='"+1+"'><a><<</a></li>");
+							newSection.append("<ul class='pager'><li class='previous goFirstPage' value='"+1+"'><a href='#' ><span aria-hidden='true'>&larr;</span>First</a></li></ul>");
 						}
 						
 						//------------------뒤로가기 버튼---------------------------------
@@ -104,7 +130,7 @@
 								newSection.append("<li class='disabled' value='"+currentPage+"'><a><</a></li>");
 							}else {
 								console.log("pageNumData-1="+(currentPage-1));
-								newSection.append("<li class='goBackPage' value='"+(currentPage-1)+"'><a><<a></li>");
+								newSection.append("<li class='goBackPage' value='"+(currentPage-1)+"'><a href='#' aria-label='Previous'><</a></li>");
 								
 							}
 						}
@@ -112,7 +138,7 @@
 						//-----------------페이지 숫자 출력(3개씩)---------------------------
 						for(var i =blockBegin; i<blockEnd+1; i++){
 								console.log("페이지네이션"+i);
-							newSection.append("<li class='p' value='"+i+"'><a>"+i+"</a></li>");
+							newSection.append("<li class='p' value='"+i+"'><a href='#'>"+i+"</a></li>");
 							
 							$(".pagination").append(newSection);
 						}
@@ -126,7 +152,7 @@
 								// >다음버튼 비활성화							
 								newSection.append("<li class='disabled' value='"+currentPage+"'><a>></a></li>");
 							}else {
-								newSection.append("<li class='goNextPage' value='"+(currentPage+1)+"'><a>></a></li>");
+								newSection.append("<li class='goNextPage' value='"+(currentPage+1)+"'><a href='#' aria-label='Next'>></a></li>");
 							}
 						}
 							
@@ -136,7 +162,7 @@
 							$(".goLastPage").children().remove();
 						
 						}else {
-							newSection.append("<li class='goLastPage' value='"+pageTotalCnt+"'><a>>></a></li>");	
+							newSection.append("<ul class='pager'><li class='next goLastPage' value='"+pageTotalCnt+"'><a href='#' >Last<span aria-hidden='true'>&rarr;</span></a></li></ul>");	
 						}
 						
 						/*
@@ -371,10 +397,11 @@
 	});
 		
 	//버튼 비활성화
+	/*
 	$(document).on("click",".disabled",function(){
-		alert("disabled!");	
+		//alert("disabled!");	
 	});
-	
+	*/
  }); //여기가 ready 끝
  
 </script>
@@ -384,37 +411,59 @@
 <body>
 
 	<div class="frame">
-		<!-- 상단바 -->
+		<!-- 로그아웃일 때 상단바 -->
 		<div class="top">
-			<div class="top_left">
-				<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
-			</div>
-			<!-- 로고 -->
-			<div class="top_middle">
-				<a href="/hire/list?userId=${userId}">탐색</a> <a
-					href="/resume/addresume?userId=${userId}">이력서</a>
-			</div>
-			<div class="top_right">
-				<div class="ms">${userId}님의취업을응원합니다!</div>
-				<button class="logOut">
-					<a href="/user/logout">로그아웃</a>
-				</button>
-			</div>
+			<c:if test="${empty userId}">
+				<div class="top_left">
+					<a href="/user/logout" style="color: #82B6ED">careerBasket</a>
+				</div>
+				<div class="top_middle">
+					<a href="/hire/list">탐색</a> <a href="/user/loginForm">이력서</a>
+				</div>
+				<div class="top_right">
+					<button class="btn btn-color">
+						<a href="/user/signup">회원가입</a>
+					</button>
+					<button class="btn btn-color">
+						<a href="/user/loginForm">로그인</a>
+					</button>
+				</div>
+			</c:if>
+			<!-- 로그인일 때 상단바 -->
+			<c:if test="${not empty userId}">
+				<div class="top_left">
+					<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
+				</div>
+				<!-- 로고 -->
+				<div class="top_middle">
+					<a href="/hire/list?userId=${userId}">탐색</a> <a
+						href="/resume/addresume?userId=${userId}">이력서</a>
+				</div>
+				<div class="top_right">
+					<div class="ms">${userId}님의취업을응원합니다!</div>
+					<button class="logOut">
+						<a href="/user/logout">로그아웃</a>
+					</button>
+				</div>
+			</c:if>
 		</div>
 		<!-- //상단바 -->
 
-		<div class="container">
+
+
+		<div class="conTain">
 			<!-- 검색바 -->
 			<div class="searchBar">
 				<form id="f" action="/hire/search" method="post">
 					<div class="search1">
 						<div class="career">
-							<input type="radio" name="hireCareer" value=1> 경력 <input
-								type="radio" name="hireCareer" value=2> 신입
+							<input class="car_con" type="radio" name="hireCareer" value=1> 경력
+							<input class="car_con" type="radio" name="hireCareer" value=2> 신입
 						</div>
 						<div class="place">
-							<label>지역</label> <select name="workPlace">
-								<option value="선택">지역을 선택해주세요</option>
+							<label>지역</label> 
+							<select name="workPlace"  class="selectpicker">
+								<option  style="color: lightgray" value="선택">지역을 선택해주세요</option>
 								<option value="서울">서울</option>
 								<option value="대구">대구</option>
 								<option value="부산">부산</option>
@@ -423,31 +472,35 @@
 					</div>
 					<hr>
 					<div class="position">
-					<div class="po_content1">
-					<input type="radio" name="position" value="자바 개발자">자바 개발자 <br>
-					<input type="radio" name="position" value="안드로이드 개발자">안드로이드 개발자 <br>
-					<input type="radio" name="position" value="데이터 사이언티스트">데이터 사이언티스트<br>
-					<input type="radio" name="position" value="프론트엔드 개발자">프론트엔드 개발자 <br>
-					<input type="radio" name="position" value="소프트웨어 엔지니어 ">소프트웨어 엔지니어 <br>
+						<div class="po_content1">
+							<input type="radio" name="position" value="자바 개발자">자바 개발자
+							<br> <input type="radio" name="position" value="안드로이드 개발자">안드로이드
+							개발자 <br> <input type="radio" name="position"
+								value="데이터 사이언티스트">데이터 사이언티스트<br> <input
+								type="radio" name="position" value="프론트엔드 개발자">프론트엔드 개발자
+							<br> <input type="radio" name="position" value="소프트웨어 엔지니어 ">소프트웨어
+							엔지니어 <br>
+						</div>
+						<div class="po_content2">
+							<input type="radio" name="position" value="빅데이터 엔지니어">빅데이터
+							엔지니어<br> <input type="radio" name="position"
+								value="보안 엔지니어 ">보안 엔지니어 <br> <input type="radio"
+								name="position" value="PHP 개발자">PHP 개발자<br> <input
+								type="radio" name="position" value="임베디드 개발자">임베디드 개발자<br>
+							<input type="radio" name="position" value="하드웨어 엔지니어">하드웨어
+							엔지니어<br>
+						</div>
+						<div class="po_content3">
+							<input type="radio" name="position" value="BI 엔지니어">BI
+							엔지니어<br> <input type="radio" name="position" value="기술지원">기술지원<br>
+							<input type="radio" name="position" value="QA,체스트 엔지니어">QA,체스트
+							엔지니어<br> <input type="radio" name="position"
+								value="그래픽스 엔지니어">그래픽스 엔지니어<br> <input type="radio"
+								name="position" value="Node.js 개발자">Node.js 개발자<br>
+						</div>
 					</div>
-					<div class="po_content2">
-					<input type="radio" name="position" value="빅데이터 엔지니어">빅데이터 엔지니어<br>
-					<input type="radio" name="position" value="보안 엔지니어 ">보안 엔지니어 <br>
-					<input type="radio" name="position" value="PHP 개발자">PHP 개발자<br>
-					<input type="radio" name="position" value="임베디드 개발자">임베디드 개발자<br>
-					<input type="radio" name="position" value="하드웨어 엔지니어">하드웨어 엔지니어<br>
-					</div>
-					<div class="po_content3">
-					<input type="radio" name="position" value="BI 엔지니어">BI 엔지니어<br>
-					<input type="radio" name="position" value="기술지원">기술지원<br>
-					<input type="radio" name="position" value="QA,체스트 엔지니어">QA,체스트 엔지니어<br>
-					<input type="radio" name="position" value="그래픽스 엔지니어">그래픽스 엔지니어<br>
-					<input type="radio" name="position" value="Node.js 개발자">Node.js 개발자<br>
-					</div>
-					</div>
-					<!-- <input type="submit" value="검색"> -->
 					<hr>
-					<button class="search_btn">검색</button>
+					<button class=" btn btn-color btn-lg search_btn">검색</button>
 				</form>
 			</div>
 			<!-- //검색바 -->
@@ -456,14 +509,15 @@
 			<hr>
 			<!-- 결과 보여주는 부분 -->
 			<div class="rs_list">
-				<div id="rs">
-				</div>
+				<div id="rs"></div>
 			</div>
 			<!-- //리스트 -->
 			<!-- 페이지 네이션 -->
 			<!-- 가운데 정렬 시키기 -->
 			<div class="p_bottom">
-				<ul class="pagination"></ul>
+				<nav aria-label="Page navigation">
+					<ul class="pagination"></ul>
+				</nav>
 			</div>
 			<!-- //페이지 네이션 -->
 		</div>
