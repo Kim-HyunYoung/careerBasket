@@ -71,7 +71,8 @@ public class ResumeController {
 		//경력 정보 조회
 		List<Career> ca = service.selectCareer(Integer.parseInt(resumeId));
 		m.addAttribute("ca", ca);
-		List<Document> doList = service.selectDoAllView(userId);
+		//이력서에 저장한 문서 보여주기
+		List<Document> doList = service.selectResumeDoc(Integer.parseInt(resumeId));
 		m.addAttribute("doList", doList);
 		return "pickList";
 	}
@@ -111,6 +112,7 @@ public class ResumeController {
 		m.addAttribute("age", age);
 		//경력 정보 조회
 		List<Career> ca = service.selectCareer(iu.getResumeId());
+		m.addAttribute("ca", ca);
 		return showViewList(m, iu.getUserId());
 	}
 	
@@ -129,6 +131,10 @@ public class ResumeController {
 		//경력 정보 조회
 		List<Career> ca = service.selectCareer(Integer.parseInt(resumeId));
 		m.addAttribute("ca", ca);
+		List<Document> doList = service.selectDoAllView(userId);
+		m.addAttribute("doList", doList);
+		List<Document> doSelList = service.selectResumeDoc(Integer.parseInt(resumeId));
+		m.addAttribute("docSel", doSelList);
 		return "updateForm";
 	}
 	

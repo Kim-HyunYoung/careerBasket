@@ -7,6 +7,13 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	if("${list}"=="[]"){
+		$("#ms").append("<p style='text-align: center;margin-bottom: 10%;padding-top: 10%;'>등록된 이력서가 없습니다</p>");
+	}else{
+		$("#ms").text("");
+	}
+})
 function myinsert(userId){
 	 console.log(userId)
 	//form생성후에 동적으로 보내주기
@@ -96,6 +103,7 @@ function myupdate(resumeId, userId){
 <button type="button" class="btn btn-color btn-lg" onclick="myinsert('${userId}')">이력서 등록</button>
 <!-- 저장된 이력서 목록 전체 보여주기 -->
 <div class="resume_wrapper">
+<div id="ms"></div>
 <c:forEach var="re" items="${list}">
 <div class="resume_outLine">
 <div class="delUp_btn">

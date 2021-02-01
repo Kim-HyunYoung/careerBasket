@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -62,11 +64,16 @@ public class ResumeService {
 		re.setScore(iu.getScore());
 		re.setBasicScore(iu.getBasicScore());
 		re.setCareer(iu.getCareer());
-		String document="";
-		for(int i=0;i<iu.getDocument().length;i++) {
-			document += iu.getDocument()[i]+",";
+		if(iu.getDocument()!=null) {
+			String document="";
+			for(int i=0;i<iu.getDocument().length;i++) {
+				document += iu.getDocument()[i]+",";
+			}
+			re.setDocument(document);
+		}else {
+			String document="0";
+			re.setDocument(document);
 		}
-		re.setDocument(document);
 		re.setMyinfo(iu.getMyinfo());
 		
 		mapper.insert(re);
@@ -106,11 +113,16 @@ public class ResumeService {
 		re.setScore(iu.getScore());
 		re.setBasicScore(iu.getBasicScore());
 		re.setCareer(iu.getCareer());
-		String document="";
-		for(int i=0;i<iu.getDocument().length;i++) {
-			document += iu.getDocument()[i]+",";
+		if(iu.getDocument()!= null) {
+			String document="";
+			for(int i=0;i<iu.getDocument().length;i++) {
+				document += iu.getDocument()[i]+",";
+			}
+			re.setDocument(document);
+		}else {
+			String document=",";
+			re.setDocument(document);
 		}
-		re.setDocument(document);
 		re.setMyinfo(iu.getMyinfo());
 		
 		mapper.update(re);
@@ -223,5 +235,22 @@ public class ResumeService {
 	//사용자의 정보 가져오는 메서드
 	public User selectOneUserId(String userId) {
 		return mapper.selectMyInfo(userId);
+	}
+
+	public List<Document> selectResumeDoc(int resumeId) {
+		Resume resume = mapper.selectOne(resumeId);
+		List<Document> documentList = new ArrayList<Document>();
+		if(!resume.getDocument().equals("0")) {
+			String document = resume.getDocument();
+			String[] num = document.split(",");
+			for(int i=0;i<num.length;i++) {
+				int docId = Integer.parseInt(num[i]);
+				documentList.add(mapper.selectDoOne(docId));
+			}
+			return documentList;
+		}else {
+			return null;			
+		}
+		
 	}
 }

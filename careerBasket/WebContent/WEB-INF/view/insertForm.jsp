@@ -1,4 +1,4 @@
-1<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
 		$("input[name=major]").val(""); 
 		$("input[name=score]").val(""); 
 		$("input[name=basicScore]").val(""); 
-		$("select[name=state]").val("");
+		$("select[name=state]").val("검정고시");
   		$("input[name=educationName]").prop("disabled", true);
 		$("input[name=period]").prop("disabled", true);
 		$("input[name=major]").prop("disabled", true);
@@ -140,6 +140,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/css/resumeInsertForm.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="resume_form_wrapper">
@@ -195,7 +197,7 @@
 </div>
 <hr>
 <p class="ed_title">학교정보입력<span style="font-size: 11px;color: red;margin-left: 1%;">필수</span></p>
-<label class="ed_ch"><input type="checkbox" name="state" onclick="check()" value="검정고시" required="required">검정고시</label><br>
+<label class="ed_ch"><input type="checkbox" name="state" onclick="check()" value="검정고시">검정고시</label><br>
 <div class="row">
   <label for="colFormLabel" class="col-sm-2 col-form-label">학교명</label>
   <div class="col-sm-10">
@@ -212,6 +214,8 @@
     <option value="졸업">졸업</option>
     <option value="휴학">휴학</option>
     <option value="중퇴">중퇴</option>
+    <option value="졸업예정">졸업예정</option>
+    <option value="검정고시">검정고시</option>
 </select>
   </div>
 </div>
