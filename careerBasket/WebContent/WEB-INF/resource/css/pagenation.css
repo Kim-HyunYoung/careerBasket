@@ -31,6 +31,9 @@
 
 .p_bottom{
 	text-align: center;
+    position: relative;
+    width: 30%;
+    display: inline;
 }
 
 .pager {

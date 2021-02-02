@@ -106,7 +106,7 @@ position: relative;
     float: left;
     font-size: small;
     font-weight:bold;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .blackF{
@@ -322,7 +322,7 @@ position: relative;
 }
 
 .doc{
-    margin-left: 44px;
+    margin-left: 65px;
     margin-bottom: 12px;
     font-size: smaller;
 }
@@ -382,8 +382,8 @@ a{
 }
 
 .notice_already{
-        width: 70%;
-    height: 186px;
+    width: 70%;
+    height: 200px;
     position: relative;
     left: 50%;
     margin-left: -35%;
@@ -391,7 +391,7 @@ a{
     top: 28%;
     border-radius: 7px;
     text-align: center;
-    padding: 8%;
+    padding: 6%;
 }
 
 .notice_already::after{content: ""; display: block; clear: both;}
@@ -400,6 +400,7 @@ a{
     position: relative;
     margin-top: 18px;
     font-size: smaller;
+    font-weight: bold;
 }
 
 .loginStart{
@@ -419,7 +420,12 @@ a{
 }
 
 #loginBtn{
-	border-radius: 15px;
+    border-radius: 39px;
+    background-color: #82B6ED;
+    border-color: #f2f3f5;
+    font-size: medium;
+    height: 35px;
+    width: 76px;
 }
 
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
@@ -428,6 +434,8 @@ a{
 
 #mo{
 	border-radius: 25px;
+    background-color: #82B6ED;
+    border-color: #82B6ED;
 }
 
 #apply{
@@ -437,10 +445,14 @@ a{
     margin-left: -51px;
     margin-top: 28px;
     margin-bottom: 15px;
+    background-color: #82B6ED;
+    border-color: #82B6ED;
 }
 
 #resume_apply{
 	border-radius: 25px;
+	top: 12px;
+    position: relative;
 }
 
 .modal-body {

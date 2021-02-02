@@ -33,8 +33,8 @@
 
 <link rel="stylesheet" type="text/css" href="/css/header.css">
 <link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
-<link rel="stylesheet" type="text/css" href="/css/search.css">
-<link rel="stylesheet" type="text/css" href="/css/pagenation.css?ver45">
+<link rel="stylesheet" type="text/css" href="/css/search.css?ver13">
+<link rel="stylesheet" type="text/css" href="/css/pagenation.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -62,7 +62,11 @@
 					if(hireTotalCnt == 0){
 						//가져온 데이터가 없으면 목록이 없다는 문구를 삽입.
 						$("#rs").children().remove();
-						$("#rs").append("<div class='notice'><h1 class='sorry'>죄송합니다.<br>해당하는 채용 공고가 없습니다.</h1></div>");
+						$('#rs').append('<div class="notice"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#ff9191" class="bi bi-exclamation-circle" viewBox="0 0 16 16">'
+								  +'<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'
+								  +'<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>'
+								  +'</svg><div class="sorry">죄송합니다.</div><br><div>해당하는 채용 공고가 없습니다.</div></div>');
+						//$("#rs").append("<div class='notice'><h1 class='sorry'>죄송합니다.<br>해당하는 채용 공고가 없습니다.</h1></div>");
 						$(".pagination").children().remove();
 						
 					}else{
@@ -240,7 +244,10 @@
 				type:"post",
 				success:function(){
 					$("#rs").children().remove();
-					$("#rs").append("<div class='notice'><h1 class='check'>검색 조건을 모두 선택해 주세요</h1></div>");
+					//$("#rs").append("<div class='notice'><h1 class='check'>검색 조건을 모두 선택해 주세요</h1></div>");
+					$('#rs').append('<div class="notice"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#ff9191" class="bi bi-ui-checks-grid" viewBox="0 0 16 16">'
+							  +'<path d="M2 10h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1zm9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm0 9a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3zm0-10a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2h-3zM2 9a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H2zm7 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2v-3zM0 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.354.854a.5.5 0 1 0-.708-.708L3 3.793l-.646-.647a.5.5 0 1 0-.708.708l1 1a.5.5 0 0 0 .708 0l2-2z"/>'
+							  +'</svg><h1 class="check">검색 조건을 모두 선택해 주세요.</h1></div>');
 					$(".pagination").children().remove();
 				},
 				error:function(e){
@@ -262,7 +269,7 @@
  	
 	//click 이벤트를 걸어 이벤트가 발생할때마다 현재 페이지를 내부링크처럼 hash에 저장
  	//상세보기 버튼 눌렀을 때 hash에 해당 id값을 저장(뒤로 가기 했을 때 기존 리스트를 보여주기위해서)
- 	 $(document).on("click",".info",function(){
+ 	 $(document).on("click","#detail_btn",function(){ //.info 를 #detail_btn으로 변경해봄
  		 //현재페이지 번호!
  		 //alert("상세보기 버튼 클릭함!");
  		var pageNumData = $(this).attr("value");
@@ -461,12 +468,12 @@
 							<input class="car_con" type="radio" name="hireCareer" value=2> 신입
 						</div>
 						<div class="place">
-							<label>지역</label> 
+							<label style="margin-right: 12px;">지역</label> 
 							<select name="workPlace"  class="selectpicker">
-								<option  style="color: lightgray" value="선택">지역을 선택해주세요</option>
-								<option value="서울">서울</option>
-								<option value="대구">대구</option>
-								<option value="부산">부산</option>
+								<option style="font-size:smaller; color:lightgray;" value="선택">지역을 선택해주세요</option>
+								<option class="selectOp" value="서울">서울</option>
+								<option class="selectOp"  value="대구">대구</option>
+								<option class="selectOp"  value="부산">부산</option>
 							</select>
 						</div>
 					</div>

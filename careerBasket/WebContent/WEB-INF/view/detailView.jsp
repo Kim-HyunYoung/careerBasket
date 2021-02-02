@@ -30,7 +30,7 @@
 <!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-<link rel="stylesheet" type="text/css" href="/css/detail.css">
+<link rel="stylesheet" type="text/css" href="/css/detail.css?ver14">
 <link rel="stylesheet" type="text/css" href="/css/header.css">
 <link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
 
@@ -437,7 +437,7 @@ $(function(){
 						</svg>
 							<div class='loginStart'>careerBasket 시작하기!</div>
 							<button id="loginBtn" class="btn btn-primary btn-sm" type="button">
-								<a href='/user/loginForm'>로그인</a>
+								<a href='/user/loginForm' style="top: -3px; position: relative;">로그인</a>
 							</button>
 							</div>
 						</c:if>
@@ -448,7 +448,7 @@ $(function(){
 									<form>
 										<div class="container n_content">
 											<select name="title" class="selectpicker" data-live-search="true">
-												<option>이력서를 선택하세요</option>
+												<option>이력서를 선택하세요.</option>
 												<c:forEach var="resume" items="${list}">
 													<option>${resume.title}</option>
 												</c:forEach>
@@ -468,8 +468,8 @@ $(function(){
 
 								<c:when test="${count<=0}">
 									<div class="notice_noResume">
-										<div class="n_content">
-											<div>등록된 이력서가 없습니다.<br> <br>먼저 이력서를 등록해주세요.</div>
+										<div class="container n_content">
+											<div>등록된 이력서가 없습니다.<br>먼저 이력서를 등록해주세요.</div>
 										<button id="resume_apply" class="btn btn-primary btn-sm">
 											<a href="/resume/addresume">이력서 등록하기</a>
 										</button>
@@ -493,59 +493,6 @@ $(function(){
 		
 		</script>
 
-		<!-- 
-		<div id="myModal" class="modal">
-			<div class="mModal_box">
-				<div class="close_bt" onclick="close_modal();">X</div>
-				<div class="modal-content">
-					<div class="m-content">
-						<span class="name">${company.companyName}</span> <span>입사지원</span>
-						<br>
-						<div class="doc">제출서류</div>
-						<br>
-						<c:choose>
-							<c:when test="${count>0}">
-									<form>
-									<div class="container">
-										<select class="selectpicker" name="title">
-											<option>이력서를 선택하세요</option>
-											<c:forEach var="resume" items="${list}">
-												<option>${resume.title}</option>
-											</c:forEach>
-										</select>
-										<div id="parents">
-											<div id="children"></div>
-										</div>
-										<input type="hidden" name="id" value="${detail.id}"> <input
-											type="hidden" name="companyName"
-											value="${detail.companyName}"> <input type="hidden"
-											name="userId" value="${userId}">
-									</div>
-									<input id="apply"
-											class="blue_btn" type="submit" value="지원하기">
-									</form>
-							</c:when>
-
-							<c:when test="${count<=0}">
-								<div class="notice_noResume">
-									<div class="n_content">
-										등록된 이력서가 없습니다.<br> <br>먼저 이력서를 등록해주세요.
-									</div>
-									<button class="resumeBtn">
-										<a href="/resume/addresume">이력서 등록하기</a>
-									</button>
-								</div>
-								<button class="gray_btn">
-									<a>지원하기</a>
-								</button>
-							</c:when>
-						</c:choose>
-
-					</div>
-				</div>
-			</div>
-		</div>
-		 -->
 	</div>
 	<!-- //frame -->
 </body>

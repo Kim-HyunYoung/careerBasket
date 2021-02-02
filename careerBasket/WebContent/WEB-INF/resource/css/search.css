@@ -42,13 +42,14 @@ body{
 	height: 100%;
 	float:left;
 	position: relative;
+	font-size: smaller;
 }
 
 .rs_list{
 	position: relative;
 	background-color: lightgray;
 	padding: 3%;
-	margin-top: 295px;
+	margin-top: 277px;
 }
 
 #rs{
@@ -67,7 +68,7 @@ body{
     margin-left: 24%;
     margin-right: 10%;
     float: left;
-    top: 12px;
+    top: 10px;
     position: relative;
 }
 
@@ -130,8 +131,8 @@ body{
     padding-top: 3px;
     padding-bottom: 3px;
     margin-left: -35px;
-    margin-bottom: 22px;
-    margin-top: 22px;
+    margin-bottom: 18px;
+    margin-top: 16px;
 }
 
 .list_content{
@@ -195,37 +196,39 @@ body{
 .h_info{
 	float: left;
     color: gray;
-    position: absolute;
+    position: relative;
     top: 65px;
-    left: -41px;
     font-size: small;
-
+    margin-left: -141px;
 }
 
 .list_box{
-    left: 24%;
-    position: relative;
+    left: 300px;
+    position: absolute;
 }
 
 .notice{
 	background-color: white;
     width: 500px;
-    height: 100px;
+    height: 200px;
     left: 50%;
     margin-left: -250px;
     border-radius: 15px;
     position: relative;
+    padding-top: 30px;
+    text-align: center;
 }
 
 .sorry{
 	text-align: center;
-	top: 45px;
+	top: 19px;
 	position: relative;
+	margin-bottom: 10px;
 }
 
 .check{
 	text-align: center;
-	top: 55px;
+	top: 33px;
 	position: relative;
 }
 
@@ -236,4 +239,12 @@ input[type=checkbox], input[type=radio] {
 
 .car_con{
 	margin-right: 5px;
+}
+
+.selectOp{
+	font-size: smaller;
+}
+
+.filter-option{
+	font-size: smaller;
 }
