@@ -107,7 +107,7 @@
 	<c:if test="${not empty applyList}">
 
 
-		<div style="position: absolute;/* margin: 72px; */width: 920px;left: 50%;margin-left: -490px;margin-top: 100px;">
+		<div style="position: absolute; width: 920px;left: 50%;margin-left: -490px;margin-top: 100px;">
 			<!-- 지원 현황 테이블 -->
 			<table class="table table-sm" style="margin: 40px;">
 				<thead style="font-weight: 500; color: #82B6ED">

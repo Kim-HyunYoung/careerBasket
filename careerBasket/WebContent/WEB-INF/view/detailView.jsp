@@ -105,14 +105,14 @@ $(function(){
 		var titleData = $('form [name="title"]').val();
 		console.log(titleData);
 		
-		if(titleData == "이력서를 선택하세요"){//이력서 선택이 안되어 있으면 "이력서를 선택해주세요"문구 띄우기
+		if(titleData == "이력서를 선택하세요."){//이력서 선택이 안되어 있으면 "이력서를 선택해주세요"문구 띄우기
 			
 			$.ajax({
 				url:"/hire/check",
 				type:"post",
 				success:function(){
 					$("#parents").children().remove();
-					$("#parents").append("<h1 class='notice_re'>이력서를 선택해주세요</h1>");
+					$("#parents").append("<h1 class='notice_re'>이력서를 선택해주세요.</h1>");
 				},
 				error:function(e){
 					console.log(e);

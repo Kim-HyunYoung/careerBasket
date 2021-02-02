@@ -190,5 +190,9 @@ public class HireInfoController {
 		return "bootstrapTest";
 	}
 	
+	@GetMapping("/alert")
+	public String getAlert() {
+		return "sweetalert2";
+	}
 	
 }

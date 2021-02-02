@@ -254,6 +254,7 @@ position: relative;
 	border-radius: 8px;
 	margin-right: 4px;
 	font-size: smaller;
+	padding: 2px;
 }
 
 .e_date{
@@ -262,6 +263,7 @@ position: relative;
     border-radius: 8px;
     margin-right: 4px;
     font-size: smaller;
+    padding: 2px;    
 }
 
 /*
