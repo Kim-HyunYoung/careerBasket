@@ -144,7 +144,7 @@ $(function(){
 							console.log("이미 지원하신 채용공고입니다.");
 							$('.modal-body').children().remove();
 							//$('.modal-body').append("<div class='noti'>"+resp+"</div></div>");
-							$('.modal-body').append('<div class="notice_already"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="darkgray" class="bi bi-exclamation-circle" viewBox="0 0 16 16">'
+							$('.modal-body').append('<div class="notice_already"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="red" class="bi bi-exclamation-circle" viewBox="0 0 16 16">'
 							  +'<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'
 							  +'<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>'
 							  +'</svg><div class="noti">'+resp+'</div></div>');
@@ -469,13 +469,13 @@ $(function(){
 								<c:when test="${count<=0}">
 									<div class="notice_noResume">
 										<div class="container n_content">
-											<div>등록된 이력서가 없습니다.<br>먼저 이력서를 등록해주세요.</div>
+											<div style="margin-bottom: 10px;">등록된 이력서가 없습니다.</div><div>먼저 이력서를 등록해주세요.</div>
 										<button id="resume_apply" class="btn btn-primary btn-sm">
 											<a href="/resume/addresume">이력서 등록하기</a>
 										</button>
 										</div>
 									</div>
-									<button id="apply" type="button"
+									<button id="apply_dis" type="button"
 										class="btn btn-secondary btn-lg" disabled>지원하기</button>
 								</c:when>
 							</c:choose>

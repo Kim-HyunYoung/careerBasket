@@ -37,15 +37,6 @@
 
 <link rel="stylesheet" type="text/css" href="/css/header.css">
 
-<script type="text/javascript">
-	/*
-	$(function() {
-		if ("${applyList}" == "[]") {
-			$("body").html("<div>아직 지원한 회사가 없습니다.</div>");
-		}
-	})
-	 */
-</script>
 </head>
 <body>
 
@@ -89,7 +80,7 @@
 
 	<c:if test="${empty applyList}">
 		<div
-			style="background-color: #f2f3f5; border-radius: 15px; width: 500px; height: 200px; /* margin: 155px; */ margin-top: 200px; margin-left: -250px; left: 50%; position: absolute; text-align: center;">
+			style="background-color: #f2f3f5; border-radius: 15px; width: 500px; height: 200px; margin-top: 200px; margin-left: -250px; left: 50%; position: absolute; text-align: center;">
 			<div>
 				<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
 					fill="red" class="bi bi-file-earmark-x" viewBox="0 0 16 16"

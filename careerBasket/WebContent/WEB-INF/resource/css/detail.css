@@ -325,8 +325,9 @@ position: relative;
 
 .doc{
     margin-left: 65px;
-    margin-bottom: 12px;
-    font-size: smaller;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    font-size: medium;
 }
 
 .close_bt{
@@ -419,6 +420,7 @@ a{
     border: 1px solid lightgray;
     border-radius: 8px;
     width: 78%;
+    text-align: center;
 }
 
 #loginBtn{
@@ -444,17 +446,34 @@ a{
 	border-radius: 25px;
     left: 50%;
     position: relative;
-    margin-left: -51px;
+    margin-left: -52px;
     margin-top: 28px;
     margin-bottom: 15px;
     background-color: #82B6ED;
     border-color: #82B6ED;
+    color: white;
+}
+
+#apply_dis{
+	border-radius: 25px;
+	width: 104px;
+	height: 43px;
+    left: 50%;
+    position: relative;
+    margin-left: -52px;
+    margin-top: 28px;
+    margin-bottom: 15px;
+    background-color: lightgray;
+    border-color: lightgray;
+    color: white;
 }
 
 #resume_apply{
 	border-radius: 25px;
 	top: 12px;
     position: relative;
+    background-color: #82B6ED;
+    border-color: #82B6ED;
 }
 
 .modal-body {

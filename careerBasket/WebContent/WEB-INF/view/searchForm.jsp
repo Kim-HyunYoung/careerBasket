@@ -62,7 +62,7 @@
 					if(hireTotalCnt == 0){
 						//가져온 데이터가 없으면 목록이 없다는 문구를 삽입.
 						$("#rs").children().remove();
-						$('#rs').append('<div class="notice"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#ff9191" class="bi bi-exclamation-circle" viewBox="0 0 16 16">'
+						$('#rs').append('<div class="notice"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="red" class="bi bi-exclamation-circle" viewBox="0 0 16 16">'
 								  +'<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'
 								  +'<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>'
 								  +'</svg><div class="sorry">죄송합니다.</div><br><div>해당하는 채용 공고가 없습니다.</div></div>');
@@ -245,7 +245,7 @@
 				success:function(){
 					$("#rs").children().remove();
 					//$("#rs").append("<div class='notice'><h1 class='check'>검색 조건을 모두 선택해 주세요</h1></div>");
-					$('#rs').append('<div class="notice"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#ff9191" class="bi bi-ui-checks-grid" viewBox="0 0 16 16">'
+					$('#rs').append('<div class="notice"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="red" class="bi bi-ui-checks-grid" viewBox="0 0 16 16">'
 							  +'<path d="M2 10h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1zm9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm0 9a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3zm0-10a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2h-3zM2 9a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H2zm7 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2v-3zM0 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.354.854a.5.5 0 1 0-.708-.708L3 3.793l-.646-.647a.5.5 0 1 0-.708.708l1 1a.5.5 0 0 0 .708 0l2-2z"/>'
 							  +'</svg><h1 class="check">검색 조건을 모두 선택해 주세요.</h1></div>');
 					$(".pagination").children().remove();
