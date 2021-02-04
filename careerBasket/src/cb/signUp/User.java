@@ -19,6 +19,7 @@ public class User {
 	private String email;	//이메일
 	private String tel;		//전화번호
 	private String address;		//주소
+	private String photoPath;	//사용자 사진
 	
 	//기본 생성자
 	public User() {}
@@ -34,6 +35,20 @@ public class User {
 		this.email = email;
 		this.tel = tel;
 		this.address = address;
+	}
+
+	public User(String userId, String password, String name, LocalDate birthDate, String sex, String email, String tel,
+			String address, String photoPath) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.sex = sex;
+		this.email = email;
+		this.tel = tel;
+		this.address = address;
+		this.photoPath = photoPath;
 	}
 
 	//getter, setter
@@ -101,10 +116,19 @@ public class User {
 		this.address = address;
 	}
 
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", password=" + password + ", name=" + name + ", birthDate=" + birthDate
-				+ ", sex=" + sex + ", email=" + email + ", tel=" + tel + ", address=" + address + "]";
+				+ ", sex=" + sex + ", email=" + email + ", tel=" + tel + ", address=" + address + ", photoPath="
+				+ photoPath + "]";
 	}
 	
 }

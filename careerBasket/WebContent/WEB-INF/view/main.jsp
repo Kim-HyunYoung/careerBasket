@@ -15,8 +15,7 @@ $(function(){
 		$("#resume").html("<section>등록된 이력서가 없습니다</section>")
 	}
 	
-	$('#target_img').click(function (e) {
-	    document.signform.target_url.value = document.getElementById( 'target_img' ).src;
+	$('#btn-upload').click(function (e) {
 	    e.preventDefault();
 	    $('#file').click();
 	});
@@ -29,7 +28,7 @@ function infoUpdate(){
 }
 
 function changeValue(obj){
-	   document.signform.submit();
+	document.signform.submit();
 	}
 </script>
 <title>main.jsp</title>
@@ -55,12 +54,9 @@ function changeValue(obj){
 %>
 
 <div>
-<div>
-    <img id = "target_img"  src="" style="width:150px;height:210px;">
-</div>
 <form name="signform" method="POST" ENCTYPE="multipart/form-data" action="/resume/photoUpdate">
     <input type="file" id="file" name="file" style="display:none;" onchange="changeValue(this)">
-    <input type="hidden" name = "target_url">
+    <button style="border: none;outline: none;background: none;" id="btn-upload"><img src="http://localhost:8080/img/photo/${photo}" style="width:150px;height:210px;"></button>
 </form>
 ${info.name }<br>
 ${info.email }<br>

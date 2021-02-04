@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cb.search.HireInfoService;
 import cb.signUp.User;
 
 
@@ -24,6 +25,9 @@ public class ResumeController {
 
 	@Autowired
 	ResumeService service;
+	
+	@Autowired
+	HireInfoService hireService;
 	
 	//마이페이지에서 미리보여주는 간단리스트, 이력서 카운트
 //	@GetMapping("/list")
@@ -192,6 +196,27 @@ public class ResumeController {
 		String result = service.uploadFiles(files, type, userId);
 		m.addAttribute("result", result);
 		return documentUploadForm(m, userId);
+	}
+	
+	@PostMapping(value="/photoUpdate", produces = "plain/text; charset=utf-8")
+	public String photoUpload(MultipartFile[] files, String userId, Model m) {
+		System.out.println("사진 컨트롤러로 넘어옴");
+		System.out.println(files[0].getOriginalFilename());
+		String ptSave = service.savePhoto(files, userId, m);
+		m.addAttribute("photo", ptSave);
+		m.addAttribute("userId", userId);
+		User myInfo = service.selectOneUserId(userId);
+		m.addAttribute("info", myInfo);
+		int resumeCount = service.resumeCount(userId);
+		m.addAttribute("count", resumeCount);
+		List<Resume> reList = service.showPreview(userId);
+		m.addAttribute("list", reList);
+		List<Document> doList = service.selectDoPreView(userId);
+//		System.out.println(doList);
+		m.addAttribute("doList", doList);
+		int applyCnt = hireService.getApplyCnt(userId);
+		m.addAttribute("applyCnt", applyCnt);
+		return "main";
 	}
 	
 	//기타문서 삭제

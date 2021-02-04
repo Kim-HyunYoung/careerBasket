@@ -13,6 +13,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import cb.signUp.User;
@@ -253,4 +254,42 @@ public class ResumeService {
 		}
 		
 	}
+
+	public String savePhoto(MultipartFile[] files, String userId, Model m) {
+		String result = null;
+		
+		String uploadFolder = "/Users/jeong-yeji/git/careerBasket/careerBasket/WebContent/WEB-INF/resource/photo/";
+		
+		
+		File file = new File(uploadFolder);
+		User user = new User();
+		
+		if(!file.exists()) {
+			file.mkdirs();
+		}
+		
+		try {
+				
+				user.setUserId(userId);
+				UUID nums = UUID.randomUUID();
+				String newName = nums.toString()+files[0].getOriginalFilename();
+				file = new File(file, newName);
+				files[0].transferTo(file);
+				user.setPhotoPath(newName);
+				
+				mapper.insertPhoto(user);
+				
+				result = user.getPhotoPath();
+		} catch (IllegalStateException e) {
+			result = "저장 실패! 다시 시도해주세요!";
+			e.printStackTrace();
+		} catch (IOException e) {
+			result = "문서저장 실패! 다시 시도해주세요!";
+			e.printStackTrace();
+		}
+		result = "저장에 성공했습니다!";
+		return	result;
+	
+		}
+
 }

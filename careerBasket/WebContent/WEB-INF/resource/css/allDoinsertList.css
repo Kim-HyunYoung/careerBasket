@@ -1,0 +1,98 @@
+@charset "utf-8";
+@import url("reset.css");
+
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.title_wrapper{
+	width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.document_title{
+	font-size: 1.5em;
+	margin-bottom: 2%;
+	font-weight: bold;
+}
+
+.fileUpload-title{
+	font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 4%;
+    margin-left: 5%;
+}
+
+.file_wrapper{
+	padding-left: 7%;
+}
+
+.fileList_outLine{
+	width: 80%;
+	border: 1px solid #cecece;
+    padding: 2%;
+    margin: 1%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.form-control-sm{
+	width: 70%;
+}
+
+.form-select-sm{
+	width: 70%;
+}
+
+.btn-color {
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+}
+
+.mb-3{
+	margin-top: 1rem!important;
+}
+
+.btn-file{
+	margin-top: 1.45rem;
+    margin-right: 5rem;
+    height: 2rem;
+    float:right;
+}
+
+.docList-wrap{
+	width: 500px;
+}
+
+.date{
+	font-size: 10pt;
+    color: gray;
+    margin-left: 3%;
+}
+
+.title{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+	font-size: 13pt;
+    margin-left: 8%;
+    vertical-align: bottom;
+}
+
+.file_size{
+	margin: 1%;
+	font-size: 10pt;
+    color: gray;
+}
+
+.type{
+	margin-left: 15%;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.float{
+	float:right;
+}

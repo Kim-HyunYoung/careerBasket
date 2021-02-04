@@ -90,4 +90,7 @@ public interface ResumeMapper {
 	
 	@Select("select * from sign_up where user_id=#{userId}")
 	public User selectMyInfo(String userId);
+
+	@Insert("insert into sign_up(photo_path) values(#{photoPath}) where user_id=#{userId}")
+	public void insertPhoto(User user);
 }

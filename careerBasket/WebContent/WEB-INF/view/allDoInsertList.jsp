@@ -8,32 +8,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	if("${doList}"!="[]"){
-		<c:forEach var="doc" items="${doList}">
-		var doc = document.getElementById("doc");
-		
-		var f = document.createElement("fieldset");
-	 	doc.append(f);
-	 	
-	 	f.innerHTML="${doc.wDate} ${doc.type} ${doc.fileTitle} ${doc.fileSize}";
-	 	
-	 	var b = document.createElement("input");
-		b.setAttribute("type", "button");
-		b.setAttribute("value", "삭제");
-		b.setAttribute("onclick", "del('${doc.documentId}', '${doc.userId}')");
-		f.append(b);
-		
-		var b2 = document.createElement("input");
-		b2.setAttribute("type", "button");
-		b2.setAttribute("value", "파일저장");
-		b2.setAttribute("onclick", "download('${doc.filePath}', '${doc.fileTitle}')");
-		f.append(b2);
-		
-		
-	 	  
-		</c:forEach>
+	if("${doList}"=="[]"){
+		$("#doc").append("<p style='text-align: center;margin-bottom: 10%;padding-top: 10%;'>저장된 문서가 없습니다</p>");
 	}else{
-		document.getElementById("doc").innerHTML = "저장된 문서가 없습니다";
+		$("#doc").text("");
 	}
 })
 
@@ -126,11 +104,20 @@ function fileUpload(userId){
 }
 </script>
 <title>allDoInsertList</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/allDoinsertList.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-<div>
-파일 구분 
-<select name="type">
+<div class="title_wrapper">
+<h1 class="document_title">업로드된 기타문서 목록</h1>
+<div class="fileUpload-wrapper">
+<div class="fileUpload-title">첨부 파일 등록</div>
+<div class="file_wrapper">
+<label for="formFileSm" class="form-label">파일 선택</label>
+<select name="type" class="form-select form-select-sm" aria-label=".form-select-sm example">
     <option value="">구분선택</option>
     <option value="포트폴리오">포트폴리오</option>
     <option value="경력기술서">경력기술서</option>
@@ -139,9 +126,27 @@ function fileUpload(userId){
     <option value="추천서">추천서</option>
     <option value="기타">기타</option>
 </select><br>
-파일 찾기 <input type="file" name="document" accept=".jpg, .png, .pdf">
-<button onclick="fileUpload(${si.userId})">추가하기</button>
+<div class="mb-3">
+  <label for="formFileSm" class="form-label">파일 선택</label>
+  <button onclick="fileUpload(${si.userId})" class="btn btn-color btn-sm btn-file">추가하기</button>
+  <input class="form-control form-control-sm" id="formFileSm" type="file" name="document" accept=".jpg, .png, .pdf">
+</div>
+</div>
+</div>
+<hr>
 </div>
 <div id="doc"></div>
+<c:forEach var="doc" items="${doList}">
+	<div class="fileList_outLine">
+		<div class="float">
+		<button type="button" class="btn btn-color btn-sm" onclick="mydelete('${doc.documentId}', '${si.userId}')">삭제</button>
+		</div>
+		<p class="docList-wrap">
+		<span class="date">${doc.wDate }</span>
+		<span class="type">${doc.type }</span>
+		<span class="title">${doc.fileTitle }</span>
+		</p>
+	</div>
+</c:forEach>
 </body>
 </html>
