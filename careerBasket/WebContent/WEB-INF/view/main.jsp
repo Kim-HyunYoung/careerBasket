@@ -37,7 +37,9 @@ function changeValue(obj){
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.gstatic.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" type="text/css" href="/css/header.css">
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
@@ -50,8 +52,14 @@ function changeValue(obj){
 		<a href="/resume/addresume?userId=${userId}">이력서</a>
 	</div>
 	<div class="top_right">
-		<div class="ms">${userId}님의 취업을 응원합니다!</div>
-		<button class="logOut"><a href="/user/logout">로그아웃</a></button>
+		<div class="ms">
+			<span style="font-size: 13px; color: gray;">
+				<span style="color:#82B6ED;">${userId}</span>
+					님의 취업을 응원합니다!</span>
+		</div>
+		<button class="btn btn-color" style="float:left; margin-top: 15px; margin-left: 12px;">
+			<a href="/user/logout">로그아웃</a>
+		</button>
 	</div>
 </div>
 
