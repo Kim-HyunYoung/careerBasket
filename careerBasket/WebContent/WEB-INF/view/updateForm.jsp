@@ -155,7 +155,7 @@ function check(){
   </div>
 </div>
 <hr>
-<button type="button" class="btn btn-color btn-sm" >기본정보 수정하기</button><br>
+<a href="${pageContext.request.contextPath}/resume/infoUpdateForm?userId=${si.userId}"><button type="button" class="btn btn-color btn-sm" >기본정보 수정하기</button></a><br>
 </div>
 <h1 class="title">학력정보</h1>
 <div class="info_wrapper">

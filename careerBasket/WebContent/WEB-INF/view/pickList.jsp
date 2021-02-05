@@ -8,76 +8,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	if("${ca}"!="[]"){
-		console.log("휴..");
-		var com = document.getElementById("com");
+	if("${ca}"=="[]"){
+		console.log("경력이 빈값이다!");
+		$("#com").html("");
 		
-		com.innerHTML="<h1>경력</h1>";
-		
-		<c:forEach var="c" items="${ca}">
-		var t = document.createElement("table");
-		t.setAttribute("border", "1");
-		var thead = document.createElement("thead");
-		var tr = document.createElement("tr");
-		var th1 = document.createElement("th");
-		var th2 = document.createElement("th");
-		var th3 = document.createElement("th");
-		var th4 = document.createElement("th");
-		
-		th1.innerHTML = "근무기간";
-		th2.innerHTML = "회사명";
-		th3.innerHTML = "직책/직급";
-		th4.innerHTML = "연봉";
-		
-		tr.appendChild(th1);
-		tr.appendChild(th2);
-		tr.appendChild(th3);
-		tr.appendChild(th4);
-		thead.appendChild(tr);
-		t.appendChild(thead);
-		
-		var tbody = document.createElement("tbody");
-		var tr2 = document.createElement("tr");
-		var td1 = document.createElement("td");
-		var td2 = document.createElement("td");
-		var td3 = document.createElement("td");
-		var td4 = document.createElement("td");
-		
-		td1.innerHTML = "${c.careerPeriod}";
-		td2.innerHTML = "${c.company}";
-		td3.innerHTML = "${c.careerPosition}";
-		td4.innerHTML = "${c.careerSalary}";
-		
-		tr2.appendChild(td1);
-		tr2.appendChild(td2);
-		tr2.appendChild(td3);
-		tr2.appendChild(td4);
-		tbody.appendChild(tr2);
-		
-		var tr3 = document.createElement("tr");
-		var th5 = document.createElement("th");
-		th5.setAttribute("colspan", "4");
-		
-		th5.innerHTML = "경력기술서";
-		
-		tr3.appendChild(th5);
-		tbody.appendChild(tr3);
-		
-		var tr4 = document.createElement("tr");
-		var td5 = document.createElement("td");
-		td5.setAttribute("colspan", "4");
-		
-		td5.innerHTML = "${c.description}";
-		
-		tr4.appendChild(td5);
-		tbody.appendChild(tr4);
-		
-		t.appendChild(tbody);
-		com.append(t);
-		
-		</c:forEach>
-	}else{
-		console.log("경력없음");
+	}
+	if("${doList}"==""){
+		console.log("저장한 첨부파일이 없다!");
+		$("#doc").html("");
 	}
 	
 })
@@ -117,30 +55,27 @@ function print(){
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-<button onclick="print()">이력서 인쇄/PDF저장</button>
+<div id="wrapper">
+<div class="print_btn">
+<div class="wdate">등록한 날짜: ${re.wDate}</div>
+<a href="${pageContext.request.contextPath}/resume/update?userId=${si.userId}&resumeId=${re.resumeId}"><div class="rm-up">이력서 수정</div></a>
+<button onclick="print()" class="btn btn-color btn-print">이력서 인쇄/PDF저장</button>
+</div>
 <div id="print">
-  <h1>${re.title }</h1>
+  <h1 class="detail_title">${re.title }</h1>
   <hr>
-  <img alt="사진을 등록하세요" src="http://localhost:8080/img/photo/${photo}" style="width:150px;height:210px;">
-  <table>
-  	<thead>
-  		<tr>
-  			<th>${si.name }</th>
-  			<td>${si.birthDate.year } (${age}세)</td>
-  		</tr>
-  	</thead>
-  	<tbody>
-  		<tr>
-  			<td>${si.email }</td>
-  			<td>${si.tel }</td>
-  		</tr>
-  		<tr>
-  			<td>${si.address }</td>
-  		</tr>
-  	</tbody>
-  </table>
-  <h1>학력</h1>
-  <table border="1">
+<div class="mainInfo">
+  <img alt="사진을 등록하세요" src="<%-- http://localhost:8080/img/photo/${photo} --%>" id="photo">
+  <div class="text_start_wrap wd-tp">
+  <p  class="text-start fw-bold fs-5">${si.name }<span class="text-center fs-6">${si.birthDate.year } (${age}세)</span></p>
+  <p  class="text-start fs-6">${si.email }<span class="text-center fs-6">${si.tel }</span></p>
+  <p  class="text-start fs-6 wd-bt">${si.address }</p>
+  </div>
+</div>
+<!-- -----------------------------------------학력----------------------------------------------------- -->
+<div class="edu_box mg-bt">
+  <div class="fs-3">학력</div>
+  <table class="table table-bordered">
   	<thead>
       <tr>
       	<th>최종학력</th>
@@ -162,27 +97,57 @@ function print(){
       </tr>
     </tbody>
   </table>
-  <div id="com"></div>
-  <h1>자기소개서</h1>
-  <table border="1">
+</div>
+<!-- -------------------------------------------경력--------------------------------------------------- -->	
+<div id="com" class="mg-bt">
+	<div class="fs-3">경력</div>
+<c:forEach var="c" items="${ca}">
+  <table class="table table-bordered">
+  	<thead>
+      <tr>
+      	<th>근무기간</th>
+        <th>회사명</th>
+        <th>직책/직급</th>
+        <th>연봉</th>
+      </tr>
+    </thead>
     <tbody>
       <tr>
-        <td>${re.myinfo }</td>
+      	<td>${c.careerPeriod}</td>
+        <td>${c.company}</td>
+        <td>${c.careerPosition}</td>
+        <td>${c.careerSalary}</td>
+      </tr>
+      <tr class="tr-col">
+      	<th colspan="4">경력기술서</th>
+      </tr>
+      <tr>
+      	<td colspan="4">${c.description}</td>
       </tr>
     </tbody>
   </table>
-  <h1>첨부문서</h1>
-  <table >
-    <tbody>
+</c:forEach>
+</div>
+<!-- -------------------------------------------자기소개서--------------------------------------------------- -->	
+<div class="mg-bt">
+ <div class="fs-3">자기소개서</div>
+  <div class="info lh-lg">${re.myinfo }</div>
+</div>
+<!-- -------------------------------------------기타문서--------------------------------------------------- -->	
+<div id="doc" class="mg-bt">
+  <div class="fs-3">첨부문서</div>
+<div class="outLine">
     <c:forEach var="doc" items="${doList}">
-      <tr>
-        <td>${doc.type}</td>
-        <td>${doc.fileTitle}</td>
-        <td>${doc.fileSize}</td>
-      </tr>
+      <div class="inLine">
+        <span class="doc-type">${doc.type}</span>
+        <span class="doc-file-title">${doc.fileTitle}</span>
+        <span class="doc-file-size">${doc.fileSize}</span>
+        <span class="doc-file-wdate">${doc.wDate}</span>
+      </div>
 	</c:forEach>
-    </tbody>
-  </table>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>

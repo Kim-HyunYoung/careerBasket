@@ -3,4 +3,183 @@
 
 body{
 	font-family: 'Noto Sans KR', sans-serif;
+	min-width: 1206px;
+}
+
+div#wrapper{
+	width:90%;
+	margin-left:5%;
+	margin-right:5%;
+}
+
+.mg-bt{
+	margin-bottom:8%;
+}
+
+.wdate{
+	border:1px solid #cecece;
+	font-size: 0.9em;
+    padding: 4%;
+    width: 123%;
+    height: 2em;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom:7%;
+}
+
+.rm-up{
+	border:1px solid #cecece;
+	font-size: 1em;
+    padding: 8%;
+    width: 123%;
+    height: 3em;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom:7%;
+}
+
+.detail_title{
+	font-size: 1.5em;
+	margin-bottom: 3%;
+	font-weight: bold;
+}
+
+.print_btn{
+	float:right;
+	margin-bottom:7%;
+}
+
+div#print{
+	width:70%;
+	margin-left:5%;
+}
+
+.mainInfo{
+    padding: 2%;
+    margin: 1%;
+	margin-top: 5%;
+}
+
+img#photo{
+	outline: 1px solid #cecece;
+	width:100px;
+	height:140px;
+	float:left;
+}
+
+.text-start{
+	margin-bottom: 3%;
+}
+
+.text-center{
+    margin-left: 3%;
+    vertical-align: bottom;
+}
+
+.text_start_wrap{
+	margin: 1%;
+    padding-left: 16%;
+}
+
+.fs-5{
+	font-size:1rem!important
+}
+.fw-bold{
+	font-weight:900!important
+}
+
+.fs-6{
+	font-size: 0.75rem!important;
+}
+
+.wd-bt{
+	margin-bottom: 7%;
+}
+
+.wd-tp{
+	margin-top: 3.5%;
+}
+
+.table-bordered{
+	text-align: center;
+	border: 1px solid #82B6ED;
+	font-size: 0.8em;
+	line-height: 1.5rem;
+}
+
+thead{
+	border: 1px solid #82B6ED;
+	font-weight:bold;
+	background:#d7e7e9;
+}
+
+th, td, tr{
+	border: 1px solid #82B6ED;
+}
+
+.tr-col{
+	background:#d7e7e9;
+}
+
+.btn-color{
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+}
+
+.btn-print{
+	width: 123%;
+}
+
+.fs-3{
+	font-size: calc(1.2rem + .2vw)!important;
+    font-weight: bold;
+    margin: 0.5em;
+    margin-bottom: 1em;
+}
+
+.info{
+	border: 1px solid #82B6ED;
+    height: 200px;
+    padding: 2%
+}
+
+.outLine{
+	border: 1px solid #82B6ED;
+    padding: 2%;
+}
+
+.inLine{
+	border: 1px solid #82B6ED;
+    padding: 1%;
+	margin-bottom: 1%;
+	width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+}
+
+.doc-type{
+	line-height: 23px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.doc-file-title{
+	line-height: 23px;
+    margin-left: 7%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.doc-file-size{
+	font-size: 14px;
+    font-weight: 200;
+    margin-left: 19%;
+}
+
+.doc-file-wdate{
+	font-size: 14px;
+    font-weight: 200;
+    margin-left: 9%;
 }

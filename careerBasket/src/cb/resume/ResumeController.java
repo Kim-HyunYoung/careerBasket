@@ -103,21 +103,9 @@ public class ResumeController {
 	public String addResume(InsertUpdate iu, Model m) {
 //		System.out.println("실행");
 		System.out.println(iu);
-		//이력서 정보 조회
-		Resume re = service.selectOne(service.insert(iu));
-		m.addAttribute("re", re);
-		String resuemId = re.getResumeId()+"";
-		System.out.println(resuemId);
-		//회원 정보 조회
-		User si = service.selectMyInfo(iu.getUserId());
-		m.addAttribute("si", si);
-		//회원 나이 계산
-		int age = (LocalDate.now().getYear()-si.getBirthDate().getYear()+1);
-		m.addAttribute("age", age);
-		//경력 정보 조회
-		List<Career> ca = service.selectCareer(iu.getResumeId());
-		m.addAttribute("ca", ca);
-		return showViewList(m, iu.getUserId());
+		m.addAttribute("userId", iu.getUserId());
+		m.addAttribute("resumeId", iu.getResumeId());
+		return "updatePickListResult";
 	}
 	
 	//이력서 리스트에서 수정버튼 클릭시 해당 이력서 수정할수 있는 폼
@@ -149,21 +137,9 @@ public class ResumeController {
 		System.out.println("실행");
 		System.out.println(iu);
 		service.update(iu);
-		//이력서 정보 조회
-		Resume re = service.selectOne(iu.getResumeId());
-		m.addAttribute("re", re);
-		String resumeId = re.getResumeId()+"";
-		System.out.println(resumeId);
-		//회원 정보 조회
-		User si = service.selectMyInfo(iu.getUserId());
-		m.addAttribute("si", si);
-		//회원 나이 계산
-		int age = (LocalDate.now().getYear()-si.getBirthDate().getYear()+1);
-		m.addAttribute("age", age);
-		//경력 정보 조회
-		List<Career> ca = service.selectCareer(iu.getResumeId());
-		m.addAttribute("ca", ca);
-		return showPickView(m, resumeId, re.getUserId());
+		m.addAttribute("userId", iu.getUserId());
+		m.addAttribute("resumeId", iu.getResumeId());
+		return "updatePickListResult";
 	}
 	
 	//이력서 리스트에서 삭제버튼 클릭시 해당 이력서 디비에서 삭제
@@ -195,7 +171,8 @@ public class ResumeController {
 		System.out.println(type);
 		String result = service.uploadFiles(files, type, userId);
 		m.addAttribute("result", result);
-		return documentUploadForm(m, userId);
+		m.addAttribute("userId", userId);
+		return "fileUploadResult";
 	}
 	
 	@PostMapping(value="/photoUpdate", produces = "plain/text; charset=utf-8")
@@ -226,15 +203,40 @@ public class ResumeController {
 		return documentUploadForm(m, userId);
 	}
 	
+	//유저기본정보 수정하는 폼
 	@GetMapping("/infoUpdateForm")
 	public String myinfoUpdateForm(Model m, String userId) {
+		System.out.println("infoUpdate userId 받아옴" + userId);
 		User userInfo = service.selectMyInfo(userId);
 		m.addAttribute("info", userInfo);
-		return "userInfoUpdateForm";
+		int idx = userInfo.getEmail().indexOf("@");
+		String emailStart = userInfo.getEmail().substring(0, idx);
+		String emailEnd = userInfo.getEmail().substring(idx+1);
+		m.addAttribute("emailStart", emailStart);
+		m.addAttribute("emailEnd", emailEnd);
+		return "myInfoUpdateForm";
 	}
 	
-	@PostMapping("/infoUpdate")
-	public String userInfoUpdate(Model m, User user) {
+	//유저 기본정보 받아오는 폼
+	@PostMapping("/userInfoUpdate")
+	public String userInfoUpdate(Model m, String userId, String password, String rePassword, String name, String birthDate,
+			String sex, String emailStart, String emailEnd, String tel, String post, String addr,
+			String detailAddr, String extraAddr, String address) {
+		
+		String email = emailStart + "@" + emailEnd;		//이메일
+		
+		if(post!=null) {
+			String address1 = post + addr + detailAddr + extraAddr;		//api에서 받은 주소 문자열 하나로 합쳐주기
+			User user = new User(userId, rePassword, name, LocalDate.parse(birthDate), sex, email, tel, address1);//user 객체 생성
+			service.signupUpdate(user);
+		}else {
+			User user = new User(userId, rePassword, name, LocalDate.parse(birthDate), sex, email, tel, address);	//user 객체 생성
+			service.signupUpdate(user);
+		}
+		
+		System.out.println("보내줄 아이디: "+userId);
+		m.addAttribute("userId", userId);
+		
 		return "userInfoUpdateResult";
 	}
 	

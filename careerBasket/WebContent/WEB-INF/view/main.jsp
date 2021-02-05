@@ -20,10 +20,12 @@ $(function(){
 	    $('#file').click();
 	});
 })
-function infoUpdate(){
+function infoUpdate(userId){
+	console.log("onclick메서드 실행!");
 	var form = document.creatElement("form");
 	form.setAttribute("action", "${pageContext.request.contextPath}/resume/infoUpdateForm");
 	form.setAttribute("method", "get");
+	form.setAttribute("value", userId);
 	form.submit();
 }
 
@@ -32,7 +34,12 @@ function changeValue(obj){
 	}
 </script>
 <title>main.jsp</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
 <!-- 상단바 -->
@@ -53,15 +60,16 @@ function changeValue(obj){
 	String userId = (String)session.getAttribute("userId");
 %>
 
+<div id="wrap">
 <div>
 <form name="signform" method="POST" ENCTYPE="multipart/form-data" action="/resume/photoUpdate">
     <input type="file" id="file" name="file" style="display:none;" onchange="changeValue(this)">
-    <button style="border: none;outline: none;background: none;" id="btn-upload"><img src="http://localhost:8080/img/photo/${photo}" style="width:150px;height:210px;"></button>
+    <button style="border: none;outline: none;background: none;" id="btn-upload"><img src="<%-- http://localhost:8080/img/photo/${photo} --%>" style="width:150px;height:210px;"></button>
 </form>
 ${info.name }<br>
 ${info.email }<br>
 ${info.tel }<br>
-<button type="button" onclik="infoUpdate()">기본정보 수정</button>
+<a href="${pageContext.request.contextPath}/resume/infoUpdateForm?userId=${userId}"><button type="button">기본정보 수정</button></a>
 <button><a href="/user/logout">로그아웃</a></button>
 </div>
 <div><a href="http://localhost:8080/hire/applyInfo?userId=${userId}">지원현황: ${applyCnt}</a></div>
@@ -91,5 +99,6 @@ ${doc.fileTitle}
 <input type="hidden" name="userId" value="${userId }">
 <button>전체보기</button>
 </form>
+</div>
 </body>
 </html>

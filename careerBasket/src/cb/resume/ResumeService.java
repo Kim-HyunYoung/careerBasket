@@ -292,4 +292,10 @@ public class ResumeService {
 	
 		}
 
+	public void signupUpdate(User user) {
+		System.out.println("signupUpdate service 실행");
+		mapper.signUpUpdate(user);
+		
+	}
+
 }

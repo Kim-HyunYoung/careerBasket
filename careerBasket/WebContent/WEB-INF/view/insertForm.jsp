@@ -51,84 +51,6 @@
 			 +"<button type='button' onclick='addCareer()' class='btn btn-color btn-sm'>+경력추가</button>"
 			 +"<button type='button' onclick='del()' class='btn btn-color btn-sm' style='margin-right: 2%;'>-삭제</button>"
 			 +"</div>");
- 	 
- 	 /* //타이틀 삽입
- 	  var h = document.createElement("h2");
- 	  h.innerHTML="경력";
- 	 com.append(h);
- 	  
- 	  //fieldset 삽입
- 	  var f = document.createElement("fieldset");
- 	  com.append(f);
- 	  
- 	  var h5 = document.createElement("h5");
- 	  h5.innerHTML="회사 정보 입력"
- 	  f.append(h5);
- 	  
- 	  var sec = document.createElement("section");
- 	  f.append(sec);
- 	  
- 	  sec.innerHTML="회사명: ";
- 	  
- 	  var input = document.createElement("input");
- 	  input.setAttribute("type", "text");
- 	  input.setAttribute("name", "company");
- 	  sec.append(input);
- 	  
- 	 var sec2 = document.createElement("section");
-	  f.append(sec2);
- 	  
- 	  sec2.innerHTML="재직기간: ";
- 	  
- 	  var input2 = document.createElement("input");
-	  input2.setAttribute("type", "text");
-	  input2.setAttribute("name", "careerPeriod");
-	  input2.setAttribute("placeholder", "예시)2016-03-02~2020-02-09");
-	  sec2.append(input2);
-	  
-	  var sec3 = document.createElement("section");
-	  f.append(sec3);
- 	  
- 	  sec3.innerHTML="직책: ";
- 	  
- 	  var input3 = document.createElement("input");
-	  input3.setAttribute("type", "text");
-	  input3.setAttribute("name", "careerPosition");
-	  sec3.append(input3);
-	  
-	  var sec4 = document.createElement("section");
-	  f.append(sec4);
- 	  
- 	  sec4.innerHTML="연봉: ";
- 	  
- 	  var input4 = document.createElement("input");
-	  input4.setAttribute("type", "number");
-	  input4.setAttribute("name", "careerSalary");
-	  sec4.append(input4);
-	  
-	  var sec5 = document.createElement("section");
-	  f.append(sec5);
- 	  
- 	  sec5.innerHTML="직무기술서: ";
- 	  
- 	  var input5 = document.createElement("input");
-	  input5.setAttribute("type", "text");
-	  input5.setAttribute("name", "description");
-	  sec5.append(input5);
- 	  
-	  f.append(document.createElement("hr"));
-	  
-	  var button = document.createElement("input");
-	  button.setAttribute("type", "button");
-	  button.setAttribute("value", "+경력추가");
-	  button.setAttribute("onclick", "addCareer()");
-	  f.append(button);
-	  
-	  var button2 = document.createElement("input");
-	  button2.setAttribute("type", "button");
-	  button2.setAttribute("value", "-삭제");
-	  button2.setAttribute("onclick", "del()");
-	  f.append(button2); */
  }
  function del(){
 	 var com = document.getElementById("com");
@@ -178,7 +100,7 @@
   </div>
 </div>
 <hr>
-<button type="button" class="btn btn-color btn-sm" >기본정보 수정하기</button><br>
+<a href="${pageContext.request.contextPath}/resume/infoUpdateForm?userId=${si.userId}"><button type="button" class="btn btn-color btn-sm" >기본정보 수정하기</button></a><br>
 </div>
 <h1 class="title">학력정보</h1>
 <div class="info_wrapper">

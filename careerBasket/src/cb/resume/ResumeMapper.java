@@ -86,7 +86,7 @@ public interface ResumeMapper {
 	@Update("update sign_up set password=#{password}, name=#{name}, birth_date=#{birthDate}, "
 			+ "sex=#{sex}, email=#{email}, tel=#{tel}, address=#{address}"
 			+ "where user_id=#{userId}")
-	public int signUpUpdate(String userId);
+	public int signUpUpdate(User user);
 	
 	@Select("select * from sign_up where user_id=#{userId}")
 	public User selectMyInfo(String userId);
