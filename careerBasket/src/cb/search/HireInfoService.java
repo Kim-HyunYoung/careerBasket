@@ -52,17 +52,20 @@ public class HireInfoService {
 	
 	//HireListView객체 값 세팅하는 메서드
 	public HireListView getHireListView(int career,String place,String position,int pageNumber) {
-		//값들 잘 넘어오는지 확인
-		System.out.println("career :"+career);
-		System.out.println("place :"+place);
-		System.out.println("position :"+position);
+		
+		/*값들 잘 넘어오는지 확인
+			System.out.println("career :"+career);
+			System.out.println("place :"+place);
+			System.out.println("position :"+position);
+		*/
 		//페이지수 잘넘어오는지 확인
-		System.out.println("pageNumber :"+pageNumber);
+		
+			//System.out.println("pageNumber :"+pageNumber);
 		HireListView hListView = null;
 		
 		//전체 메시지 개수 담기
 		int hireTotalCnt = hireInfoMapper.selectHireTotalCnt(career, place, position);
-		System.out.println("hireTotalCnt :"+hireTotalCnt);
+			//System.out.println("hireTotalCnt :"+hireTotalCnt);
 		 	
 		//채용공고 담는 리스트
 		List<HireInfo> hireList = null;
@@ -72,14 +75,14 @@ public class HireInfoService {
 			firstRow = (pageNumber -1) * HIRE_CNT_PER_PAGE;
 			hireList = hireInfoMapper.selectPerList(career, place, position, firstRow, HIRE_CNT_PER_PAGE);
 			
-			System.out.println("서비스에서 hireList :"+hireList);
+			//System.out.println("서비스에서 hireList :"+hireList);
 		}else {
 			pageNumber = 0;
 		}
 		
 		hListView = new HireListView(hireTotalCnt, pageNumber, hireList, HIRE_CNT_PER_PAGE, firstRow);
 		
-		System.out.println("hListView :"+ hListView);
+			//System.out.println("hListView :"+ hListView);
 		
 		return hListView;
 	}
@@ -97,49 +100,6 @@ public class HireInfoService {
 	//apply의 id를 List로 가져오기
 	public List<Integer> getApplyId(String userId){
 		return hireInfoMapper.selectApplyId(userId);
-	}
-	
-	//resume테이블의 resume_path값 가져오기
-	public String getResumePath(String title,String userId) {
-		return hireInfoMapper.selectResumePath(title,userId);
-	}
-	
-	//이력서(사진파일-WEB-INF/resume안에 있는) "한 개"를  (WEB-INF/apply)에 업로드하기
-	public String applyResume(MultipartFile file) { //그냥 file형식 넣으면??
-		//MultipartFile 형식 : 사진,동영상 등 글자가 아닌 파일형식
-		String result = "";
-		
-		//파일 저장 위치
-		String uploadFolder = "C:/Users/rbfl6/git/careerBasket/careerBasket/WebContent/WEB-INF/apply"; //apply폴더
-		
-		//파일경로 입력
-		File f = new File(uploadFolder);
-		
-		//해당 파일이 존재하지 않으면 생성
-		if(!f.exists()) {
-			f.mkdir(); //주소에 해당되는 폴더 한개 생성
-		}
-		
-		try {
-			//난수 생성
-			UUID nums = UUID.randomUUID();
-			String newName = nums.toString()+file.getOriginalFilename();
-			
-			//파일 생성
-			f = new File(uploadFolder, newName);
-		
-			file.transferTo(f);  //multipart형식의 파일을 file형식으로 바꾸어 저장함
-			
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			result="실패";
-		} catch (IOException e) {
-			e.printStackTrace();
-			result="실패";
-		}
-		
-		result="성공";
-		return result;
 	}
 	
 	//지원 현황 리스트 가져오기

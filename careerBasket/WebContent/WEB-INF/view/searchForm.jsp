@@ -8,36 +8,37 @@
 <meta charset="UTF-8">
 <title>searchForm.jsp</title>
 
-<!-- 부트스트랩 버전 3으로 해야 select 잘 적용됨 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
-	crossorigin="anonymous">
-<!-- 부트스트랩 select css -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+	<!-- 부트스트랩 버전 3으로 해야 select 잘 적용됨 -->
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+		crossorigin="anonymous">
+	<!-- 부트스트랩 select css -->
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+	
+	<!-- ajax CDN -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- select보다 부트스트랩이 더 먼저와야함 -->
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+		crossorigin="anonymous"></script>
+	<!-- 부트스트랩 select 스크립트 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+	<!-- 부트스트랩 아이콘 -->
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	
+	<link rel="stylesheet" type="text/css" href="/css/search.css?verver">
+	<link rel="stylesheet" type="text/css" href="/css/header.css">
+	<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
+	<link rel="stylesheet" type="text/css" href="/css/pagenation.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- ajax CDN -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- select보다 부트스트랩이 더 먼저와야함 -->
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-	integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-	crossorigin="anonymous"></script>
-<!-- 부트스트랩 select 스크립트 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-<!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
-<link rel="stylesheet" type="text/css" href="/css/header.css">
-<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
-<link rel="stylesheet" type="text/css" href="/css/search.css?ver13">
-<link rel="stylesheet" type="text/css" href="/css/pagenation.css">
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 //ajax 비동기 방식으로 검색 버튼 누르면 리스트 보여주기!
 
@@ -418,44 +419,50 @@
 <body>
 
 	<div class="frame">
+
 		<!-- 로그아웃일 때 상단바 -->
 		<div class="top">
 			<c:if test="${empty userId}">
-				<div class="top_left">
-					<a href="/user/logout" style="color: #82B6ED">careerBasket</a>
-				</div>
-				<div class="top_middle">
-					<a href="/hire/list">탐색</a> <a href="/user/loginForm">이력서</a>
-				</div>
-				<div class="top_right">
-					<button class="btn btn-color">
-						<a href="/user/signup">회원가입</a>
-					</button>
-					<button class="btn btn-color">
-						<a href="/user/loginForm">로그인</a>
-					</button>
-				</div>
+					<div class="top_left">
+						<a href="/user/logout" style="color: #82B6ED">careerBasket</a>
+					</div>
+					<div class="top_middle">
+						<a href="/hire/list">탐색</a> <a href="/user/loginForm">이력서</a>
+					</div>
+					<div class="top_right">
+						<button class="btn btn-color">
+							<a href="/user/signup">회원가입</a>
+						</button>
+						<button class="btn btn-color">
+							<a href="/user/loginForm">로그인</a>
+						</button>
+					</div>
 			</c:if>
+			
 			<!-- 로그인일 때 상단바 -->
 			<c:if test="${not empty userId}">
-				<div class="top_left">
-					<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
-				</div>
-				<!-- 로고 -->
-				<div class="top_middle">
-					<a href="/hire/list?userId=${userId}">탐색</a> <a
-						href="/resume/addresume?userId=${userId}">이력서</a>
-				</div>
-				<div class="top_right">
-					<div class="ms">${userId}님의취업을응원합니다!</div>
-					<button class="logOut">
-						<a href="/user/logout">로그아웃</a>
-					</button>
-				</div>
+					<div class="top_left">
+						<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
+					</div>
+					<!-- 로고 -->
+					<div class="top_middle">
+						<a href="/hire/list?userId=${userId}">탐색</a> <a
+							href="/resume/addresume?userId=${userId}">이력서</a>
+					</div>
+					<div class="top_right">
+						<div class="ms">
+							<span style="font-size: 13px; color: gray;"> <span
+								style="color: #82B6ED;">${userId}</span> 님의 취업을 응원합니다!
+							</span>
+						</div>
+						<button class="btn btn-color"
+							style="float: left; margin-top: 15px; margin-left: 12px;">
+							<a href="/user/logout">로그아웃</a>
+						</button>
+					</div>
 			</c:if>
 		</div>
 		<!-- //상단바 -->
-
 
 
 		<div class="conTain">
@@ -464,16 +471,18 @@
 				<form id="f" action="/hire/search" method="post">
 					<div class="search1">
 						<div class="career">
-							<input class="car_con" type="radio" name="hireCareer" value=1> 경력
-							<input class="car_con" type="radio" name="hireCareer" value=2> 신입
+							<input class="car_con" type="radio" name="hireCareer" value=1>
+							경력 <input class="car_con" type="radio" name="hireCareer" value=2>
+							신입
 						</div>
 						<div class="place">
-							<label style="margin-right: 12px;">지역</label> 
-							<select name="workPlace"  class="selectpicker">
-								<option style="font-size:smaller; color:lightgray;" value="선택">지역을 선택해주세요</option>
+							<label style="margin-right: 12px;">지역</label> <select
+								name="workPlace" class="selectpicker">
+								<option style="font-size: smaller; color: lightgray;" value="선택">지역을
+									선택해주세요</option>
 								<option class="selectOp" value="서울">서울</option>
-								<option class="selectOp"  value="대구">대구</option>
-								<option class="selectOp"  value="부산">부산</option>
+								<option class="selectOp" value="대구">대구</option>
+								<option class="selectOp" value="부산">부산</option>
 							</select>
 						</div>
 					</div>
@@ -529,8 +538,8 @@
 			<!-- //페이지 네이션 -->
 		</div>
 		<!-- //container -->
-
-
 	</div>
-</body>
+	
+	
+	</body>
 </html>

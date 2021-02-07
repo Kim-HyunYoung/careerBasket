@@ -7,36 +7,35 @@
 <head>
 <meta charset="UTF-8">
 <title>detailView.jsp</title>
-<!-- 부트스트랩 버전 3으로 해야 select 잘 적용됨 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
-	crossorigin="anonymous">
-<!-- 부트스트랩 select css -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-
-<!-- ajax CDN -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- select보다 부트스트랩이 더 먼저와야함 -->
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-	integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-	crossorigin="anonymous"></script>
-<!-- 부트스트랩 select 스크립트 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-<!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
-<link rel="stylesheet" type="text/css" href="/css/detail.css?ver14">
-<link rel="stylesheet" type="text/css" href="/css/header.css">
-<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
-
-<!-- 지도 services 라이브러리 불러오기 -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f92552f56d0252119d785ec6db2f5b73&libraries=services"></script>
+	<!-- 부트스트랩 버전 3으로 해야 select 잘 적용됨 -->
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+		crossorigin="anonymous">
+	<!-- 부트스트랩 select css -->
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+	
+	<!-- ajax CDN -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- select보다 부트스트랩이 더 먼저와야함 -->
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+		crossorigin="anonymous"></script>
+	<!-- 부트스트랩 select 스크립트 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+	<!-- 부트스트랩 아이콘 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	
+	<link rel="stylesheet" type="text/css" href="/css/detail.css?ver14">
+	<link rel="stylesheet" type="text/css" href="/css/header.css">
+	<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
+	
+	<!-- 지도 services 라이브러리 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f92552f56d0252119d785ec6db2f5b73&libraries=services"></script>
 
 </head>
 <body>
@@ -48,8 +47,7 @@
 	<fmt:parseDate var="startDate" pattern="yyyy-MM-dd'T'HH:mm"
 		value="${detail.startDate}" />
 
-	<script>	
-	
+<script>	
 $(function(){
 
 	//-------------------- 남은 시간 계산 --------------
@@ -136,9 +134,6 @@ $(function(){
 					success:function(resp){
 						console.log(resp);
 						
-						//0이면 이미 지원하신 채용공고입니다.
-						//1이면 지원이 완료되었습니다.
-						
 						//구분해서 각각 다른 아이콘 넣어주기
 						if(resp == "이미 지원하신 채용공고입니다."){
 							console.log("이미 지원하신 채용공고입니다.");
@@ -158,8 +153,6 @@ $(function(){
 									  +'</svg><div class="noti">'+resp+'</div></div>');
 						
 						}
-						
-			
 					},
 					error:function(e){
 						console.log(e);
@@ -180,49 +173,53 @@ $(function(){
 				return false;
 			}
 		}
-		
 	})
-	
-	
 })
 	
 </script>
 
 	<div class="frame">
+	
 		<!-- 로그아웃일 때 상단바 -->
 		<div class="top">
 			<c:if test="${empty userId}">
-				<div class="top_left">
-					<a href="/user/logout" style="color: #82B6ED">careerBasket</a>
-				</div>
-				<div class="top_middle">
-					<a href="/hire/list">탐색</a> <a href="/user/loginForm">이력서</a>
-				</div>
-				<div class="top_right">
-					<button class="btn btn-color">
-						<a href="/user/signup">회원가입</a>
-					</button>
-					<button class="btn btn-color">
-						<a href="/user/loginForm">로그인</a>
-					</button>
-				</div>
+					<div class="top_left">
+						<a href="/user/logout" style="color: #82B6ED">careerBasket</a>
+					</div>
+					<div class="top_middle">
+						<a href="/hire/list">탐색</a> <a href="/user/loginForm">이력서</a>
+					</div>
+					<div class="top_right">
+						<button class="btn btn-color">
+							<a href="/user/signup">회원가입</a>
+						</button>
+						<button class="btn btn-color">
+							<a href="/user/loginForm">로그인</a>
+						</button>
+					</div>
 			</c:if>
+			
 			<!-- 로그인일 때 상단바 -->
 			<c:if test="${not empty userId}">
-				<div class="top_left">
-					<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
-				</div>
-				<!-- 로고 -->
-				<div class="top_middle">
-					<a href="/hire/list?userId=${userId}">탐색</a> <a
-						href="/resume/addresume?userId=${userId}">이력서</a>
-				</div>
-				<div class="top_right">
-					<div class="ms">${userId}님의취업을응원합니다!</div>
-					<button class="logOut">
-						<a href="/user/logout">로그아웃</a>
-					</button>
-				</div>
+					<div class="top_left">
+						<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
+					</div>
+					<!-- 로고 -->
+					<div class="top_middle">
+						<a href="/hire/list?userId=${userId}">탐색</a> <a
+							href="/resume/addresume?userId=${userId}">이력서</a>
+					</div>
+					<div class="top_right">
+						<div class="ms">
+							<span style="font-size: 13px; color: gray;"> <span
+								style="color: #82B6ED;">${userId}</span> 님의 취업을 응원합니다!
+							</span>
+						</div>
+						<button class="btn btn-color"
+							style="float: left; margin-top: 15px; margin-left: 12px;">
+							<a href="/user/logout">로그아웃</a>
+						</button>
+					</div>
 			</c:if>
 		</div>
 		<!-- //상단바 -->
@@ -405,9 +402,7 @@ $(function(){
 		</div>
 		<!-- //container -->
 
-
-
-		<!-- Modal -->
+		<!-------------------------------------------------- Modal -------------------------------------------------------->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
@@ -492,8 +487,8 @@ $(function(){
 			});
 		
 		</script>
-
 	</div>
 	<!-- //frame -->
+	
 </body>
 </html>

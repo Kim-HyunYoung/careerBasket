@@ -43,12 +43,8 @@ public interface HireInfoMapper {
 	@Select("select id from apply_list where user_id = #{userId}")
 	public List<Integer> selectApplyId(String userId);
 	
-	//resume테이블에서 resume_path값 가져오기
-	@Select("select resume_path from resume where title=#{title} and user_id = #{userId}")
-	public String selectResumePath(@Param("title")String title,@Param("userId")String userId);
-
 	//join으로 지원현황 리스트 조회
-	@Select("select H.hire_title,H.company_name,R.title,H.end_date,A.apply_date " + 
+	@Select("select H.hire_title,H.company_name,R.title,H.end_date,A.apply_date,A.id,A.resume_id " +  //A.id랑 A.resume_id도 가져오기
 			"	from hire_info H " + 
 			"		inner join apply_list A " + 
 			"		on H.id = A.id " + 

@@ -7,16 +7,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Apply {
 	//지원 현황 데이터
 	
-	//추가할 것
-	//resumeId
-	//wDate
-	
+	private int id; //채용공고 id
 	private String hireTitle;
 	private String companyName;
 	private String title;
 	private int resumeId;
 	
-	//이거 맞나?
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul") 
 	private LocalDateTime applyDate;
 	
@@ -25,15 +21,24 @@ public class Apply {
 
 	public Apply() {}
 
-	public Apply(String hireTitle, String companyName, String title, int resumeId, LocalDateTime applyDate,
+	public Apply(int id, String hireTitle, String companyName, String title, int resumeId, LocalDateTime applyDate,
 			LocalDateTime endDate) {
 		super();
+		this.id = id;
 		this.hireTitle = hireTitle;
 		this.companyName = companyName;
 		this.title = title;
 		this.resumeId = resumeId;
 		this.applyDate = applyDate;
 		this.endDate = endDate;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getHireTitle() {
@@ -86,8 +91,10 @@ public class Apply {
 
 	@Override
 	public String toString() {
-		return "Apply [hireTitle=" + hireTitle + ", companyName=" + companyName + ", title=" + title + ", resumeId="
-				+ resumeId + ", applyDate=" + applyDate + ", endDate=" + endDate + "]";
+		return "Apply [id=" + id + ", hireTitle=" + hireTitle + ", companyName=" + companyName + ", title=" + title
+				+ ", resumeId=" + resumeId + ", applyDate=" + applyDate + ", endDate=" + endDate + "]";
 	}
+	
+	
 
 }
