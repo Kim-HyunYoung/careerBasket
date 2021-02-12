@@ -175,12 +175,12 @@ public class ResumeController {
 		return "fileUploadResult";
 	}
 	
+	//사진저장해주는 컨트롤러
 	@PostMapping(value="/photoUpdate", produces = "plain/text; charset=utf-8")
 	public String photoUpload(MultipartFile[] files, String userId, Model m) {
 		System.out.println("사진 컨트롤러로 넘어옴");
-		System.out.println(files[0].getOriginalFilename());
-		String ptSave = service.savePhoto(files, userId, m);
-		m.addAttribute("photo", ptSave);
+		System.out.println(files[0].getOriginalFilename().trim());
+		m.addAttribute("photo", service.savePhoto(files, userId));
 		m.addAttribute("userId", userId);
 		User myInfo = service.selectOneUserId(userId);
 		m.addAttribute("info", myInfo);

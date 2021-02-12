@@ -6,10 +6,14 @@ body{
 	min-width: 1206px;
 }
 
+div#wrap{
+    margin-top: 6rem;
+}
+
 .title_wrapper{
-	width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+	width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .resume_title{
@@ -22,10 +26,10 @@ body{
 }
 
 div#allList_wrapper{
-	width: 80%;
+	width: 60%;
     position: absolute;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .resume_wrapper{
@@ -44,7 +48,7 @@ div#allList_wrapper{
     color: gray;
 }
 
-.btn-color {
+.btn_color {
 	color: #ffffff;
 	background: #82B6ED;
     border: none;

@@ -7,8 +7,166 @@ body{
 }
 
 div#wrap{
-	width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 10%;
+	width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 7%;
+}
+
+.title{
+	margin-top: 8%;
+	margin-left: 3%;
+	font-weight: bold;
+    letter-spacing: 0.05rem;
+}
+
+.info-wrap{
+	width: 25%;
+	text-align: center;
+	margin-top: 3%;
+	border: 1px solid #82B6ED;
+    padding: 2%;
+}
+
+.info-name{
+	margin-top: 10%;
+	font-size: 15pt;
+	font-weight: 700!important;
+}
+
+.info-email{
+	margin-top: 16%;
+	font-size: 10pt;
+}
+
+.info-tel{
+	font-size: 10pt;
+	margin-top: 3%;
+}
+
+.logout-wrap{
+	text-align: center;
+	width: 25%;
+	border: 1px solid #82B6ED;
+    line-height: 3rem;
+}
+
+.btn-outline-primary{
+	border-color:#82B6ED;
+	color:#82B6ED;
+}
+
+.btn-photo{
+	margin-top: 5%;
+	font-size: 0.5rem;
+	line-height: 0.6rem;
+}
+
+.btn-info-update{
+	margin-top: 9%;
+	font-size: 0.8rem;
+}
+
+.board-wrap{
+	border: 1px solid #82B6ED;
+    float: right;
+    margin-top: -24.3rem;
+    width: 72%;
+    height: 24.3rem;
+}
+
+.top-list{
+	list-style:none;
+	background: #82B6ED;
+	padding: 3.5% 4%;
+}
+.top-list>li{
+	display: inline-block;
+	color: white;
+	font-weight:700;
+}
+
+div#resume{
+	clear: both;
+	background: #f4f4f4;
+    padding: 3%;
+}
+
+div#document{
+	clear: both;
+	background: #f4f4f4;
+    padding: 3%;
+}
+
+.board-top{
+	background: #82B6ED;
+}
+
+.btn-adrm{
+	background: white;
+	height: 2.5rem;
+    width: 8rem;
+}
+
+.sub-title-font{
+	font-size: 16px;
+	font-weight: 700!important;
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+}
+
+.all-list-bnt{
+	font-weight: 500!important;
+	font-size: 13px;
+	float: right;
+	margin-bottom: 1rem;
+}
+
+.resume-board{
+	padding: 8% 5%;
+}
+
+.resume-wrap{
+	margin: 5% 0% 0% 3%;
+	width: 45%;
+    float: left;
+}
+
+.doc-wrap{
+	margin: 5% 3% 0% 0%;
+	width:45%;
+	float: right;
+}
+
+.detail-t-tp{
+	font-size: 13px;
+	font-weight: 300!important;
+	margin-bottom: 1%;
+}
+
+.detail-t-bt{
+	margin-bottom: 4%;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+
+.count{
+	vertical-align: sub;
+    margin-left: 1rem;
+    font-weight: 900;
+    font-size: 30px;
+    background: white;
+    border-radius: 5rem;
+    color: #82B6ED;
+    padding: 0.5rem;
+    display: inline-block;
+	width: 4rem;
+	text-align: center;
+}
+
+.none-text{
+	text-align: center;
+    height: 10.5rem;
+    padding: 29% 0%;
 }

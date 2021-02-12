@@ -6,6 +6,13 @@ body{
 	min-width: 1206px;
 }
 
+div#wrap{
+	width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 7rem;
+}
+
 div#info_form_wrapper{
 	width:60%;
 	margin-left: 20%;
@@ -26,4 +33,24 @@ div#info_form_wrapper{
 .badge{
 	line-height: 2;
 	font-size: 1rem;
+}
+
+.col-sm-10{
+	width: 29rem;
+}
+
+.col-form-label{
+	width: 8rem;
+}
+
+.btn-photo{
+	margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.photo-wrap{
+	float: right;
+    margin-top: -3rem;
+    margin-right: 1rem;
+}
 }

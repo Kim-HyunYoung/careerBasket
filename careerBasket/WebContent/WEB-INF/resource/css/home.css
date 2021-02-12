@@ -1,0 +1,37 @@
+@charset "utf-8";
+@import url("reset.css");
+
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+	min-width: 1206px;
+}
+
+.main-wrap{
+	padding-top: 15rem;
+    width: 60%;
+    margin-left: 20%;
+    padding-left: 2rem;
+}
+
+.btn_color {
+	color: #ffffff;
+	background: #82B6ED;
+    border: none;
+    margin-left: 8rem;
+    margin-top: 3rem;
+}
+
+.slogan-wrap{
+	float: right;
+    margin-top: -21rem;
+	margin-right: 2rem;
+}
+
+.slogan{
+	font-size: 2.5rem;
+    line-height: 4rem;
+    font-weight: 500;
+}
+
+.img{
+}

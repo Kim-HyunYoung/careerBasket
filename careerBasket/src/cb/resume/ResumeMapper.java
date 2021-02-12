@@ -15,7 +15,7 @@ public interface ResumeMapper {
 	
 	//resume query
 	
-	@Select("select * from resume where user_id=#{userId} order by resume_id desc limit 3")
+	@Select("select * from resume where user_id=#{userId} order by resume_id desc limit 4")
 	public List<Resume> selecLimit(String userId);
 
 	@Select("select * from resume where user_id=#{userId} order by resume_id desc")
@@ -61,10 +61,10 @@ public interface ResumeMapper {
 	
 	//document query
 	
-	@Select("select * from document where user_id=#{userId} order by resume_id desc limit 3")
+	@Select("select * from document where user_id=#{userId} order by resume_id desc limit 4")
 	public List<Document> selectDo(String userId);
 	
-	@Select("select * from document where user_id=#{userId}")
+	@Select("select * from document where user_id=#{userId} order by document_id desc")
 	public List<Document> selectAllDo(String userId);
 	
 	@Select("select * from document where document_id=#{documentId}")
@@ -91,6 +91,6 @@ public interface ResumeMapper {
 	@Select("select * from sign_up where user_id=#{userId}")
 	public User selectMyInfo(String userId);
 
-	@Insert("insert into sign_up(photo_path) values(#{photoPath}) where user_id=#{userId}")
+	@Update("update sign_up set photo_path=#{photoPath} where user_id=#{userId}")
 	public void insertPhoto(User user);
 }

@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	if("${si.photoPath}"==""){
+		$("#photo").attr("src", "http://localhost:8080/photo/image.png")
+	}
+})
  function check(){
 	if($("input[type=checkbox]").is(":checked") == true){
 		$("input[name=educationName]").val(""); 
@@ -48,33 +53,63 @@
 			 +"<div class='form-floating'>"
 			 +"<textarea name='description' class='form-control' id='floatingTextarea2' style='height: 100px;margin: 1%;'></textarea>"
 			 +"<label for='floatingTextarea2' style='margin: 1%;'>직무기술서</label></div>"
-			 +"<button type='button' onclick='addCareer()' class='btn btn-color btn-sm'>+경력추가</button>"
-			 +"<button type='button' onclick='del()' class='btn btn-color btn-sm' style='margin-right: 2%;'>-삭제</button>"
+			 +"<button type='button' onclick='addCareer()' class='btn btn-color1 btn-sm'>+경력추가</button>"
+			 +"<button type='button' onclick='del(this)' class='btn btn-color1 btn-sm' style='margin-right: 2%;'>-삭제</button>"
 			 +"</div>");
  }
- function del(){
-	 var com = document.getElementById("com");
-		 com.removeChild( com.firstChild ); 
-		 com.removeChild( com.firstChild ); 
+ function del(e){
+		 let parent = e.parentNode;
+		 parent.parentNode.removeChild(parent);
  }
 </script>
 <title>insertForm.jsp</title>
+<!-- ----------------------------부트스트랩 CDN-------------------------------- -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/resumeInsertForm.css">
+
+<!-- ---------------------------------------폰트 CDN---------------------------------------------- -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/resumeInsertForm.css">
 </head>
 <body>
+<!-- 상단바 -->
+<div class="top">
+	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${si.userId}">careerBasket</a></div>	<!-- 로고 -->
+	<div class="top_middle">
+		<a href="/hire/list?userId=${si.userId}">탐색</a>
+		<a href="/resume/addresume?userId=${si.userId}">이력서</a>
+	</div>
+	<div class="top_right">
+		<div class="ms">
+			<span style="font-size: 13px; color: gray;">
+				<span style="color:#82B6ED;">${si.userId}</span>
+					님의 취업을 응원합니다!</span>
+		</div>
+		<button class="btn btn-color" style="float:left; margin-top: 15px; margin-left: 12px;">
+			<a href="/user/logout">로그아웃</a>
+		</button>
+	</div>
+</div>
+
+
+로그인했을 때 메인화면 <br>
+<%
+	String userId = (String)session.getAttribute("userId");
+%>
+
+<!-- --------------------------메인화면-------------------------- -->
+<div id="wrap">
 <div id="resume_form_wrapper">
 <form action="/resume/addresume" method="post">
-    <input type="text" name="title" placeholder="이력서의 제목을 적어주세요(필수)" style="width:600px;margin-top: 0.3%" required="required">
-    <input type="submit" class="btn btn-color btn-sm"  value="이력서 저장">
+<input type="hidden" name="userId" value="${si.userId }">
+    <input type="text" name="title" placeholder="이력서의 제목을 적어주세요(필수)" style="width:600px;margin-top: 0.3%;" required="required">
+    <input type="submit" class="btn btn-color1 btn-sm"  value="이력서 저장">
 <h1 class="title">기본정보</h1>
 <div class="info_wrapper">
-<img alt="사진을 등록하세요" src=""  style="width:100px;height:140px;float:right;margin-bottom: 5%;" class="img-thumbnail">
-<p class="ms">기본정보 수정은 마이페이지 기본정보 수정페이지에서 가능합니다</p>
-<input type="hidden" name="userId" value="${si.userId }">
+<img alt="사진을 등록하세요" src="/photo/${si.photoPath}"  style="width:100px;height:140px;float:right;margin-bottom: 5%;object-fit:contain;" id="photo" class="img-thumbnail">
 <div class="row">
   <label for="colFormLabel" class="col-sm-2 col-form-label">이름</label>
   <div class="col-sm-10">
@@ -96,11 +131,12 @@
 <div class="row">
   <label for="colFormLabel" class="col-sm-2 col-form-label">주소</label>
   <div class="col-sm-10">
-    <input type="text" name="address" class="colFormLabel" style="width: 500px;" id="colFormLabel" readonly="readonly" value="${si.address }">
+    <input type="text" name="address" class="colFormLabel" style="width: 430px;" id="colFormLabel" readonly="readonly" value="${si.address }">
   </div>
 </div>
 <hr>
-<a href="${pageContext.request.contextPath}/resume/infoUpdateForm?userId=${si.userId}"><button type="button" class="btn btn-color btn-sm" >기본정보 수정하기</button></a><br>
+<div class="ms">기본정보 수정은 마이페이지 기본정보 수정페이지에서 가능합니다</div>
+<a href="${pageContext.request.contextPath}/resume/infoUpdateForm?userId=${si.userId}"><button type="button" class="btn btn-color1 btn-sm" >기본정보 수정하기</button></a><br>
 </div>
 <h1 class="title">학력정보</h1>
 <div class="info_wrapper">
@@ -167,7 +203,7 @@
   <label class="btn btn-outline-primary" for="btnradio6">경력</label>
 </div>
 <hr>
-<button type="button" onclick="addCareer()" class="btn btn-color btn-sm">+경력추가</button>
+<button type="button" onclick="addCareer()" class="btn btn-color1 btn-sm">+경력추가</button>
 </div>
 <div id="com"></div>
 <h1 class="title">자기소개서</h1>
@@ -192,8 +228,9 @@
 </div>
 </c:forEach>
 </div>
-<input type="submit" class="btn btn-color btn-sm" style="margin-top:2%;" value="이력서 저장">
+<input type="submit" class="btn btn-color1 btn-sm" style="margin-top:2%;" value="이력서 저장">
 </form>
+</div>
 </div>
 </body>
 </html>

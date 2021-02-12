@@ -6,6 +6,13 @@ body{
 	min-width: 1206px;
 }
 
+div#wrap{
+	width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 6rem;
+}
+
 .title_wrapper{
 	width: 90%;
     margin-left: 5%;
@@ -46,7 +53,7 @@ body{
 	width: 70%;
 }
 
-.btn-color {
+.btn-color1 {
 	color: #ffffff;
 	background: #82B6ED;
     border: none;

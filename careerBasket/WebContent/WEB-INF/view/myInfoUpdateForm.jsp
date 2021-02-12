@@ -64,16 +64,86 @@ $(function(){
 			
 			$("input[type=submit]").prop("disabled",true);		//가입하기 버튼 비활성화
 		}
+	if("${info.photoPath}"==""){
+		$("#photo").attr("src", "http://localhost:8080/photo/image.png")
+	}
 })
+
+function fileUpload(userId){	
+	
+		var files = document.querySelector("input[type=file]").files;
+		console.dir(files);
+		console.log(userId);
+		
+		//file을 전송하기 위해 FormData라는 객체에 넣어야한다
+		var formData = new FormData();
+		
+		//폼에 보낼 내용을 추가
+		for(file of files){
+			console.dir(file);
+			formData.append("files",file);
+		}
+		
+			formData.append("userId", userId);
+		
+		//비동기로 파일을 서버로 보냄
+		$.ajax({
+			url:"/resume/photoUpdate",
+			processData: false,//쿼리스트링으로 보내지는 방식을 사용하지 않겠다
+			contentType: false,//"multipart/form-data"로 보내기 위함
+			data: formData,//보낼 데이타
+			type: "post",//보내는 방식
+			success: function(result){
+				console.log(result)
+			},
+			error: function(e){
+				console.log(e)
+			}
+		})
+}
+
 </script>
 <title>myInfoUpdateForm.jsp</title>
+<!-- ----------------------------부트스트랩 CDN-------------------------------- -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/myInfoUpdateForm.css">
+
+<!-- ---------------------------------------폰트 CDN---------------------------------------------- -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/myInfoUpdateForm.css">
 </head>
 <body>
+<!-- 상단바 -->
+<div class="top">
+	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${info.userId}">careerBasket</a></div>	<!-- 로고 -->
+	<div class="top_middle">
+		<a href="/hire/list?userId=${info.userId}">탐색</a>
+		<a href="/resume/addresume?userId=${info.userId}">이력서</a>
+	</div>
+	<div class="top_right">
+		<div class="ms">
+			<span style="font-size: 13px; color: gray;">
+				<span style="color:#82B6ED;">${info.userId}</span>
+					님의 취업을 응원합니다!</span>
+		</div>
+		<button class="btn btn-color" style="float:left; margin-top: 15px; margin-left: 12px;">
+			<a href="/user/logout">로그아웃</a>
+		</button>
+	</div>
+</div>
+
+
+로그인했을 때 메인화면 <br>
+<%
+	String userId = (String)session.getAttribute("userId");
+%>
+
+<!-- --------------------------메인화면-------------------------- -->
+<div id="wrap">
 <div id="info_form_wrapper">
 <form action="/resume/userInfoUpdate" method="post">
 <input type="hidden" name="userId" value="${info.userId }">
@@ -84,25 +154,31 @@ $(function(){
      <input type="text" readonly class="form-control-plaintext" id="staticUserId" value="${info.userId }">
    </div>
  </div>
+<!-- --------------------------이미지 수정-------------------------- -->
+<div class="photo-wrap">
+ <div><label for="input-file"><img src="/photo/${info.photoPath}" style="width: 100px;height: 120px;object-fit:cover;" id="photo"></label></div>
+		    <input type="file" id="input-file" name="file" style="display:none;" multiple accept=".jpg, .png">
+		    <button onclick="fileUpload('${userId}')" class="btn btn-outline-primary btn-sm btn-photo">사진저장</button>
+</div>
 <!-- -----------------------------------------비밀번호------------------------------------------------------- -->
- <div class="mb-3 row">
-   <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
-   <div class="col-sm-10">
+ <div class="mb-3 row" style="margin-left: 0rem;">
+   <label for="inputPassword" class="col-sm-2 col-form-label" style="padding-left: 0rem;">비밀번호</label>
+   <div class="col-sm-10" style="width: 17rem;padding-left: 0rem;">
      <input type="password" id="inputPassword" name="password" value="${info.password }">
    </div>
  </div>
 <!-- -----------------------------------------비밀번호확인------------------------------------------------------- -->
- <div class="mb-3 row">
-   <label for="rePassword" class="col-sm-2 col-form-label">비밀번호 확인</label>
-   <div class="col-sm-10">
+ <div class="mb-3 row" style="margin-left: 0rem;">
+   <label for="rePassword" class="col-sm-2 col-form-label" style="padding-left: 0rem;">비밀번호 확인</label>
+   <div class="col-sm-10" style="width: 17rem;padding-left: 0rem;">
      <input id="rePassword" type="password" name="rePassword" value="${info.password }"><br>
      <span id="pwCheck" class="message" style="font-size: 12px;"></span>
    </div>
  </div>
 <!-- -----------------------------------------이름------------------------------------------------------- -->
- <div class="mb-3 row">
-   <label for="inputName" class="col-sm-2 col-form-label">이름</label>
-   <div class="col-sm-10">
+ <div class="mb-3 row" style="margin-left: 0rem;">
+   <label for="inputName" class="col-sm-2 col-form-label" style="padding-left: 0rem;">이름</label>
+   <div class="col-sm-10" style="width: 17rem;padding-left: 0rem;">
      <input type="text" class="form-control" id="inputName" name="name" value="${info.name }">
    </div>
  </div>
@@ -279,6 +355,7 @@ $(function(){
 	<input type="submit" value="기본정보 수정" class="btn btn-outline-primary" style="margin-left: 35%;">
 </div>
 </form>
+</div>
 </div>
 </body>
 </html>

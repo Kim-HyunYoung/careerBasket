@@ -104,13 +104,46 @@ function fileUpload(userId){
 }
 </script>
 <title>allDoInsertList</title>
+<!-- ----------------------------부트스트랩 CDN-------------------------------- -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/allDoinsertList.css">
+
+<!-- ---------------------------------------폰트 CDN---------------------------------------------- -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/allDoinsertList.css">
 </head>
 <body>
+<!-- 상단바 -->
+<div class="top">
+	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${si.userId}">careerBasket</a></div>	<!-- 로고 -->
+	<div class="top_middle">
+		<a href="/hire/list?userId=${si.userId}">탐색</a>
+		<a href="/resume/addresume?userId=${si.userId}">이력서</a>
+	</div>
+	<div class="top_right">
+		<div class="ms">
+			<span style="font-size: 13px; color: gray;">
+				<span style="color:#82B6ED;">${si.userId}</span>
+					님의 취업을 응원합니다!</span>
+		</div>
+		<button class="btn btn-color" style="float:left; margin-top: 15px; margin-left: 12px;">
+			<a href="/user/logout">로그아웃</a>
+		</button>
+	</div>
+</div>
+
+
+로그인했을 때 메인화면 <br>
+<%
+	String userId = (String)session.getAttribute("userId");
+%>
+
+<!-- --------------------------메인화면-------------------------- -->
+<div id="wrap">
 <div class="title_wrapper">
 <h1 class="document_title">업로드된 기타문서 목록</h1>
 <div class="fileUpload-wrapper">
@@ -128,7 +161,7 @@ function fileUpload(userId){
 </select><br>
 <div class="mb-3">
   <label for="formFileSm" class="form-label">파일 선택</label>
-  <button onclick="fileUpload(${si.userId})" class="btn btn-color btn-sm btn-file">추가하기</button>
+  <button onclick="fileUpload(${si.userId})" class="btn btn-color1 btn-sm btn-file">추가하기</button>
   <input class="form-control form-control-sm" id="formFileSm" type="file" name="document" accept=".jpg, .png, .pdf">
 </div>
 </div>
@@ -139,7 +172,7 @@ function fileUpload(userId){
 <c:forEach var="doc" items="${doList}">
 	<div class="fileList_outLine">
 		<div class="float">
-		<button type="button" class="btn btn-color btn-sm" onclick="mydelete('${doc.documentId}', '${si.userId}')">삭제</button>
+		<button type="button" class="btn btn-color1 btn-sm" onclick="mydelete('${doc.documentId}', '${si.userId}')">삭제</button>
 		</div>
 		<p class="docList-wrap">
 		<span class="date">${doc.wDate }</span>
@@ -148,5 +181,6 @@ function fileUpload(userId){
 		</p>
 	</div>
 </c:forEach>
+</div>
 </body>
 </html>

@@ -255,7 +255,10 @@ public class ResumeService {
 		
 	}
 
-	public String savePhoto(MultipartFile[] files, String userId, Model m) {
+	public String savePhoto(MultipartFile[] files, String userId) {
+		
+		System.out.println("Service의 savePhoto 메서드 실행"+userId);
+		
 		String result = null;
 		
 		String uploadFolder = "/Users/jeong-yeji/git/careerBasket/careerBasket/WebContent/WEB-INF/resource/photo/";
@@ -272,14 +275,20 @@ public class ResumeService {
 				
 				user.setUserId(userId);
 				UUID nums = UUID.randomUUID();
-				String newName = nums.toString()+files[0].getOriginalFilename();
+				String replaceStr = files[0].getOriginalFilename().replace(" ", "");
+				String newName = nums.toString()+replaceStr;
+				System.out.println(newName);
 				file = new File(file, newName);
 				files[0].transferTo(file);
 				user.setPhotoPath(newName);
 				
+				System.out.println("Service의 savePhoto 메서드 실행"+user.getUserId()+user.getPhotoPath());
+				System.out.println("Service의 savePhoto 메서드 실행"+user);
+				
 				mapper.insertPhoto(user);
 				
 				result = user.getPhotoPath();
+				
 		} catch (IllegalStateException e) {
 			result = "저장 실패! 다시 시도해주세요!";
 			e.printStackTrace();
