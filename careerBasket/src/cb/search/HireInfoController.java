@@ -38,39 +38,17 @@ public class HireInfoController {
 		return "searchForm";
 	}
 	
-	@PostMapping("/search")
-	public @ResponseBody HireListView getHireList(int hireCareer,String workPlace,String position,int page,String userId,Model m){
-			/*
-			System.out.println("post컨트롤러에서 hireCareer:"+hireCareer);
-			System.out.println("post컨트롤러에서 workPlace:"+workPlace);
-			System.out.println("post컨트롤러에서 position:"+position);
-			*/
-		
-		m.addAttribute("userId", userId);
-		
-		HireListView viewData = service.getHireListView(hireCareer, workPlace, position, page);
-		
-		//한페이지에 보여줄 채용공고 가져오기
-		int firstRow = viewData.getFirstRow();
-		int hireCntPerPage = viewData.getHireCntPerPage();
-		List<HireInfo> hList = viewData.getHireList();
-			/*
-			System.out.println(firstRow);
-			System.out.println(hireCntPerPage);
-			System.out.println(hList);
-			System.out.println(viewData);
-			*/
-		return viewData;
-	}
-	
-	//페이지 네이션 a태그 눌렀을 때 실행될 메서드
 	@GetMapping("/search")
-	public @ResponseBody HireListView getHireList(int hireCareer,String workPlace,String position,int page){
-			/*
+	public @ResponseBody HireListView getHireList(Integer hireCareer,String workPlace,String position,Integer page){
+		
+		if(page == null) {
+			page = 1;
+		}
+		
 			System.out.println("get컨트롤러에서 hireCareer:"+hireCareer);
 			System.out.println("get컨트롤러에서 workPlace:"+workPlace);
 			System.out.println("get컨트롤러에서 position:"+position);
-			*/
+			System.out.println("get컨트롤러에서 page:"+page);
 		
 		HireListView viewData = service.getHireListView(hireCareer, workPlace, position, page);
 		
@@ -78,12 +56,12 @@ public class HireInfoController {
 		int firstRow = viewData.getFirstRow();
 		int hireCntPerPage = viewData.getHireCntPerPage();
 		List<HireInfo> hList = viewData.getHireList();
-			/*
+			
 			System.out.println(firstRow);
 			System.out.println(hireCntPerPage);
 			System.out.println(hList);
 			System.out.println(viewData);
-			*/
+			
 		
 		return viewData;
 	}
@@ -109,13 +87,6 @@ public class HireInfoController {
 		m.addAttribute("doList", doList);
 		
 		return "detailView";
-	}
-	
-	//조건 선택하라는 안내문
-	@PostMapping("/check")
-	@ResponseBody  //이거 주석하면 왜 404뜨는거지?
-	public void getCheckInfo() {
-		//return "검색할 조건을 모두 선택해주세요";
 	}
 	
 	@PostMapping(value = "/apply",  produces = "text/html; charset=UTF-8")
@@ -150,12 +121,7 @@ public class HireInfoController {
 			System.out.println("DB저장 부분 실행!");
 			*/
 			
-			/*
-			 지원하기 
-			*/
-			
 			//지원이 성공했다면 지원현황 데이터테이블에 넣기
-			//resume_id 받아오는 서비스 메서드 실행해서 변수에 넣기
 			int resumeId = service.getResumeId(title, userId);
 			service.addApplyInfo(id, companyName, title,userId,resumeId); 
 			
@@ -168,7 +134,8 @@ public class HireInfoController {
 	
 	@GetMapping("/applyInfo")
 	public String getApplyList(Model m,String userId) { //String userId 추가해야함(회원가입 완료되면)
-	
+		
+		m.addAttribute("userId", userId);
 		//지원한 개수
 		int applyCnt = service.getApplyCnt(userId);
 		//System.out.println(applyCnt);
@@ -179,4 +146,5 @@ public class HireInfoController {
 		
 		return "applyListView";
 	}
+	
 }

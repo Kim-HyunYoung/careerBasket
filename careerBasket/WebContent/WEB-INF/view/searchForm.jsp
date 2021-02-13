@@ -8,48 +8,59 @@
 <meta charset="UTF-8">
 <title>searchForm.jsp</title>
 
-	<!-- 부트스트랩 버전 3으로 해야 select 잘 적용됨 -->
-	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
-		crossorigin="anonymous">
-	<!-- 부트스트랩 select css -->
-	<link rel="stylesheet"
-		href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-	
-	<!-- ajax CDN -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<!-- select보다 부트스트랩이 더 먼저와야함 -->
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-		integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-		crossorigin="anonymous"></script>
-	<!-- 부트스트랩 select 스크립트 -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-	<!-- 부트스트랩 아이콘 -->
-	<link rel="stylesheet"
-		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	
-	<link rel="stylesheet" type="text/css" href="/css/search.css?verver">
-	<link rel="stylesheet" type="text/css" href="/css/header.css">
-	<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
-	<link rel="stylesheet" type="text/css" href="/css/pagenation.css">
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 부트스트랩 버전 3으로 해야 select 잘 적용됨 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+	crossorigin="anonymous">
+<!-- 부트스트랩 select css -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+<!-- ajax CDN -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- select보다 부트스트랩이 더 먼저와야함 -->
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+	integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+	crossorigin="anonymous"></script>
+<!-- 부트스트랩 select 스크립트 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<!-- 부트스트랩 아이콘 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+<link rel="stylesheet" type="text/css" href="/css/search.css?verver">
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<link rel="stylesheet" type="text/css" href="/css/imgstyle.css">
+<link rel="stylesheet" type="text/css" href="/css/pagenation.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-//ajax 비동기 방식으로 검색 버튼 누르면 리스트 보여주기!
 
 		//ajax함수 선언
-		function loadAjax(url, type, alldata) {
-			//url 없애기
+		function loadAjax(url,page) {
+			var pageNumData = page;
+				console.log("pageNumData :" +pageNumData);
+			//var formData = $("#searchForm").serializeArray();
+			//radio 체크된 값 가져오기
+			var careerData = $('form [name="hireCareer"]:checked').val();
+				console.log("careerData :" +careerData);
+			var workPlaceData = $('form [name="workPlace"]').val();
+				console.log("workPlaceData :" +workPlaceData);
+			var positionData = $('form [name="position"]:checked').val();
+				console.log("positionData :" +positionData);
+				
+			var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
 			
 			$.ajax({
 				url:"/hire/search",
-				type:type,
-				data:alldata,
+				type:"get",
+				data:allData,
 				success:function(resp){
 					//총 검색결과 개수
 					var hireTotalCnt = resp.hireTotalCnt;
@@ -71,7 +82,6 @@
 						$(".pagination").children().remove();
 						
 					}else{
-						//가져온 데이터가 있으면 목록을 each로 반복해서출력!
 						
 						//append때문에 쌓이지 않도록 remove(초기화)시켜줌
 						$("#rs").children().remove();
@@ -84,18 +94,14 @@
 						//id 링크 -> hash
 						newSection.append("<button class='btn btn-color btn-lg info'><a id='detail_btn' value='"+currentPage+"' href='http://localhost:8080/hire/detail?id="+hire.id+"&userId=${userId}'>상세보기</a></button>")
 							//쿼리스트링으로 해당 페이지로 연결 url~~~?변수1=값1&변수2=값2
-							//http://localhost:8080/hire/detail
 						newSection.append("<div class='list_top'><div class='hire_title'>"+hire.hireTitle+"</div><div class='end_date'><span class='end_box'>마감일</span>"+hire.endDate.substring(0,10)+"</div>")
 						newSection.append("<div class='com_name_box'><div class='company_name'>"+hire.companyName+"</div>")
 						newSection.append("<br><div class='list_box'><div class='h_info'><span>"+hire.workPlace+" | </span><span>"+hire.workType+" | </span><span>"+hire.education+"</span></div>")
 						
-							
 						$("#rs").append(newSection);
 					
 						}
-						
 						//----------페이지네이션 처리하기--------------------------
-							
 							console.log("totBlock :"+resp.totBlock);
 							console.log("curBlock :"+resp.curBlock);
 							console.log("prevPage :"+resp.prevPage);
@@ -161,7 +167,6 @@
 							}
 						}
 							
-						
 						//----------------------마지막 페이지로 이동 버튼------------------------
 						if(pageTotalCnt == 1 || pageTotalCnt == 2){
 							$(".goLastPage").children().remove();
@@ -169,12 +174,6 @@
 						}else {
 							newSection.append("<ul class='pager'><li class='next goLastPage' value='"+pageTotalCnt+"'><a href='#' >Last<span aria-hidden='true'>&rarr;</span></a></li></ul>");	
 						}
-						
-						/*
-						fetch('listView').then(function(resp){
-							document.querySelector('article').innerHTML = resp;
-						})
-						*/
 					}
 				},
 				error:function(e){
@@ -183,7 +182,6 @@
 			});
 		}
 		
-	
 	//해쉬 체크하는 메서드 선언
 	function checkForHash(){
 		if(document.location.hash){
@@ -191,37 +189,29 @@
 			hash_str = hash_str.replace("#","");
 			hash_str = decodeURI(hash_str);
 			console.log(hash_str);
-			//여기에 ajax함수로 해당 리스트 그리기
 			//해당 리스트를 그리기 위해 필요한 값(가져올 값)
 			arr_data = hash_str.split("&"); //데이터 쪼개서 배열로 담기
 			var pageNumData = arr_data[0];
 			console.log("pageNumData"+pageNumData);
-			var careerData  = arr_data[1];
-			console.log("careerData"+careerData);
-			var workPlaceData = arr_data[2];
-			//var workPlaceData = "hey"; ->영어는 나옴 한글 인코딩을 해야할 듯
-			console.log("workPlaceData"+workPlaceData);
-			var positionData = arr_data[3];
-			console.log("positionData"+positionData);
 			
-			var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
-			
-			loadAjax("/hire/search","get",allData); //post로 하면 1페이지만 나옴!! ,근데 get하니까 왜 사진 안나오지
+			loadAjax("/hire/search",pageNumData);
 			return false; 
 		}
 	}
 
+
+	//현재 input 값 가져오는 메서드??
+	function getInputData(){}
+	
+	
 //----------------문서 로드---------------------------------
- $(function(){ //$(document).ready(function(){ 와 같다
+ $(function(){ 
 	 
 	 //문서가 로드 될 때마다 hash 체크
 	 checkForHash();
 	 
 	 //검색버튼 눌렀을 때 실행될 이벤트
-	$("#f").on("submit",function(){
-	
-		var pageNumData = 1; //검색버튼 눌렀을 땐 -> 1페이지 보여줘야함
-			console.log("pageNumData :" +pageNumData);
+	$("#searchForm").on("submit",function(){
 		//radio 체크된 값 가져오기
 		var careerData = $('form [name="hireCareer"]:checked').val();
 			console.log("careerData :" +careerData);
@@ -229,41 +219,20 @@
 			console.log("workPlaceData :" +workPlaceData);
 		var positionData = $('form [name="position"]:checked').val();
 			console.log("positionData :" +positionData);
-			
-		var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
-		
-		
-		//검색 조건3가지 중 하나라도 입력하지 않으면
-		//(null,지역을 선택하세요,null)
-		//안내문구 띄우기
+	
+		//검색 조건3가지 중 하나라도 입력하지 않으면 (null,지역을 선택하세요,null) 안내문구 띄우기
 		if(typeof careerData == "undefined" || workPlaceData == "선택" || typeof positionData == "undefined"){
-			//document.write("<h1>검색할 조건을 선택해주세요</h1>")
-			//loadAjax("/hire/check","post",allData);
-			//return false; 
-			$.ajax({
-				url:"/hire/check",
-				type:"post",
-				success:function(){
-					$("#rs").children().remove();
-					//$("#rs").append("<div class='notice'><h1 class='check'>검색 조건을 모두 선택해 주세요</h1></div>");
-					$('#rs').append('<div class="notice"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="red" class="bi bi-ui-checks-grid" viewBox="0 0 16 16">'
-							  +'<path d="M2 10h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1zm9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm0 9a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3zm0-10a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2h-3zM2 9a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H2zm7 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2v-3zM0 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.354.854a.5.5 0 1 0-.708-.708L3 3.793l-.646-.647a.5.5 0 1 0-.708.708l1 1a.5.5 0 0 0 .708 0l2-2z"/>'
-							  +'</svg><h1 class="check">검색 조건을 모두 선택해 주세요.</h1></div>');
-					$(".pagination").children().remove();
-				},
-				error:function(e){
-					console.log(e);
-				}
+			$("#rs").children().remove();
+			$('#rs').append('<div class="notice"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="red" class="bi bi-ui-checks-grid" viewBox="0 0 16 16">'
+					  +'<path d="M2 10h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1zm9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm0 9a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3zm0-10a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2h-3zM2 9a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H2zm7 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2v-3zM0 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.354.854a.5.5 0 1 0-.708-.708L3 3.793l-.646-.647a.5.5 0 1 0-.708.708l1 1a.5.5 0 0 0 .708 0l2-2z"/>'
+					  +'</svg><h1 class="check">검색 조건을 모두 선택해 주세요.</h1></div>');
+			$(".pagination").children().remove();
 			
-			});
-			return false; 
+			return false;  //이거 안해주면 페이지 계속 새로고침된다!
 			
 		}else{
-			
-		
-		//ajax함수 호출
-		loadAjax("/hire/search","post",allData);
-		return false; 
+			loadAjax("/hire/search",1);
+			return false; 
 		}
 		
 	});
@@ -271,8 +240,6 @@
 	//click 이벤트를 걸어 이벤트가 발생할때마다 현재 페이지를 내부링크처럼 hash에 저장
  	//상세보기 버튼 눌렀을 때 hash에 해당 id값을 저장(뒤로 가기 했을 때 기존 리스트를 보여주기위해서)
  	 $(document).on("click","#detail_btn",function(){ //.info 를 #detail_btn으로 변경해봄
- 		 //현재페이지 번호!
- 		 //alert("상세보기 버튼 클릭함!");
  		var pageNumData = $(this).attr("value");
 			console.log("pageNumData :" +pageNumData);
 		var careerData = $('form [name="hireCareer"]:checked').val();
@@ -282,193 +249,95 @@
 		var positionData = $('form [name="position"]:checked').val();
 			console.log("positionData :" +positionData);
 			
-		//var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
-		
  		 document.location.hash = "#" + pageNumData +"&"+careerData +"&"+ workPlaceData+ "&"+ positionData;
-		
  		 
  	 });
- 
 	 
 	//클릭된 페이지에 해당하는 리스트 보여주는 이벤트
 	 $(document).on("click",".p",function(){
-			var pageNumData = $(this).attr("value");
-				console.log("pageNumData :" +pageNumData);
-			var careerData = $('form [name="hireCareer"]:checked').val();
-				console.log("careerData :" +careerData);
-			var workPlaceData = $('form [name="workPlace"]').val();
-				console.log("workPlaceData :" +workPlaceData);
-			var positionData = $('form [name="position"]:checked').val();
-				console.log("positionData :" +positionData);
-		
-			var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
-			
-			//ajax함수 호출
-			loadAjax("/hire/search","get",allData);
-			return false; 
+		var pageNumData = $(this).attr("value");
+		loadAjax("/hire/search",pageNumData);
+		return false; 
 			
 	});
 	
-	
-	//첫번째 페이지로 가기 버튼 이벤트
 	$(document).on("click",".goFirstPage",function(){
-		//alert("goFirstPage!");	
 		var pageNumData = $(this).attr("value");
-			console.log("pageNumData :" +pageNumData);
-		var careerData = $('form [name="hireCareer"]:checked').val();
-			console.log("careerData :" +careerData);
-		var workPlaceData = $('form [name="workPlace"]').val();
-			console.log("workPlaceData :" +workPlaceData);
-		var positionData = $('form [name="position"]:checked').val();
-			console.log("positionData :" +positionData);
-	
-		var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
-		
-		//ajax함수 호출
-		loadAjax("/hire/search","get",allData);
+		loadAjax("/hire/search",pageNumData);
 		return false; 
 		
 	});
 	
-	
-	//이전 페이지로 가기 버튼 이벤트
 	$(document).on("click",".goBackPage",function(){
-		//alert("goBackPage!");
-		//현재페이지!
 		var pageNumData = $(this).attr("value");
-		
-		//pageNumData = pageNumData -1;
-		//이전페이지로 가야하니까 currentPage에 -1을 해주기 
-		console.log("pageNumData :" +pageNumData);
-		//console.log("a :" + a);
-		
-		var careerData = $('form [name="hireCareer"]:checked').val();
-		console.log("careerData :" +careerData);
-		var workPlaceData = $('form [name="workPlace"]').val();
-		console.log("workPlaceData :" +workPlaceData);
-		var positionData = $('form [name="position"]:checked').val();
-		console.log("positionData :" +positionData);
-	
-		var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
-		
-		//ajax함수 호출
-		loadAjax("/hire/search","get",allData);
+		loadAjax("/hire/search",pageNumData);
 		return false; 
 		
 	});
 		
-	
-	//다음 페이지로 가기 버튼 이벤트
 	$(document).on("click",".goNextPage",function(){
-		//alert("goNextPage!");	
 		var pageNumData = $(this).attr("value");
-		
-		//pageNumData = Number(pageNumData) + 1;
-		//이전페이지로 가야하니까 currentPage에 +1을 해주기 
-		console.log("pageNumData :" +pageNumData);
-		//console.log("a :" + a);
-		
-		var careerData = $('form [name="hireCareer"]:checked').val();
-		console.log("careerData :" +careerData);
-		var workPlaceData = $('form [name="workPlace"]').val();
-		console.log("workPlaceData :" +workPlaceData);
-		var positionData = $('form [name="position"]:checked').val();
-		console.log("positionData :" +positionData);
-	
-		var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
-		
-		//ajax함수 호출
-		loadAjax("/hire/search","get",allData);
+		loadAjax("/hire/search",pageNumData);
 		return false; 
 		
 	});
 		
-	//마지막 페이지로 가기 버튼 이벤트
 	$(document).on("click",".goLastPage",function(){
-		//alert("goLastPage!");	
 		var pageNumData = $(this).attr("value");
-		console.log("pageNumData :" +pageNumData);
-		
-		var careerData = $('form [name="hireCareer"]:checked').val();
-		console.log("careerData :" +careerData);
-		var workPlaceData = $('form [name="workPlace"]').val();
-		console.log("workPlaceData :" +workPlaceData);
-		var positionData = $('form [name="position"]:checked').val();
-		console.log("positionData :" +positionData);
-	
-		var allData = {"hireCareer":careerData, "workPlace":workPlaceData, "position":positionData,"page":pageNumData}
-		
-		//ajax함수 호출
-		loadAjax("/hire/search","get",allData);
+		loadAjax("/hire/search",pageNumData);
 		return false; 
 		
 	});
 		
-	//버튼 비활성화
-	/*
-	$(document).on("click",".disabled",function(){
-		//alert("disabled!");	
-	});
-	*/
- }); //여기가 ready 끝
+ }); 
  
 </script>
-
-
 </head>
 <body>
-
-	<div class="frame">
-
-		<!-- 로그아웃일 때 상단바 -->
+	<div class="frame"> <!-- 로그아웃일 때 상단바 -->
 		<div class="top">
 			<c:if test="${empty userId}">
-					<div class="top_left">
-						<a href="/user/logout" style="color: #82B6ED">careerBasket</a>
+				<div class="top_left">
+					<a href="/user/logout" style="color: #82B6ED">careerBasket</a>
+				</div>
+				<div class="top_middle">
+					<a href="/hire/list">탐색</a> <a href="/user/loginForm">이력서</a>
+				</div>
+				<div class="top_right">
+					<button class="btn btn-color">
+						<a href="/user/signup">회원가입</a>
+					</button>
+					<button class="btn btn-color">
+						<a href="/user/loginForm">로그인</a>
+					</button>
+				</div>
+			</c:if> 
+			<c:if test="${not empty userId}"> <!-- 로그인일 때 상단바 -->
+				<div class="top_left">
+					<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
+				</div>
+				<!-- 로고 -->
+				<div class="top_middle">
+					<a href="/hire/list?userId=${userId}">탐색</a> <a
+						href="/resume/addresume?userId=${userId}">이력서</a>
+				</div>
+				<div class="top_right">
+					<div class="ms">
+						<span style="font-size: 13px; color: gray;"> <span
+							style="color: #82B6ED;">${userId}</span> 님의 취업을 응원합니다!
+						</span>
 					</div>
-					<div class="top_middle">
-						<a href="/hire/list">탐색</a> <a href="/user/loginForm">이력서</a>
-					</div>
-					<div class="top_right">
-						<button class="btn btn-color">
-							<a href="/user/signup">회원가입</a>
-						</button>
-						<button class="btn btn-color">
-							<a href="/user/loginForm">로그인</a>
-						</button>
-					</div>
+					<button class="btn btn-color"
+						style="float: left; margin-top: 15px; margin-left: 12px;">
+						<a href="/user/logout">로그아웃</a>
+					</button>
+				</div>
 			</c:if>
-			
-			<!-- 로그인일 때 상단바 -->
-			<c:if test="${not empty userId}">
-					<div class="top_left">
-						<a style="color: #82B6ED" href="/user/main?userId=${userId}">careerBasket</a>
-					</div>
-					<!-- 로고 -->
-					<div class="top_middle">
-						<a href="/hire/list?userId=${userId}">탐색</a> <a
-							href="/resume/addresume?userId=${userId}">이력서</a>
-					</div>
-					<div class="top_right">
-						<div class="ms">
-							<span style="font-size: 13px; color: gray;"> <span
-								style="color: #82B6ED;">${userId}</span> 님의 취업을 응원합니다!
-							</span>
-						</div>
-						<button class="btn btn-color"
-							style="float: left; margin-top: 15px; margin-left: 12px;">
-							<a href="/user/logout">로그아웃</a>
-						</button>
-					</div>
-			</c:if>
-		</div>
-		<!-- //상단바 -->
-
-
+		</div> <!-- //상단바 -->
 		<div class="conTain">
 			<!-- 검색바 -->
 			<div class="searchBar">
-				<form id="f" action="/hire/search" method="post">
+				<form id="searchForm">
 					<div class="search1">
 						<div class="career">
 							<input class="car_con" type="radio" name="hireCareer" value=1>
@@ -518,28 +387,22 @@
 					<hr>
 					<button class=" btn btn-color btn-lg search_btn">검색</button>
 				</form>
-			</div>
-			<!-- //검색바 -->
-
-			<!-- 리스트 -->
+			</div> <!-- //검색바 -->
 			<hr>
+			<!-- 리스트 -->
 			<!-- 결과 보여주는 부분 -->
 			<div class="rs_list">
 				<div id="rs"></div>
-			</div>
-			<!-- //리스트 -->
+			</div> <!-- //리스트 -->
+			
 			<!-- 페이지 네이션 -->
-			<!-- 가운데 정렬 시키기 -->
 			<div class="p_bottom">
 				<nav aria-label="Page navigation">
 					<ul class="pagination"></ul>
 				</nav>
-			</div>
-			<!-- //페이지 네이션 -->
-		</div>
-		<!-- //container -->
+			</div> <!-- //페이지 네이션 -->
+		</div> <!-- //container -->
 	</div>
-	
-	
-	</body>
+
+</body>
 </html>

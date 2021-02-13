@@ -49,10 +49,26 @@
 
 <script>	
 $(function(){
-
-	//-------------------- 남은 시간 계산 --------------
+	
 	const clock = document.querySelector(".clock");
 	
+	if(getTime() <= 0){ //남은 시간이 0이하라면
+		//"마감된 채용공고입니다." 문구 띄우기
+		$('.nav_content').children().remove();
+		$('.nav_content').append('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="red" class="bi bi-exclamation-circle" viewBox="0 0 16 16">'
+				  +'<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>'
+				  +'<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>'
+				  +'</svg><br><div style="margin-top: 20px;color: gray;">마감된 채용공고입니다.</div>');
+	}else{ //남은 시간이 0보다 많다면
+		//1초마다 getTime함수 실행
+		setInterval(() => {
+			console.log("인터벌 시작")
+			getTime();	
+			console.log("인터벌 끝")
+		}, 1000);
+	}
+	
+	//남은 시간 계산
 	function getTime(){
 		//현재시간 찍는 객체를 여기서 만들기
 		var today = new Date();
@@ -67,7 +83,6 @@ $(function(){
 	             parseInt(endTime.substring(12,14), 10) //초
 	            );
 		console.log(endDate);
-		
 		//일자 사이의 차이 구하기
 		  var dateGap = endDate.getTime() - today.getTime();
 		  console.log(dateGap);
@@ -76,27 +91,23 @@ $(function(){
 	  	  
 	  	   var diffDay  = Math.floor(dateGap / (1000 * 60 * 60 * 24)); // 일수
 	   		  console.log(diffDay);
-	
 	  	   var diffHour = ("0"+timeGap.getHours()).slice(-2);       // 시간 끝에 두자리(00,01,02)
 	   		  console.log(diffHour);
-	
 	  	   var diffMin  = ("0"+timeGap.getMinutes()).slice(-2);      // 분
 	   	 	 console.log(diffMin);
-	
 	  	   var diffSec  = ("0"+timeGap.getSeconds()).slice(-2);      // 초
 	   	 	 console.log(diffSec);
 	  	   
 	  	  clock.innerHTML = diffDay + "일 " + diffHour + ": " + diffMin + ": "  + diffSec ;
 			 console.log("getTime 끝")
+			 return dateGap;
 	}
 	
-	//1초마다 getTime함수 실행
-	setInterval(() => {
-		console.log("인터벌 시작")
-		getTime();	
-		console.log("인터벌 끝")
-
-	}, 1000);
+	//nav 지원하기 버튼 눌렀을 때
+	$('#mo').on('click', function(){
+		$('#myModal').modal('show');
+		
+		});
 	
 	//모달창 안에 지원하기 버튼 눌렀을 때 실행될 것
 	$("#apply").on("click",function(){ 
@@ -104,21 +115,13 @@ $(function(){
 		console.log(titleData);
 		
 		if(titleData == "이력서를 선택하세요."){//이력서 선택이 안되어 있으면 "이력서를 선택해주세요"문구 띄우기
+			$("#parents").children().remove();
+			$("#parents").append("<h1 class='notice_re'>이력서를 선택해주세요.</h1>");
 			
-			$.ajax({
-				url:"/hire/check",
-				type:"post",
-				success:function(){
-					$("#parents").children().remove();
-					$("#parents").append("<h1 class='notice_re'>이력서를 선택해주세요.</h1>");
-				},
-				error:function(e){
-					console.log(e);
-				}
-			})
 			return false;
-		
 		}else{ //이력서 선택 되었으면 데이터 직렬화해서 변수에 담기!
+			$("#parents").children().remove();
+		
 			var con = confirm("지원서 제출후에는 수정이 불가능합니다.지원하시겠습니까?");
 			if(con == true){ //확인누르면
 				//폼에 있는 데이터를 스크립트로 보내려면 ajax에 사용하기 좋은 형태로 바꿔서 보내야해!!
@@ -151,7 +154,6 @@ $(function(){
 									  +'<path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>'
 									  +'<path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>'
 									  +'</svg><div class="noti">'+resp+'</div></div>');
-						
 						}
 					},
 					error:function(e){
@@ -160,26 +162,14 @@ $(function(){
 				})
 				return false; //submit 실행이 안되도록 만든다
 			}else if(con == false){ //취소 버튼 누르면 확인창 닫힘
-				
-				$.ajax({
-					url:"/hire/check",
-					type:"post",
-					success:function(){
-					},
-					error:function(e){
-						console.log(e);
-					}
-				})
 				return false;
 			}
 		}
 	})
 })
-	
 </script>
 
 	<div class="frame">
-	
 		<!-- 로그아웃일 때 상단바 -->
 		<div class="top">
 			<c:if test="${empty userId}">
@@ -324,7 +314,6 @@ $(function(){
 					<div class="location">
 						<div id="map" style="width: 100%; height: 350px;"></div>
 
-
 						<script>
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 						    mapOption = {
@@ -413,8 +402,6 @@ $(function(){
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<c:if test="${empty userId}">
-							
-							
 							<h4 class="modal-title">회원이 아닙니다.</h4>
 						</c:if>
 						<c:if test="${not empty userId}">
@@ -479,14 +466,6 @@ $(function(){
 				</div>
 			</div>
 		</div>
-
-		<script>
-		$('#mo').on('click', function(){
-			$('#myModal').modal('show');
-			
-			});
-		
-		</script>
 	</div>
 	<!-- //frame -->
 	
