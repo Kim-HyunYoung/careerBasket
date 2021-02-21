@@ -13,7 +13,7 @@ $(function(){
 		$("#com").html("");
 		
 	}
-	if("${doList}"=="[]"){
+	if("${doList}"==""){
 		console.log("저장한 첨부파일이 없다!");
 		$("#doc").html("");
 	}
@@ -23,26 +23,31 @@ $(function(){
 	
 })
 function print(){
-	const _tempHTML = document.getElementById("print").innerHTML;
-	  const innerHTMLs = "<div class='printWrap' style='width:21cm; height: 29.7cm;'>" + _tempHTML + "</div>"; 
-	  const popupWindow = window.open("", "_blank", "width=700,height=800");
+	  var _tempHTML = document.getElementById("print").innerHTML;
+ 	  var innerHTMLs = "<div class='printWrap' style='width:21cm; height: 29.7cm;'>" + _tempHTML + "</div>"; 
+	  var popupWindow = window.open("", "_blank", "width=700,height=800");
 	  popupWindow.document.write("<!DOCTYPE html>"+
 				      "<html>"+
 				        "<head>"+
+				        	"<link rel='stylesheet' type='text/css' href='/css/pickList.css'>"+
+				        	"<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1' crossorigin='anonymous'>"+
+				        	"<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous'>"+
+				        	"<link rel='preconnect' href='https://fonts.gstatic.com'>"+
+				        	"<link href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap' rel='stylesheet'>"+
 				        	"<style type='text/css'>"+
 				        		".endline{page-break-before:always}"+
 				        	"</style>"+
 				        	"<style type='text/css' media='print'>"+
 					    		"@page {"+
 					    		    "size: auto;  /* auto is the initial value */"+
-					    		    "margin: 0px 100px 0px 100px;  /* this affects the margin in the printer settings */"+
+					    		    "margin: 50px 100px 50px 100px;  /* this affects the margin in the printer settings */"+
 					    		"}"+
 					    	"</style>"+
 				        "</head>"+
 				        "<body>"+innerHTMLs+"</body>"+
 				      "</html>");
 	  popupWindow.document.close();
-		popupWindow.focus();
+	  popupWindow.focus();
 	  //1초후 새 창 프린트
 	  window.setTimeout(function () {
 		 	popupWindow.print();
@@ -101,7 +106,7 @@ function print(){
   <h1 class="detail_title">${re.title }</h1>
   <hr>
 <div class="mainInfo">
-  <img alt="사진을 불러오지 못했습니다" src="http://localhost:8080/img/photo/${si.photoPath}" id="photo">
+  <img alt="사진을 불러오지 못했습니다" src="http://localhost:8080/photo/${si.photoPath}" id="photo">
   <div class="text_start_wrap wd-tp">
   <p  class="text-start fw-bold fs-5">${si.name }<span class="text-center fs-6">${si.birthDate.year } (${age}세)</span></p>
   <p  class="text-start fs-6">${si.email }<span class="text-center fs-6">${si.tel }</span></p>

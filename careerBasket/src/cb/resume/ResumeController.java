@@ -103,8 +103,9 @@ public class ResumeController {
 	public String addResume(InsertUpdate iu, Model m) {
 //		System.out.println("실행");
 		System.out.println(iu);
+		int resumeId = service.insert(iu);
 		m.addAttribute("userId", iu.getUserId());
-		m.addAttribute("resumeId", iu.getResumeId());
+		m.addAttribute("resumeId", resumeId);
 		return "updatePickListResult";
 	}
 	
@@ -159,6 +160,7 @@ public class ResumeController {
 	public String documentUploadForm(Model m, String userId) {
 		List<Document> doList = service.selectDoAllView(userId);
 		m.addAttribute("doList", doList);
+		m.addAttribute("userId", userId);
 		return "allDoInsertList";
 	}
 	
@@ -169,10 +171,11 @@ public class ResumeController {
 		System.out.println(files[0].getOriginalFilename());
 		System.out.println(files[0].getSize());
 		System.out.println(type);
-		String result = service.uploadFiles(files, type, userId);
-		m.addAttribute("result", result);
+		service.uploadFiles(files, type, userId);
+		List<Document> doList = service.selectDoAllView(userId);
+		m.addAttribute("doList", doList);
 		m.addAttribute("userId", userId);
-		return "fileUploadResult";
+		return "allDoInsertList";
 	}
 	
 	//사진저장해주는 컨트롤러

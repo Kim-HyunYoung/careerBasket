@@ -162,7 +162,7 @@ function check(){
     <input type="submit" class="btn btn-color1 btn-sm"  value="이력서 저장">
 <h1 class="title">기본정보</h1>
 <div class="info_wrapper">
-<img alt="사진을 등록하세요" src=""  style="width:100px;height:140px;float:right;margin-bottom: 5%;object-fit:contain;" id="photo" class="img-thumbnail">
+<img alt="사진을 등록하세요" src="/photo/${si.photoPath}"  style="width:100px;height:140px;float:right;margin-bottom: 5%;object-fit:contain;" id="photo" class="img-thumbnail">
 <input type="hidden" name="userId" value="${si.userId }">
 <div class="row">
   <label for="colFormLabel" class="col-sm-2 col-form-label">이름</label>

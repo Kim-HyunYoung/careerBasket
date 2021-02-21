@@ -104,15 +104,15 @@ function myupdate(resumeId, userId){
 <body>
 <!-- 상단바 -->
 <div class="top">
-	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${si.userId}">careerBasket</a></div>	<!-- 로고 -->
+	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${userId}">careerBasket</a></div>	<!-- 로고 -->
 	<div class="top_middle">
-		<a href="/hire/list?userId=${si.userId}">탐색</a>
-		<a href="/resume/addresume?userId=${si.userId}">이력서</a>
+		<a href="/hire/list?userId=${userId}">탐색</a>
+		<a href="/resume/addresume?userId=${userId}">이력서</a>
 	</div>
 	<div class="top_right">
 		<div class="ms">
 			<span style="font-size: 13px; color: gray;">
-				<span style="color:#82B6ED;">${si.userId}</span>
+				<span style="color:#82B6ED;">${userId}</span>
 					님의 취업을 응원합니다!</span>
 		</div>
 		<button class="btn btn-color" style="float:left; margin-top: 15px; margin-left: 12px;">

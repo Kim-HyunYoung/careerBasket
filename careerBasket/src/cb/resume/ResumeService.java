@@ -215,7 +215,7 @@ public class ResumeService {
 			e.printStackTrace();
 		}
 		result = "저장에 성공했습니다!";
-		return	type+result;
+		return	type;
 	}
 
 	//등록된 이력서 카운트

@@ -90,12 +90,14 @@ div#resume{
 	clear: both;
 	background: #f4f4f4;
     padding: 3%;
+    height: 12rem;
 }
 
 div#document{
 	clear: both;
 	background: #f4f4f4;
     padding: 3%;
+    height: 12rem;
 }
 
 .board-top{

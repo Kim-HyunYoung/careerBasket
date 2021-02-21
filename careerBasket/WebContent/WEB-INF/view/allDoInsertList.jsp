@@ -10,8 +10,6 @@
 $(function(){
 	if("${doList}"=="[]"){
 		$("#doc").append("<p style='text-align: center;margin-bottom: 10%;padding-top: 10%;'>저장된 문서가 없습니다</p>");
-	}else{
-		$("#doc").text("");
 	}
 })
 
@@ -73,7 +71,6 @@ function fileUpload(userId){
 		console.dir(files);
 		console.log(type);
 		console.log(userId);
-		userId="durumi";
 		
 		//file을 전송하기 위해 FormData라는 객체에 넣어야한다
 		var formData = new FormData();
@@ -119,15 +116,15 @@ function fileUpload(userId){
 <body>
 <!-- 상단바 -->
 <div class="top">
-	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${si.userId}">careerBasket</a></div>	<!-- 로고 -->
+	<div class="top_left"><a style="color:#82B6ED" href="/user/main?userId=${userId}">careerBasket</a></div>	<!-- 로고 -->
 	<div class="top_middle">
-		<a href="/hire/list?userId=${si.userId}">탐색</a>
-		<a href="/resume/addresume?userId=${si.userId}">이력서</a>
+		<a href="/hire/list?userId=${userId}">탐색</a>
+		<a href="/resume/addresume?userId=${userId}">이력서</a>
 	</div>
 	<div class="top_right">
 		<div class="ms">
 			<span style="font-size: 13px; color: gray;">
-				<span style="color:#82B6ED;">${si.userId}</span>
+				<span style="color:#82B6ED;">${userId}</span>
 					님의 취업을 응원합니다!</span>
 		</div>
 		<button class="btn btn-color" style="float:left; margin-top: 15px; margin-left: 12px;">
@@ -161,7 +158,7 @@ function fileUpload(userId){
 </select><br>
 <div class="mb-3">
   <label for="formFileSm" class="form-label">파일 선택</label>
-  <button onclick="fileUpload(${si.userId})" class="btn btn-color1 btn-sm btn-file">추가하기</button>
+  <button onclick="fileUpload('${userId}')" class="btn btn-color1 btn-sm btn-file">추가하기</button>
   <input class="form-control form-control-sm" id="formFileSm" type="file" name="document" accept=".jpg, .png, .pdf">
 </div>
 </div>
@@ -172,7 +169,7 @@ function fileUpload(userId){
 <c:forEach var="doc" items="${doList}">
 	<div class="fileList_outLine">
 		<div class="float">
-		<button type="button" class="btn btn-color1 btn-sm" onclick="mydelete('${doc.documentId}', '${si.userId}')">삭제</button>
+		<button type="button" class="btn btn-color1 btn-sm" onclick="mydelete('${doc.documentId}', '${userId}')">삭제</button>
 		</div>
 		<p class="docList-wrap">
 		<span class="date">${doc.wDate }</span>
