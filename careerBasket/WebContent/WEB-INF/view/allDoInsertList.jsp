@@ -43,10 +43,10 @@ function del(documentId, userId){
 		}
 }
 
-function download(filePath, fileTitle){
+/* function download(filePath, fileTitle){
 	console.log(filePath+fileTitle);
     $.ajax({
-        url: "http://localhost:8080/img/"+filePath,
+        url: "/document/"+filePath,
         method: 'GET',
         xhrFields: {
             responseType: 'blob'
@@ -62,7 +62,7 @@ function download(filePath, fileTitle){
             window.URL.revokeObjectURL(url);
         }
     })
-}
+} */
 
 function fileUpload(userId){	
 	
@@ -169,12 +169,12 @@ function fileUpload(userId){
 <c:forEach var="doc" items="${doList}">
 	<div class="fileList_outLine">
 		<div class="float">
-		<button type="button" class="btn btn-color1 btn-sm" onclick="mydelete('${doc.documentId}', '${userId}')">삭제</button>
+		<button type="button" class="btn btn-color1 btn-sm" onclick="del('${doc.documentId}', '${userId}')">삭제</button>
 		</div>
 		<p class="docList-wrap">
 		<span class="date">${doc.wDate }</span>
 		<span class="type">${doc.type }</span>
-		<span class="title">${doc.fileTitle }</span>
+		<a href="/document/${doc.filePath}" download><span class="title">${doc.fileTitle }</span></a>
 		</p>
 	</div>
 </c:forEach>
